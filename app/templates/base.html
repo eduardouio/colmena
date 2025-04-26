@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Liga Santa Clara{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <header class="bg-white shadow py-4">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-xl font-bold text-gray-800">Liga Independiente Santa Clara</h1>
+    </div>
+  </header>
+
+  <main class="flex-1 px-4">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer class="bg-white shadow mt-10 py-4">
+    <div class="max-w-4xl mx-auto px-4 text-center text-sm text-gray-500">
+      &copy; {{ year|default:2025 }} Liga Independiente Santa Clara de San Millán. Todos los derechos reservados.
+    </div>
+  </footer>
+
+</body>
+</html>

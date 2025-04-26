@@ -1,0 +1,312 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto mt-8 bg-white shadow-lg rounded-xl overflow-hidden mb-10">
+  <!-- Cabecera con imagen -->
+  <div class="h-48 bg-blue-600 flex items-center justify-center">
+    <div class="text-white text-center">
+      <!-- Puedes añadir una imagen creando una carpeta 'static/img' y colocando tu logo allí -->
+      <!-- <img src="{% static 'img/logo.png' %}" alt="Logo Liga Santa Clara" class="h-32 mx-auto"> -->
+      <h1 class="text-2xl font-bold">Liga Independiente Santa Clara de San Millán</h1>
+    </div>
+  </div>
+
+  <!-- Contenido del formulario -->
+  <div class="p-8">
+    <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">Formulario de Calificaciones</h1>
+    
+    <div class="mb-8 text-gray-700 bg-blue-50 p-6 rounded-lg border border-blue-200">
+      <p class="mb-4">Bienvenido al formulario de evaluación de aspirantes de la Liga Independiente Santa Clara de San Millán. Este proceso tiene como objetivo calificar a los jugadores de acuerdo con el reglamento interno de la liga. A través de esta evaluación, analizaremos el desempeño, habilidades y cumplimiento de los requisitos necesarios para formar parte de nuestra comunidad deportiva.</p>
+      
+      <p>Por favor, complete todos los campos con la información requerida y asegúrese de proporcionar datos verídicos. La evaluación será revisada por la comisión de calificaciones y se le notificará sobre el resultado de su postulación.</p>
+    </div>
+
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <!-- Email -->
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label for="{{ form.email.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+          {{ form.email.label }} <span class="text-red-500">*</span>
+        </label>
+        <div class="mt-1">
+          {{ form.email.errors }}
+          <input type="email" name="{{ form.email.html_name }}" id="{{ form.email.auto_id }}" 
+                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                 {% if form.email.value %}value="{{ form.email.value }}"{% endif %}>
+        </div>
+        <p class="text-gray-500 text-xs mt-1">Su dirección de correo electrónico será registrada con su respuesta</p>
+      </div>
+
+      <!-- Temporada -->
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label for="{{ form.temporada.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+          {{ form.temporada.label }} <span class="text-red-500">*</span>
+        </label>
+        <div class="mt-1">
+          {{ form.temporada.errors }}
+          <input type="text" name="{{ form.temporada.html_name }}" id="{{ form.temporada.auto_id }}" 
+                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                 {% if form.temporada.value %}value="{{ form.temporada.value }}"{% endif %} placeholder="2025 - 2026">
+        </div>
+        <p class="text-gray-500 text-xs mt-1">Ejemplo: 2025 - 2026</p>
+      </div>
+
+      <!-- Club -->
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label for="{{ form.club.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+          Nombre del Club <span class="text-red-500">*</span>
+        </label>
+        <div class="mt-1">
+          {{ form.club.errors }}
+          <select name="{{ form.club.html_name }}" id="{{ form.club.auto_id }}" 
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            {% for choice in form.club.field.choices %}
+              <option value="{{ choice.0 }}" {% if form.club.value|stringformat:'s' == choice.0|stringformat:'s' %}selected{% endif %}>
+                {{ choice.1 }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <!-- Categoría -->
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label class="block text-gray-700 text-sm font-bold mb-2">
+          Categoría <span class="text-red-500">*</span>
+        </label>
+        <div class="mt-1">
+          {{ form.categoria.errors }}
+          <select name="{{ form.categoria.html_name }}" id="{{ form.categoria.auto_id }}" 
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            {% for choice in form.categoria.field.choices %}
+              <option value="{{ choice.0 }}" {% if form.categoria.value|stringformat:'s' == choice.0|stringformat:'s' %}selected{% endif %}>
+                {{ choice.1 }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <!-- Información Personal -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <label for="{{ form.nombres.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+            Nombres <span class="text-red-500">*</span>
+          </label>
+          <div class="mt-1">
+            {{ form.nombres.errors }}
+            <input type="text" name="{{ form.nombres.html_name }}" id="{{ form.nombres.auto_id }}" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   {% if form.nombres.value %}value="{{ form.nombres.value }}"{% endif %}>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <label for="{{ form.apellidos.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+            Apellidos <span class="text-red-500">*</span>
+          </label>
+          <div class="mt-1">
+            {{ form.apellidos.errors }}
+            <input type="text" name="{{ form.apellidos.html_name }}" id="{{ form.apellidos.auto_id }}" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   {% if form.apellidos.value %}value="{{ form.apellidos.value }}"{% endif %}>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cédula y Fecha de Nacimiento -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <label for="{{ form.cedula.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+            Número de cédula sin guiones <span class="text-red-500">*</span>
+          </label>
+          <div class="mt-1">
+            {{ form.cedula.errors }}
+            <input type="text" name="{{ form.cedula.html_name }}" id="{{ form.cedula.auto_id }}" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   {% if form.cedula.value %}value="{{ form.cedula.value }}"{% endif %} placeholder="1722919725">
+          </div>
+          <p class="text-gray-500 text-xs mt-1">Ejemplo: 1722919725</p>
+        </div>
+
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <label for="{{ form.fecha_nacimiento.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+            Fecha de Nacimiento <span class="text-red-500">*</span>
+          </label>
+          <div class="mt-1">
+            {{ form.fecha_nacimiento.errors }}
+            <input type="date" name="{{ form.fecha_nacimiento.html_name }}" id="{{ form.fecha_nacimiento.auto_id }}" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   {% if form.fecha_nacimiento.value %}value="{{ form.fecha_nacimiento.value|date:'Y-m-d' }}"{% endif %}>
+          </div>
+        </div>
+      </div>
+
+      <!-- Número y Pases -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <label for="{{ form.numero_jugador.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+            Número del Jugador <span class="text-red-500">*</span>
+          </label>
+          <div class="mt-1">
+            {{ form.numero_jugador.errors }}
+            <input type="number" name="{{ form.numero_jugador.html_name }}" id="{{ form.numero_jugador.auto_id }}" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   {% if form.numero_jugador.value %}value="{{ form.numero_jugador.value }}"{% endif %}>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Club Anterior (Pases) <span class="text-red-500">*</span>
+          </label>
+          <div class="mt-1 space-y-2">
+            <div class="flex items-center">
+              <input type="radio" name="{{ form.tiene_pases.html_name }}" id="{{ form.tiene_pases.auto_id }}_0" value="True" 
+                     class="mr-2" {% if form.tiene_pases.value == True %}checked{% endif %}>
+              <label for="{{ form.tiene_pases.auto_id }}_0" class="text-gray-700">Sí</label>
+            </div>
+            <div class="flex items-center">
+              <input type="radio" name="{{ form.tiene_pases.html_name }}" id="{{ form.tiene_pases.auto_id }}_1" value="False" 
+                     class="mr-2" {% if form.tiene_pases.value == False %}checked{% endif %}>
+              <label for="{{ form.tiene_pases.auto_id }}_1" class="text-gray-700">No</label>
+            </div>
+          </div>
+          <p class="text-gray-500 text-xs mt-1">En caso de que la respuesta sea SÍ, por favor llevar el documento físico el día que corresponda.</p>
+        </div>
+      </div>
+
+      <!-- Autorización Menor -->
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label for="{{ form.autorizacion_menor.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+          Autorización en Caso de Menor de Edad
+        </label>
+        <div class="mt-1">
+          {{ form.autorizacion_menor.errors }}
+          <input type="file" name="{{ form.autorizacion_menor.html_name }}" id="{{ form.autorizacion_menor.auto_id }}" 
+                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <p class="text-gray-500 text-xs mt-1">En el caso de que el aspirante sea menor de edad, por reglamento se requiere la autorización. Por favor suba una imagen o un archivo PDF con el documento, caso contrario omitir esta pregunta.</p>
+      </div>
+
+      <!-- Fotos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <label for="{{ form.foto_fondo_claro.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+            Foto con fondo claro <span class="text-red-500">*</span>
+          </label>
+          <div class="mt-1">
+            {{ form.foto_fondo_claro.errors }}
+            <input type="file" name="{{ form.foto_fondo_claro.html_name }}" id="{{ form.foto_fondo_claro.auto_id }}" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+        </div>
+
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <label for="{{ form.foto_cedula.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+            Foto delantera de la cédula clara <span class="text-red-500">*</span>
+          </label>
+          <div class="mt-1">
+            {{ form.foto_cedula.errors }}
+            <input type="file" name="{{ form.foto_cedula.html_name }}" id="{{ form.foto_cedula.auto_id }}" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+          <p class="text-gray-500 text-xs mt-1">Por favor recortar los bordes, solo la cédula</p>
+        </div>
+      </div>
+
+      <!-- Recalificación -->
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label class="block text-gray-700 text-sm font-bold mb-2">
+          Recalificación ( llevar las dos fichas ) <span class="text-red-500">*</span>
+        </label>
+        <div class="mt-1 space-y-2">
+          <div class="flex items-center">
+            <input type="radio" name="{{ form.recalificacion.html_name }}" id="{{ form.recalificacion.auto_id }}_0" value="True" 
+                   class="mr-2" {% if form.recalificacion.value == True %}checked{% endif %}>
+            <label for="{{ form.recalificacion.auto_id }}_0" class="text-gray-700">Sí</label>
+          </div>
+          <div class="flex items-center">
+            <input type="radio" name="{{ form.recalificacion.html_name }}" id="{{ form.recalificacion.auto_id }}_1" value="False" 
+                   class="mr-2" {% if form.recalificacion.value == False %}checked{% endif %}>
+            <label for="{{ form.recalificacion.auto_id }}_1" class="text-gray-700">No</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón de envío -->
+      <div class="mt-8">
+        <button type="submit" class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition duration-300 font-bold text-lg shadow-md">
+          Enviar Formulario
+        </button>
+      </div>
+
+      <div class="mt-4 text-center text-sm text-gray-500">
+        No envíe nunca contraseñas a través de este formulario.
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const fechaNacimientoInput = document.getElementById('{{ form.fecha_nacimiento.auto_id }}');
+    const categoriaSelect = document.getElementById('{{ form.categoria.auto_id }}');
+    const numeroJugadorInput = document.getElementById('{{ form.numero_jugador.auto_id }}');
+
+    fechaNacimientoInput.addEventListener('change', function () {
+      const fechaNacimiento = new Date(this.value);
+      const hoy = new Date();
+      let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+      const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+      if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+        edad--;
+      }
+
+      // Mostrar la edad en un elemento del formulario
+      let edadDisplay = document.getElementById('edad-display');
+      if (!edadDisplay) {
+        edadDisplay = document.createElement('p');
+        edadDisplay.id = 'edad-display';
+        edadDisplay.className = 'text-gray-700 text-sm mt-2';
+        fechaNacimientoInput.parentNode.appendChild(edadDisplay);
+      }
+      edadDisplay.textContent = `Edad calculada: ${edad} años`;
+
+      const categoria = categoriaSelect.value;
+      const numeroJugador = parseInt(numeroJugadorInput.value, 10);
+
+      let mensajeError = '';
+
+      if (categoria === 'niños') {
+        if (edad < 10 || edad > 11) {
+          mensajeError = 'La categoría "Niños" requiere una edad entre 10 y 11 años.';
+        } else if (edad < 10 && numeroJugador <= 30) {
+          mensajeError = 'Los menores de 10 años deben usar un número superior a 30.';
+        } else if (edad >= 10 && numeroJugador > 30) {
+          mensajeError = 'Los niños de 10 a 11 años deben usar un número menor o igual a 30.';
+        }
+      } else if (categoria === 'senior' || categoria === 'femenino') {
+        if (edad < 18 && numeroJugador <= 30) {
+          mensajeError = 'Los menores de 18 años deben usar un número superior a 30 en la categoría "Senior" o "Femenino".';
+        } else if (edad >= 18 && numeroJugador > 30) {
+          mensajeError = 'Los mayores de 18 años deben usar un número menor o igual a 30 en la categoría "Senior" o "Femenino".';
+        }
+      } else if (categoria === 'master') {
+        if (edad < 40 && numeroJugador <= 30) {
+          mensajeError = 'Los menores de 40 años deben usar un número superior a 30 en la categoría "Master".';
+        } else if (edad >= 40 && numeroJugador > 30) {
+          mensajeError = 'Los mayores de 40 años deben usar un número menor o igual a 30 en la categoría "Master".';
+        }
+      }
+
+      if (mensajeError) {
+        alert(mensajeError);
+      }
+    });
+  });
+</script>
