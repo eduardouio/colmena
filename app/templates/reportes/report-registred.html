@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ficha del Jugador</title>
+  <style>
+    body {
+      margin: 10px;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 12pt;
+    }
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      box-sizing: border-box;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+    }
+    .logo {
+      width: 40mm;
+    }
+    .logo img {
+      max-width: 100%;
+    }
+    .texts {
+      flex: 1;
+      text-align: center;
+    }
+    .texts h1 {
+      margin: 0;
+      font-size: 16pt;
+      font-weight: bold;
+    }
+    .texts h2 {
+      margin: 2mm 0 0;
+      font-size: 12pt;
+    }
+    .texts h3 {
+      margin: 1mm 0 0;
+      font-size: 10pt;
+      text-transform: uppercase;
+    }
+    .title {
+      margin: 4mm 0;
+      text-align: center;
+      font-size: 14pt;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 3mm 0;
+    }
+    .category span {
+      margin-right: 6mm;
+    }
+    .section {
+      margin: 4mm 0;
+    }
+    .section h4 {
+      margin: 0 0 2mm;
+      font-size: 12pt;
+      font-weight: bold;
+    }
+    .fields {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .labels {
+      display: flex;
+      flex-direction: column;
+    }
+    .field-label {
+      margin-bottom: 4mm;
+    }
+    .field-label .line {
+      border-bottom: 1px solid #000;
+      height: 0;
+      width: 100mm;
+      margin-top: 1mm;
+    }
+    .box {
+      border: 1px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 10pt;
+    }
+    .photo {
+      width: 40mm;
+      height: 50mm;
+    }
+    .copy-id {
+      margin-top: 4mm;
+      border: 1px solid #000;
+      width: 110mm;
+      height: 60mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 10pt;
+    }
+    .club-info {
+      display: flex;
+      align-items: center;
+      gap: 4mm;
+      margin: 4mm 0;
+    }
+    .club-info .line {
+      border-bottom: 1px solid #000;
+      height: 8mm;
+      margin-top: 0;
+    }
+    .club-info .club { width: 60mm; }
+    .club-info .num  { width: 20mm; }
+    .footer-line {
+      display: flex;
+      align-items: center;
+      gap: 4mm;
+      margin: 6mm 0;
+    }
+    .checkbox {
+      width: 6mm;
+      height: 6mm;
+      border: 1px solid #000;
+    }
+    .recal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4mm;
+    }
+    .recal-table th,
+    .recal-table td {
+      border: 1px solid #000;
+      padding: 2mm;
+      text-align: center;
+      font-size: 10pt;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="header">
+      <div class="logo">
+        <img src="logo.png" alt="Logo Liga">
+      </div>
+      <div class="texts">
+        <h1>LIGA INDEPENDIENTE DE INDOR FUTBOL</h1>
+        <h2>SANTA CLARA DE SAN MILLAN</h2>
+        <h3>FUNDADA EL 08 DE ENERO DE 1997</h3>
+      </div>
+    </div>
+
+    <div class="title">FICHA DEL JUGADOR</div>
+
+    <div class="row">
+      <div>Temporada 20__ – 20__</div>
+      <div class="category">
+        <span>Categoría</span>
+        <span>Femenino</span>
+        <span>Niños</span>
+        <span>Señor</span>
+        <span>Master</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h4>DATOS DEL JUGADOR</h4>
+      <div class="fields">
+        <div class="labels">
+          <div class="field-label">
+            Nombres
+            <div class="line"></div>
+          </div>
+          <div class="field-label">
+            Apellidos
+            <div class="line"></div>
+          </div>
+          <div class="field-label">
+            Número de cédula
+            <div class="line"></div>
+          </div>
+        </div>
+        <div class="box photo">Foto</div>
+      </div>
+      <div class="copy-id">Copia de cédula</div>
+    </div>
+
+    <div class="club-info">
+      <span>Nombre del Club</span>
+      <div class="line club"></div>
+      <span>Número del Jugador</span>
+      <div class="line num"></div>
+    </div>
+
+    <div class="footer-line">
+      <span>Recalificación</span>
+      <div class="checkbox"></div>
+      <span>Pase: nombre del Club que proviene</span>
+    </div>
+
+    <table class="recal-table">
+      <thead>
+        <tr>
+          <th>Fecha de calificación</th>
+          <th>Firma del presidente</th>
+          <th>Fecha Recalificación</th>
+          <th>Pase</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</body>
+</html>

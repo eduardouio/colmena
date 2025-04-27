@@ -1,11 +1,13 @@
 from django.contrib import admin
 from .models import Club, CalificacionAspirante
 
+
 @admin.register(Club)
 class ClubAdmin(admin.ModelAdmin):
     list_display = ('nombre',)
     search_fields = ('nombre',)
     ordering = ('nombre',)
+
 
 @admin.register(CalificacionAspirante)
 class CalificacionAspiranteAdmin(admin.ModelAdmin):
@@ -14,6 +16,7 @@ class CalificacionAspiranteAdmin(admin.ModelAdmin):
     search_fields = ('nombres', 'apellidos', 'cedula', 'email', 'numero_jugador')
     date_hierarchy = 'created_at'
     list_per_page = 25
+    ordering = ('-created_at',)  # Ordenar por fecha de creación descendente
     fieldsets = (
         ('Información Personal', {
             'fields': ('nombres', 'apellidos', 'cedula', 'fecha_nacimiento', 'email')

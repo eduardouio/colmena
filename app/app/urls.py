@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('grappelli/', include('grappelli.urls'), name='grappelli'),
-    path('registro/', include('registro.urls')),
+    path('', include('registro.urls')),
 ]
 
 # Añadir configuración para archivos estáticos y multimedia

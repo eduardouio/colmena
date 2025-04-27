@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center min-h-screen bg-blue-50 p-4">
+  <div class="max-w-4xl w-full bg-white rounded-xl shadow-xl overflow-hidden">
+    <!-- Banner de cabecera con imagen de fondo -->
+    <div class="h-64 bg-blue-600 bg-cover bg-center relative" style="background-image: url('{% static 'img/portada.jpg' %}')">
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+        <div class="text-center">
+          <img src="{% static 'img/logo.jpg' %}" alt="Logo Liga Santa Clara" class="h-32 mx-auto mb-4">
+          <h1 class="text-3xl font-bold text-white">Liga Independiente Santa Clara de San Millán</h1>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Contenido principal -->
+    <div class="p-8 text-center">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Sistema de Registro de Jugadores</h2>
+      
+      <div class="mb-8 text-gray-700 bg-blue-50 p-6 rounded-lg border border-blue-200 text-left">
+        <p class="mb-4">Bienvenido al sistema de registro de la Liga Independiente Santa Clara de San Millán. Este proceso tiene como objetivo calificar a los jugadores de acuerdo con el reglamento interno de la liga.</p>
+        
+        <p>A través de nuestro formulario de registro, podrá proporcionar la información necesaria para formar parte de nuestra comunidad deportiva. Asegúrese de tener a mano su documento de identidad y una fotografía reciente con fondo claro.</p>
+      </div>
+      
+      <a href="{% url 'registro:formulario' %}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 text-xl">
+        Registrar Jugador
+      </a>
+    </div>
+    
+    <!-- Pie de página -->
+    <div class="bg-gray-50 p-6 border-t border-gray-200">
+      <p class="text-center text-gray-600">Para más información, contáctese con la administración de la Liga Santa Clara.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

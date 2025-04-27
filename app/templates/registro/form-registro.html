@@ -3,12 +3,13 @@
 
 {% block content %}
 <div class="max-w-3xl mx-auto mt-8 bg-white shadow-lg rounded-xl overflow-hidden mb-10">
-  <!-- Cabecera con imagen -->
-  <div class="h-48 bg-blue-600 flex items-center justify-center">
-    <div class="text-white text-center">
-      <!-- Puedes añadir una imagen creando una carpeta 'static/img' y colocando tu logo allí -->
-      <!-- <img src="{% static 'img/logo.png' %}" alt="Logo Liga Santa Clara" class="h-32 mx-auto"> -->
-      <h1 class="text-2xl font-bold">Liga Independiente Santa Clara de San Millán</h1>
+  <!-- Banner de cabecera con imagen de fondo -->
+  <div class="h-64 bg-blue-600 bg-cover bg-center relative" style="background-image: url('{% static 'img/portada.jpg' %}')">
+    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+      <div class="text-center">
+        <img src="{% static 'img/logo.jpg' %}" alt="Logo Liga Santa Clara" class="h-32 mx-auto mb-4">
+        <h1 class="text-3xl font-bold text-white">Liga Independiente Santa Clara de San Millán</h1>
+      </div>
     </div>
   </div>
 
@@ -16,15 +17,14 @@
   <div class="p-8">
     <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">Formulario de Calificaciones</h1>
     
-    <div class="mb-8 text-gray-700 bg-blue-50 p-6 rounded-lg border border-blue-200">
-      <p class="mb-4">Bienvenido al formulario de evaluación de aspirantes de la Liga Independiente Santa Clara de San Millán. Este proceso tiene como objetivo calificar a los jugadores de acuerdo con el reglamento interno de la liga. A través de esta evaluación, analizaremos el desempeño, habilidades y cumplimiento de los requisitos necesarios para formar parte de nuestra comunidad deportiva.</p>
-      
-      <p>Por favor, complete todos los campos con la información requerida y asegúrese de proporcionar datos verídicos. La evaluación será revisada por la comisión de calificaciones y se le notificará sobre el resultado de su postulación.</p>
-    </div>
-
-    <form method="post" enctype="multipart/form-data" class="space-y-6">
+    <form method="post" enctype="multipart/form-data" class="space-y-6" id="registro-form">
       {% csrf_token %}
-      {{ form.non_field_errors }}
+      
+      {% if form.non_field_errors %}
+      <div class="bg-red-100 text-red-800 border border-red-400 rounded px-4 py-3 mb-4">
+        {{ form.non_field_errors }}
+      </div>
+      {% endif %}
 
       <!-- Email -->
       <div class="bg-gray-50 p-4 rounded-lg">
@@ -32,9 +32,13 @@
           {{ form.email.label }} <span class="text-red-500">*</span>
         </label>
         <div class="mt-1">
-          {{ form.email.errors }}
+          {% if form.email.errors %}
+          <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+            {{ form.email.errors }}
+          </div>
+          {% endif %}
           <input type="email" name="{{ form.email.html_name }}" id="{{ form.email.auto_id }}" 
-                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                 class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
                  {% if form.email.value %}value="{{ form.email.value }}"{% endif %}>
         </div>
         <p class="text-gray-500 text-xs mt-1">Su dirección de correo electrónico será registrada con su respuesta</p>
@@ -46,12 +50,15 @@
           {{ form.temporada.label }} <span class="text-red-500">*</span>
         </label>
         <div class="mt-1">
-          {{ form.temporada.errors }}
+          {% if form.temporada.errors %}
+          <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+            {{ form.temporada.errors }}
+          </div>
+          {% endif %}
           <input type="text" name="{{ form.temporada.html_name }}" id="{{ form.temporada.auto_id }}" 
-                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                 {% if form.temporada.value %}value="{{ form.temporada.value }}"{% endif %} placeholder="2025 - 2026">
+                 class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 cursor-not-allowed text-base"
+                 value="2025" readonly>
         </div>
-        <p class="text-gray-500 text-xs mt-1">Ejemplo: 2025 - 2026</p>
       </div>
 
       <!-- Club -->
@@ -60,9 +67,13 @@
           Nombre del Club <span class="text-red-500">*</span>
         </label>
         <div class="mt-1">
-          {{ form.club.errors }}
+          {% if form.club.errors %}
+          <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+            {{ form.club.errors }}
+          </div>
+          {% endif %}
           <select name="{{ form.club.html_name }}" id="{{ form.club.auto_id }}" 
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
             {% for choice in form.club.field.choices %}
               <option value="{{ choice.0 }}" {% if form.club.value|stringformat:'s' == choice.0|stringformat:'s' %}selected{% endif %}>
                 {{ choice.1 }}
@@ -78,9 +89,13 @@
           Categoría <span class="text-red-500">*</span>
         </label>
         <div class="mt-1">
-          {{ form.categoria.errors }}
+          {% if form.categoria.errors %}
+          <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+            {{ form.categoria.errors }}
+          </div>
+          {% endif %}
           <select name="{{ form.categoria.html_name }}" id="{{ form.categoria.auto_id }}" 
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
             {% for choice in form.categoria.field.choices %}
               <option value="{{ choice.0 }}" {% if form.categoria.value|stringformat:'s' == choice.0|stringformat:'s' %}selected{% endif %}>
                 {{ choice.1 }}
@@ -97,9 +112,13 @@
             Nombres <span class="text-red-500">*</span>
           </label>
           <div class="mt-1">
-            {{ form.nombres.errors }}
+            {% if form.nombres.errors %}
+            <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+              {{ form.nombres.errors }}
+            </div>
+            {% endif %}
             <input type="text" name="{{ form.nombres.html_name }}" id="{{ form.nombres.auto_id }}" 
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
                    {% if form.nombres.value %}value="{{ form.nombres.value }}"{% endif %}>
           </div>
         </div>
@@ -109,9 +128,13 @@
             Apellidos <span class="text-red-500">*</span>
           </label>
           <div class="mt-1">
-            {{ form.apellidos.errors }}
+            {% if form.apellidos.errors %}
+            <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+              {{ form.apellidos.errors }}
+            </div>
+            {% endif %}
             <input type="text" name="{{ form.apellidos.html_name }}" id="{{ form.apellidos.auto_id }}" 
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
                    {% if form.apellidos.value %}value="{{ form.apellidos.value }}"{% endif %}>
           </div>
         </div>
@@ -124,9 +147,13 @@
             Número de cédula sin guiones <span class="text-red-500">*</span>
           </label>
           <div class="mt-1">
-            {{ form.cedula.errors }}
+            {% if form.cedula.errors %}
+            <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+              {{ form.cedula.errors }}
+            </div>
+            {% endif %}
             <input type="text" name="{{ form.cedula.html_name }}" id="{{ form.cedula.auto_id }}" 
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
                    {% if form.cedula.value %}value="{{ form.cedula.value }}"{% endif %} placeholder="1722919725">
           </div>
           <p class="text-gray-500 text-xs mt-1">Ejemplo: 1722919725</p>
@@ -137,10 +164,16 @@
             Fecha de Nacimiento <span class="text-red-500">*</span>
           </label>
           <div class="mt-1">
-            {{ form.fecha_nacimiento.errors }}
+            {% if form.fecha_nacimiento.errors %}
+            <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+              {{ form.fecha_nacimiento.errors }}
+            </div>
+            {% endif %}
             <input type="date" name="{{ form.fecha_nacimiento.html_name }}" id="{{ form.fecha_nacimiento.auto_id }}" 
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                   {% if form.fecha_nacimiento.value %}value="{{ form.fecha_nacimiento.value|date:'Y-m-d' }}"{% endif %}>
+                   class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
+                   {% if form.fecha_nacimiento.value %}value="{{ form.fecha_nacimiento.value|date:'Y-m-d' }}"{% endif %}
+                   onchange="calcularMostrarEdad()">
+            <p id="edad-display" class="text-gray-700 font-medium mt-2"></p>
           </div>
         </div>
       </div>
@@ -149,14 +182,19 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-gray-50 p-4 rounded-lg">
           <label for="{{ form.numero_jugador.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
-            Número del Jugador <span class="text-red-500">*</span>
+            Número del Jugador en Camiseta <span class="text-red-500">*</span>
           </label>
           <div class="mt-1">
-            {{ form.numero_jugador.errors }}
+            {% if form.numero_jugador.errors %}
+            <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+              {{ form.numero_jugador.errors }}
+            </div>
+            {% endif %}
             <input type="number" name="{{ form.numero_jugador.html_name }}" id="{{ form.numero_jugador.auto_id }}" 
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
                    {% if form.numero_jugador.value %}value="{{ form.numero_jugador.value }}"{% endif %}>
           </div>
+          <p class="text-gray-500 text-xs mt-1">Introduzca el número que el jugador llevará en su camiseta o uniforme.</p>
         </div>
 
         <div class="bg-gray-50 p-4 rounded-lg">
@@ -164,14 +202,19 @@
             Club Anterior (Pases) <span class="text-red-500">*</span>
           </label>
           <div class="mt-1 space-y-2">
+            {% if form.tiene_pases.errors %}
+            <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+              {{ form.tiene_pases.errors }}
+            </div>
+            {% endif %}
             <div class="flex items-center">
               <input type="radio" name="{{ form.tiene_pases.html_name }}" id="{{ form.tiene_pases.auto_id }}_0" value="True" 
-                     class="mr-2" {% if form.tiene_pases.value == True %}checked{% endif %}>
+                     class="mr-3 w-6 h-6" {% if form.tiene_pases.value == True %}checked{% endif %}>
               <label for="{{ form.tiene_pases.auto_id }}_0" class="text-gray-700">Sí</label>
             </div>
             <div class="flex items-center">
               <input type="radio" name="{{ form.tiene_pases.html_name }}" id="{{ form.tiene_pases.auto_id }}_1" value="False" 
-                     class="mr-2" {% if form.tiene_pases.value == False %}checked{% endif %}>
+                     class="mr-3 w-6 h-6" {% if form.tiene_pases.value == False %}checked{% endif %}>
               <label for="{{ form.tiene_pases.auto_id }}_1" class="text-gray-700">No</label>
             </div>
           </div>
@@ -180,28 +223,36 @@
       </div>
 
       <!-- Autorización Menor -->
-      <div class="bg-gray-50 p-4 rounded-lg">
+      <div id="autorizacion-menor-container" class="bg-gray-50 p-4 rounded-lg" style="display: none;">
         <label for="{{ form.autorizacion_menor.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
-          Autorización en Caso de Menor de Edad
+          Autorización en Caso de Menor de Edad <span class="text-red-500">*</span>
         </label>
         <div class="mt-1">
-          {{ form.autorizacion_menor.errors }}
+          {% if form.autorizacion_menor.errors %}
+          <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+            {{ form.autorizacion_menor.errors }}
+          </div>
+          {% endif %}
           <input type="file" name="{{ form.autorizacion_menor.html_name }}" id="{{ form.autorizacion_menor.auto_id }}" 
-                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                 class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
         </div>
-        <p class="text-gray-500 text-xs mt-1">En el caso de que el aspirante sea menor de edad, por reglamento se requiere la autorización. Por favor suba una imagen o un archivo PDF con el documento, caso contrario omitir esta pregunta.</p>
+        <p class="text-gray-500 text-xs mt-1">Para menores de 18 años, es <strong>obligatorio</strong> subir la autorización de los padres o representante legal. Por favor suba una imagen o un archivo PDF con el documento firmado.</p>
       </div>
 
       <!-- Fotos -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-gray-50 p-4 rounded-lg">
           <label for="{{ form.foto_fondo_claro.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
-            Foto con fondo claro <span class="text-red-500">*</span>
+            Foto con fondo claro <span class="text-red-500">*</span> <span class="text-cyan-600">(Será usada en el Carnet)</span>
           </label>
           <div class="mt-1">
-            {{ form.foto_fondo_claro.errors }}
+            {% if form.foto_fondo_claro.errors %}
+            <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+              {{ form.foto_fondo_claro.errors }}
+            </div>
+            {% endif %}
             <input type="file" name="{{ form.foto_fondo_claro.html_name }}" id="{{ form.foto_fondo_claro.auto_id }}" 
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                   class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
           </div>
         </div>
 
@@ -210,9 +261,13 @@
             Foto delantera de la cédula clara <span class="text-red-500">*</span>
           </label>
           <div class="mt-1">
-            {{ form.foto_cedula.errors }}
+            {% if form.foto_cedula.errors %}
+            <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+              {{ form.foto_cedula.errors }}
+            </div>
+            {% endif %}
             <input type="file" name="{{ form.foto_cedula.html_name }}" id="{{ form.foto_cedula.auto_id }}" 
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                   class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
           </div>
           <p class="text-gray-500 text-xs mt-1">Por favor recortar los bordes, solo la cédula</p>
         </div>
@@ -224,14 +279,19 @@
           Recalificación ( llevar las dos fichas ) <span class="text-red-500">*</span>
         </label>
         <div class="mt-1 space-y-2">
+          {% if form.recalificacion.errors %}
+          <div class="bg-red-100 text-red-800 border border-red-400 rounded px-3 py-2 mb-2">
+            {{ form.recalificacion.errors }}
+          </div>
+          {% endif %}
           <div class="flex items-center">
             <input type="radio" name="{{ form.recalificacion.html_name }}" id="{{ form.recalificacion.auto_id }}_0" value="True" 
-                   class="mr-2" {% if form.recalificacion.value == True %}checked{% endif %}>
+                   class="mr-3 w-6 h-6" {% if form.recalificacion.value == True %}checked{% endif %}>
             <label for="{{ form.recalificacion.auto_id }}_0" class="text-gray-700">Sí</label>
           </div>
           <div class="flex items-center">
             <input type="radio" name="{{ form.recalificacion.html_name }}" id="{{ form.recalificacion.auto_id }}_1" value="False" 
-                   class="mr-2" {% if form.recalificacion.value == False %}checked{% endif %}>
+                   class="mr-3 w-6 h-6" {% if form.recalificacion.value == False %}checked{% endif %}>
             <label for="{{ form.recalificacion.auto_id }}_1" class="text-gray-700">No</label>
           </div>
         </div>
@@ -239,74 +299,123 @@
 
       <!-- Botón de envío -->
       <div class="mt-8">
-        <button type="submit" class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition duration-300 font-bold text-lg shadow-md">
+        <button type="submit" class="w-full bg-blue-600 text-white py-4 px-4 rounded-md hover:bg-blue-700 transition duration-300 font-bold text-lg shadow-md text-base">
           Enviar Formulario
         </button>
       </div>
-
       <div class="mt-4 text-center text-sm text-gray-500">
         No envíe nunca contraseñas a través de este formulario.
       </div>
     </form>
+    <div id="js-errors" class="bg-red-100 text-red-800 border border-red-400 rounded px-4 py-3 mt-4 mb-2 hidden"></div>
   </div>
 </div>
-{% endblock %}
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const fechaNacimientoInput = document.getElementById('{{ form.fecha_nacimiento.auto_id }}');
-    const categoriaSelect = document.getElementById('{{ form.categoria.auto_id }}');
-    const numeroJugadorInput = document.getElementById('{{ form.numero_jugador.auto_id }}');
-
-    fechaNacimientoInput.addEventListener('change', function () {
-      const fechaNacimiento = new Date(this.value);
-      const hoy = new Date();
-      let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
-      const mes = hoy.getMonth() - fechaNacimiento.getMonth();
-      if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
-        edad--;
+  // Función para calcular la edad a partir de una fecha
+  function calcularEdad(fecha) {
+    const hoy = new Date();
+    const fechaNacimiento = new Date(fecha);
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+    
+    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+      edad--;
+    }
+    
+    return edad;
+  }
+  
+  // Función para mostrar la edad calculada y controlar el campo de autorización
+  function calcularMostrarEdad() {
+    const fechaInput = document.getElementById('{{ form.fecha_nacimiento.auto_id }}');
+    const edadDisplay = document.getElementById('edad-display');
+    const autorizacionContainer = document.getElementById('autorizacion-menor-container');
+    const autorizacionInput = document.getElementById('{{ form.autorizacion_menor.auto_id }}');
+    
+    if (fechaInput && fechaInput.value && edadDisplay) {
+      const edad = calcularEdad(fechaInput.value);
+      edadDisplay.textContent = `Edad: ${edad} años`;
+      edadDisplay.style.color = edad < 18 ? '#2563eb' : '#1f2937'; // Azul para menores, gris oscuro para adultos
+      
+      // Controlar visibilidad del campo de autorización
+      if (edad < 18) {
+        autorizacionContainer.style.display = 'block';
+        autorizacionInput.setAttribute('required', 'required');
+      } else {
+        autorizacionContainer.style.display = 'none';
+        autorizacionInput.removeAttribute('required');
       }
+    } else if (edadDisplay) {
+      edadDisplay.textContent = '';
+      autorizacionContainer.style.display = 'none';
+      autorizacionInput.removeAttribute('required');
+    }
+  }
 
-      // Mostrar la edad en un elemento del formulario
-      let edadDisplay = document.getElementById('edad-display');
-      if (!edadDisplay) {
-        edadDisplay = document.createElement('p');
-        edadDisplay.id = 'edad-display';
-        edadDisplay.className = 'text-gray-700 text-sm mt-2';
-        fechaNacimientoInput.parentNode.appendChild(edadDisplay);
+  // Validaciones del modelo en el formulario antes de enviar
+  function validarFormulario(event) {
+    const categoria = document.getElementById('{{ form.categoria.auto_id }}').value;
+    const fechaNacimiento = document.getElementById('{{ form.fecha_nacimiento.auto_id }}').value;
+    const numeroJugador = parseInt(document.getElementById('{{ form.numero_jugador.auto_id }}').value, 10);
+    const errores = [];
+    let edad = null;
+
+    if (fechaNacimiento) {
+      edad = calcularEdad(fechaNacimiento);
+    }
+
+    // Validación para categoría "niños"
+    if (categoria === 'niños') {
+      if (!(edad >= 8 && edad <= 10)) {
+        errores.push('La categoría "Niños" requiere una edad entre 8 y 10 años.');
       }
-      edadDisplay.textContent = `Edad calculada: ${edad} años`;
+    }
 
-      const categoria = categoriaSelect.value;
-      const numeroJugador = parseInt(numeroJugadorInput.value, 10);
-
-      let mensajeError = '';
-
-      if (categoria === 'niños') {
-        if (edad < 10 || edad > 11) {
-          mensajeError = 'La categoría "Niños" requiere una edad entre 10 y 11 años.';
-        } else if (edad < 10 && numeroJugador <= 30) {
-          mensajeError = 'Los menores de 10 años deben usar un número superior a 30.';
-        } else if (edad >= 10 && numeroJugador > 30) {
-          mensajeError = 'Los niños de 10 a 11 años deben usar un número menor o igual a 30.';
+    // Validación para "senior" y "femenino"
+    if (categoria === 'senior' || categoria === 'femenino') {
+      if (edad !== null) {
+        if (edad < 18 && numeroJugador < 50) {
+          errores.push('Los menores de 18 años deben usar un número superior a 50 en la categoría "Senior" o "Femenino".');
         }
-      } else if (categoria === 'senior' || categoria === 'femenino') {
-        if (edad < 18 && numeroJugador <= 30) {
-          mensajeError = 'Los menores de 18 años deben usar un número superior a 30 en la categoría "Senior" o "Femenino".';
-        } else if (edad >= 18 && numeroJugador > 30) {
-          mensajeError = 'Los mayores de 18 años deben usar un número menor o igual a 30 en la categoría "Senior" o "Femenino".';
-        }
-      } else if (categoria === 'master') {
-        if (edad < 40 && numeroJugador <= 30) {
-          mensajeError = 'Los menores de 40 años deben usar un número superior a 30 en la categoría "Master".';
-        } else if (edad >= 40 && numeroJugador > 30) {
-          mensajeError = 'Los mayores de 40 años deben usar un número menor o igual a 30 en la categoría "Master".';
+        if (edad >= 18 && numeroJugador > 49) {
+          errores.push('Los mayores de 18 años deben usar un número menor o igual a 49 en la categoría "Senior" o "Femenino".');
         }
       }
+    }
 
-      if (mensajeError) {
-        alert(mensajeError);
+    // Validación para "master"
+    if (categoria === 'master') {
+      if (edad !== null && edad < 39 && numeroJugador < 50) {
+        errores.push('Los menores de 40 años deben usar un número superior a 50 en la categoría "Master".');
       }
-    });
+    }
+
+    // Mostrar errores si existen
+    const errorDiv = document.getElementById('js-errors');
+    if (errores.length > 0) {
+      event.preventDefault();
+      errorDiv.innerHTML = errores.map(e => `<div>${e}</div>`).join('');
+      errorDiv.classList.remove('hidden');
+      window.scrollTo({ top: errorDiv.offsetTop - 40, behavior: 'smooth' });
+    } else {
+      errorDiv.classList.add('hidden');
+      errorDiv.innerHTML = '';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Calcular edad al cargar la página si ya hay una fecha seleccionada
+    calcularMostrarEdad();
+    
+    // También añadimos el listener aquí por si el onchange del input no funciona
+    const fechaInput = document.getElementById('{{ form.fecha_nacimiento.auto_id }}');
+    if (fechaInput) {
+      fechaInput.addEventListener('change', calcularMostrarEdad);
+      fechaInput.addEventListener('input', calcularMostrarEdad);
+    }
+
+    document.getElementById('registro-form').addEventListener('submit', validarFormulario);
   });
 </script>
+{% endblock %}
