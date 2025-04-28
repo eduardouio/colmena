@@ -24,9 +24,25 @@
         <p>A través de nuestro formulario de registro, podrá proporcionar la información necesaria para formar parte de nuestra comunidad deportiva. Asegúrese de tener a mano su documento de identidad y una fotografía reciente con fondo claro.</p>
       </div>
       
-      <a href="{% url 'registro:formulario' %}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 text-xl">
-        Registrar Jugador
-      </a>
+      <!-- Sección de botones principales -->
+      <div class="flex flex-col md:flex-row gap-6 justify-center mb-8">
+        <a href="{% url 'registro:formulario' %}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 text-xl">
+          Registrar Jugador
+        </a>
+        
+        <!-- Nuevo formulario de búsqueda de ficha -->
+        <div class="bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg transition duration-300 overflow-hidden">
+          <div class="p-4">
+            <div class="flex flex-col sm:flex-row items-center gap-2">
+              <input type="text" id="cedula-input" placeholder="Ingrese número de cédula" class="w-full sm:w-64 px-4 py-2 text-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+              <button id="buscar-ficha-btn" class="w-full sm:w-auto px-6 py-2 bg-green-700 hover:bg-green-800 rounded-md transition duration-200">
+                Buscar Ficha
+              </button>
+            </div>
+            <div id="mensaje-error" class="text-white text-sm mt-2 hidden"></div>
+          </div>
+        </div>
+      </div>
     </div>
     
     <!-- Pie de página -->
@@ -35,4 +51,60 @@
     </div>
   </div>
 </div>
+
+<!-- Script para la búsqueda de fichas -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const cedulaInput = document.getElementById('cedula-input');
+    const buscarFichaBtn = document.getElementById('buscar-ficha-btn');
+    const mensajeError = document.getElementById('mensaje-error');
+    
+    // Función para buscar por cédula
+    async function buscarPorCedula(cedula) {
+      try {
+        // Hacemos una petición al backend para buscar la cédula
+        const response = await fetch(`/api/buscar-ficha/?cedula=${encodeURIComponent(cedula)}`);
+        const data = await response.json();
+        
+        if (response.ok && data.id) {
+          // Si encontramos el registro, abrimos la URL en una nueva pestaña
+          window.open(`/descargar/${data.id}/`, '_blank');
+          mensajeError.classList.add('hidden');
+        } else {
+          // Mostramos mensaje de error
+          mensajeError.textContent = data.error || 'No se encontró ningún registro con esa cédula';
+          mensajeError.classList.remove('hidden');
+        }
+      } catch (error) {
+        console.error('Error al buscar ficha:', error);
+        mensajeError.textContent = 'Ocurrió un error al buscar la ficha. Inténtelo nuevamente.';
+        mensajeError.classList.remove('hidden');
+      }
+    }
+    
+    // Manejador del botón de búsqueda
+    buscarFichaBtn.addEventListener('click', function() {
+      const cedula = cedulaInput.value.trim();
+      if (cedula) {
+        buscarPorCedula(cedula);
+      } else {
+        mensajeError.textContent = 'Por favor, ingrese un número de cédula';
+        mensajeError.classList.remove('hidden');
+      }
+    });
+    
+    // También permitir buscar presionando Enter en el input
+    cedulaInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const cedula = cedulaInput.value.trim();
+        if (cedula) {
+          buscarPorCedula(cedula);
+        } else {
+          mensajeError.textContent = 'Por favor, ingrese un número de cédula';
+          mensajeError.classList.remove('hidden');
+        }
+      }
+    });
+  });
+</script>
 {% endblock %}

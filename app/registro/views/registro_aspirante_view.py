@@ -35,6 +35,21 @@ class RegistroAspiranteView(CreateView):
         # Validar autorización para menores de edad
         fecha_nacimiento = form.cleaned_data.get('fecha_nacimiento')
         autorizacion = form.cleaned_data.get('autorizacion_menor')
+        
+        # Validación 1: Verificar que la cédula sea única
+        cedula = form.cleaned_data.get('cedula')
+        if CalificacionAspirante.objects.filter(cedula=cedula).exists():
+            form.add_error(
+                'cedula', 'Ya existe un jugador registrado con esta cédula.')
+            return self.form_invalid(form)
+            
+        # Validación 2: Verificar que el número sea único dentro del club
+        club = form.cleaned_data.get('club')
+        numero_jugador = form.cleaned_data.get('numero_jugador')
+        if CalificacionAspirante.objects.filter(club=club, numero_jugador=numero_jugador).exists():
+            form.add_error(
+                'numero_jugador', f'El número {numero_jugador} ya está en uso en el club {club}.')
+            return self.form_invalid(form)
 
         if fecha_nacimiento:
             hoy = timezone.now().date()
