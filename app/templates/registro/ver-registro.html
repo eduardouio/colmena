@@ -19,6 +19,11 @@
       border-radius: 1rem;
       border: 3px solid #0d6efd;
     }
+    
+    .border{
+      border: 1px solid #999 !important;
+      border-radius: 0.21rem !important;
+    }
     /* Estilo para convertir el logo de Colmena a escala de grises */
     .logo-grayscale {
       filter: grayscale(100%);
@@ -28,14 +33,14 @@
       height: 350px;
       object-fit: contain; /* Cambiado de 'cover' a 'contain' para mostrar la imagen completa */
       border-radius: 0.5rem;
-      border: 2px solid #dee2e6;
+      border: 2px solid #000000;
       background: #fff;
       margin-bottom: 1rem;
       display: block;
       max-width: 100%;
     }
     .line {
-      border-bottom: 1px solid #dee2e6;
+      border-bottom: 1px solid #404040;
       min-height: 2.2em;
       padding: 0 0.5em;
       background: #f8f9fa;
@@ -105,21 +110,21 @@
           </div>
         </div>
         <div class="row g-4 mb-4">
-          <div class="col-7 border">
+          <div class="col-7 border fs-5">
             <div class="row mb-2">
-              <div class="col-5 info-label">Nombres</div>
+              <div class="col-5 info-label text-end" style="background-color: #f1f1f1;" >Nombres</div>
               <div class="col-7 line info-value">{{ registro.nombres }}</div>
             </div>
-            <div class="row mb-2">
-              <div class="col-5 info-label">Apellidos</div>
+            <div class="row mb-2">  
+              <div class="col-5 info-label text-end" style="background-color: #f1f1f1;">Apellidos</div>
               <div class="col-7 line info-value">{{ registro.apellidos }}</div>
             </div>
             <div class="row mb-2">
-              <div class="col-5 info-label">Número de cédula</div>
+              <div class="col-5 info-label text-end" style="background-color: #f1f1f1;">Número de cédula</div>
               <div class="col-7 line info-value">{{ registro.cedula }}</div>
             </div>
             <div class="row mb-2">
-              <div class="col-5 info-label">Fecha de nacimiento</div>
+              <div class="col-5 info-label text-end" style="background-color: #f1f1f1;">Fecha de nacimiento</div>
               <div class="col-7 line info-value">{{ registro.fecha_nacimiento|date:"d/m/Y" }}</div>
             </div>
             <div class="row mt-4">
