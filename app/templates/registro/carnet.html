@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carnet de Jugador - Liga Santa Clara</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+  <div class="relative w-80 h-[120mm] bg-white overflow-hidden shadow-l border-2 rounded">
+    <div class="bg-cyan-600 pb-10">
+      <div class="text-center">
+        Liga Santa Clara de San Millan
+      </div>
+      <div class="absolute top-3 right-3">
+        <img src="{{ logo_url }}" alt="Logo Liga Santa Clara" class="h-10 w-auto">
+      </div>
+    </div>
+    <div class="mt-12 flex justify-center">
+      <img src="{{ foto_url }}" alt="Foto de {{ registro.nombres }}" class="w-24 h-24 rounded-full border-4 border-blue-500 object-cover">
+    </div>
+    <div class="mt-4 text-center px-4" >
+      <h1 class="text-lg font-bold uppercase">{{ registro.nombres }} {{ registro.apellidos }}</h1>
+      <p class="text-sm text-blue-400">Jugador</p>
+      <p class="mt-2 text-xs">Cédula: <span class="font-semibold">{{ registro.cedula }}</span></p>
+      <p class="text-xs">Club: <span class="font-semibold">{{ registro.club.nombre }}</span></p>
+      <p class="text-xs">N° de jugador: <span class="font-semibold">{{ registro.numero_jugador }}</span></p>
+      <p class="text-xs">Edad: <span class="font-semibold">{{ edad }} años</span></p>
+      <p class="mt-2 text-[9px] text-blue-700">Liga Santa Clara • Temporada {{ registro.temporada }}</p>
+    </div>
+    <div class="absolute bottom-3 right-3">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://liga.com" alt="QR" class="w-20 h-20">
+    </div>
+  </div>
+
+</body>
+</html>

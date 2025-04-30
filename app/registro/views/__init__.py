@@ -5,6 +5,7 @@ from .registro_detail_view import RegistroDetailView
 from .home_view import HomeView
 from .views import descargar_registro_pdf, preview_registro
 from .report import descargar_pdf
+from .VistaCarnet import VistaCarnet
 from .buscar_ficha_view import buscar_ficha
 
 __all__ = [
