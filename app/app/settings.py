@@ -114,7 +114,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-es'  # Cambiado a español
 
-TIME_ZONE = 'America/Guayaquil'  # Ajustado a una zona horaria de Ecuador (puedes cambiarla según tu ubicación)
+# Ajustado a una zona horaria de Ecuador (puedes cambiarla según tu ubicación)
+TIME_ZONE = 'America/Guayaquil'
 
 USE_I18N = True
 
@@ -154,3 +155,6 @@ STATIC_ROOT = os.sep.join(os.path.abspath(
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+BASE_URL = 'http://localhost:8000'

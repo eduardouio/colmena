@@ -86,8 +86,9 @@
             <h1 class="mb-0 fs-3 fw-bold">LIGA INDEPENDIENTE DE INDOR FUTBOL</h1>
             <h2 class="mb-0 fs-5">SANTA CLARA DE SAN MILLAN</h2>
             <h3 class="mt-1 fs-6">FUNDADA EL 08 DE ENERO DE 1997</h3>
-            <div class="mt-2 mb-2">
-              <span class="text-primary fs-5">FICHA DE JUGADOR # {{ registro.pk }}</span>
+            <div class="mt-2 mb-2 flex justify-content-between">
+              <span class="text-primary fs-5">FICHA DE JUGADOR </span>
+              <span class="border p-1"># {{ registro.pk }}</span>
             </div>
           </div>
           <div class="col-auto">
@@ -130,21 +131,13 @@
             <div class="row mt-4">
               <div class="col-12">
                 <div class="info-label mb-1">Copia de cédula</div>
-                {% if foto_cedula_url %}
                   <img src="{{ foto_cedula_url }}" alt="Copia de cédula" class="id-img">
-                {% else %}
-                  <div class="id-img d-flex align-items-center justify-content-center text-muted">Copia de cédula</div>
-                {% endif %}
               </div>
             </div>
           </div>
           <div class="col-5 border d-flex flex-column align-items-center">
             <div class="info-label mb-2">Foto Carnet</div>
-            {% if foto_fondo_claro_url %}
               <img src="{{ foto_fondo_claro_url }}" alt="Foto" class="profile-img">
-            {% else %}
-              <div class="profile-img d-flex align-items-center justify-content-center text-muted">Foto</div>
-            {% endif %}
             <div class="col-6">
               <div class="row align-items-center mb-2 mt-2">
                 <div class="col-12 fs-1 text-center"># {{ registro.numero_jugador }}</div>
