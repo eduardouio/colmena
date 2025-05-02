@@ -24,5 +24,5 @@ urlpatterns = [
     path('preview/<int:pk>/', preview_registro, name='preview_registro'),
     path('descargar/<int:pk>/', descargar_pdf, name='descargar_pdf'),
     path('api/buscar-ficha/', buscar_ficha, name='buscar_ficha'),
-    path('carnet/<int:pk>/', VistaCarnet.as_view(), name='carnet'),
+    path('carnet/<int:pk>/', VistaCarnet.as_view(), name='ver_carnet'),
 ]

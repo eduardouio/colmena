@@ -6,33 +6,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carnet de Jugador - Liga Santa Clara</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Define el tamaño físico del carnet si es necesario para imprimir */
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact; /* For Chrome, Safari */
+        print-color-adjust: exact; /* Standard */
+      }
+      .carnet-container {
+        /* Ajustar tamaño de impresión si es necesario, manteniendo proporción */
+        width: 107mm; /* 85.6mm * 1.25 */
+        height: 67.475mm; /* 53.98mm * 1.25 */
+        /* O usar las dimensiones en pantalla aumentadas */
+        /* width: 100mm; */
+        /* height: 150mm; */
+        page-break-inside: avoid;
+        overflow: hidden;
+      }
+    }
+    /* Ajusta el tamaño en pantalla, aumentado un 25% */
+    .carnet-container {
+        width: 100mm; /* 80mm * 1.25 */
+        height: 150mm; /* 120mm * 1.25 */
+        /* Añadir imagen de fondo */
+        background-image: url('https://img.freepik.com/premium-vector/abstract-blue-line-hexagon-light-technology-geometric-design-modern-white-background-vector_33869-3653.jpg');
+        background-size: cover; /* Cubrir todo el contenedor */
+        background-position: center; /* Centrar la imagen */
+        background-repeat: no-repeat; /* No repetir la imagen */
+    }
+  </style>
 </head>
-<body>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
 
-  <div class="relative w-80 h-[120mm] bg-white overflow-hidden shadow-l border-2 rounded">
-    <div class="bg-cyan-600 pb-10">
-      <div class="text-center">
-        Liga Santa Clara de San Millan
-      </div>
-      <div class="absolute top-3 right-3">
-        <img src="{{ logo_url }}" alt="Logo Liga Santa Clara" class="h-10 w-auto">
-      </div>
+  <!-- Se quita bg-white para que se vea el fondo -->
+  <div class="carnet-container relative rounded-lg overflow-hidden shadow-lg border border-gray-200">
+    <!-- Encabezado con fondo azul, texto y logo -->
+    <!-- Cambiado justify-end a justify-between y items-start a items-center para mejor alineación vertical -->
+    <div class="h-24 bg-blue-600/50 p-3 flex justify-between items-center backdrop-blur-sm">
+        <!-- Contenedor para el texto -->
+        <div class="text-white">
+            <span class="block text-xl">LIGA BARRIAL</span> <!-- Ajusta text-xl según necesites -->
+            <span class="block text-2xl font-bold">SANTA CLARA</span> <!-- Ajusta text-2xl según necesites -->
+        </div>
+        <!-- Logo -->
+        {% if logo_url %}
+        <img src="{{ logo_url }}" alt="Logo Liga" class="h-20 w-auto">
+        {% else %}
+        <!-- Placeholder si no hay logo -->
+        <div class="h-20 w-32 bg-gray-300/80 rounded flex items-center justify-center text-xs text-gray-500">Logo</div> <!-- Placeholder mejorado -->
+        {% endif %}
     </div>
-    <div class="mt-12 flex justify-center">
-      <img src="{{ foto_url }}" alt="Foto de {{ registro.nombres }}" class="w-24 h-24 rounded-full border-4 border-blue-500 object-cover">
+
+    <!-- Contenedor principal del contenido -->
+    <!-- Se puede añadir un fondo blanco semi-transparente a esta sección para mejorar legibilidad -->
+    <div class="relative p-4 bg-white/50 rounded-b-lg"> <!-- Ejemplo: bg-white/50 -->
+        <!-- Foto del jugador (posicionada parcialmente sobre el encabezado) -->
+        <!-- Cambiado -top-20 a -top-16 para bajar la imagen -->
+        <div class="absolute -top-5 left-1/2 transform -translate-x-1/2">
+            <img src="{{ foto_url }}" alt="Foto Jugador" class="w-48 h-48 rounded-full border-4 border-white bg-gray-200 object-cover shadow-md"> <!-- Duplicado tamaño de foto (w/h-24 a w/h-48) -->
+        </div>
+
+        <!-- Información del jugador (debajo de la foto) -->
+        <!-- Ajustado mt-32 a mt-36 para compensar la bajada de la foto -->
+        <div class="mt-40 text-center space-y-2">
+            <!-- Corregido: Usar nombres y apellidos del modelo CalificacionAspirante -->
+            <h1 class="text-2xl font-bold uppercase text-gray-800">{{ registro.nombres }} {{ registro.apellidos }}</h1>
+            <!-- Corregido: Usar club.nombre del modelo CalificacionAspirante -->
+            <p class="text-lg text-blue-700 font-semibold">{{ registro.club.nombre|default:"Equipo" }}</p> <!-- Ajustado color para contraste -->
+            <!-- Corregido: Usar cedula del modelo CalificacionAspirante -->
+            <p class="mt-2 text-lg text-gray-700">ID: <span class="font-semibold">{{ registro.cedula|default:"0000000000" }}</span></p> <!-- Ajustado color para contraste -->
+            <!-- Campos existentes (correctos según VistaCarnet) -->
+            <p class="text-lg text-gray-700">Edad: <span class="font-semibold">{{ edad }}</span></p> <!-- Ajustado color para contraste -->
+            <p class="text-lg text-gray-700">Categoría: <span class="font-semibold">{{ registro.categoria|title|default:"Categoría" }}</span></p> <!-- Ajustado color para contraste -->
+            <p class="text-lg text-gray-700">Temporada: <span class="font-semibold">{{ registro.temporada|default:"N/A" }}</span></p> <!-- Ajustado color para contraste -->
+        </div>
+
+        <!-- QR Code (esquina inferior derecha) -->
+        <div class="absolute bottom-3 right-3">
+            {% if qr_url %}
+            <img src="{{ qr_url }}" alt="QR Code" class="w-16 h-16 bg-white p-1 rounded"> <!-- Añadido fondo blanco al QR -->
+            {% else %}
+            <div class="w-16 h-16 bg-gray-300 flex items-center justify-center text-xs text-gray-500 rounded">QR</div>
+            {% endif %}
+        </div>
     </div>
-    <div class="mt-4 text-center px-4" >
-      <h1 class="text-lg font-bold uppercase">{{ registro.nombres }} {{ registro.apellidos }}</h1>
-      <p class="text-sm text-blue-400">Jugador</p>
-      <p class="mt-2 text-xs">Cédula: <span class="font-semibold">{{ registro.cedula }}</span></p>
-      <p class="text-xs">Club: <span class="font-semibold">{{ registro.club.nombre }}</span></p>
-      <p class="text-xs">N° de jugador: <span class="font-semibold">{{ registro.numero_jugador }}</span></p>
-      <p class="text-xs">Edad: <span class="font-semibold">{{ edad }} años</span></p>
-      <p class="mt-2 text-[9px] text-blue-700">Liga Santa Clara • Temporada {{ registro.temporada }}</p>
-    </div>
-    <div class="absolute bottom-3 right-3">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://liga.com" alt="QR" class="w-20 h-20">
-    </div>
+
+    <!-- Pie de página opcional (si necesitas añadir algo más) -->
+    <!-- <div class="absolute bottom-0 left-0 w-full h-4 bg-blue-600"></div> -->
   </div>
 
 </body>

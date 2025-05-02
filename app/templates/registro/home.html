@@ -68,7 +68,7 @@
         
         if (response.ok && data.id) {
           // Si encontramos el registro, abrimos la URL en una nueva pestaña
-          window.open(`/descargar/${data.id}/`, '_blank');
+          window.open(`/exito/${data.id}/`, '_blank');
           mensajeError.classList.add('hidden');
         } else {
           // Mostramos mensaje de error
