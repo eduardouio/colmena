@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils.html import format_html
+from django.urls import reverse
 from .models import Club, CalificacionAspirante
 
 
@@ -11,7 +13,7 @@ class ClubAdmin(admin.ModelAdmin):
 
 @admin.register(CalificacionAspirante)
 class CalificacionAspiranteAdmin(admin.ModelAdmin):
-    list_display = ('nombres', 'apellidos', 'cedula', 'categoria', 'club', 'temporada', 'email', 'numero_jugador', 'created_at')
+    list_display = ('nombres', 'apellidos', 'cedula', 'categoria', 'club', 'temporada', 'email', 'numero_jugador', 'created_at', 'acciones')
     list_filter = ('temporada', 'categoria', 'club', 'recalificacion', 'tiene_pases', 'created_at')
     search_fields = ('nombres', 'apellidos', 'cedula', 'email', 'numero_jugador')
     date_hierarchy = 'created_at'
@@ -27,4 +29,22 @@ class CalificacionAspiranteAdmin(admin.ModelAdmin):
         ('Documentos', {
             'fields': ('foto_fondo_claro', 'foto_cedula', 'autorizacion_menor')
         }),
+        ('Notas y Observaciones', {
+            'fields': ('notes',),
+            'classes': ('collapse',),
+        }),
     )
+
+    def acciones(self, obj):
+        """Muestra botones para ver carnet y descargar PDF."""
+        ver_carnet = reverse('registro:ver_carnet', args=[obj.id])
+        descargar_pdf = reverse('registro:descargar_pdf', args=[obj.id])
+        
+        return format_html(
+            '<a class="button" href="{}" target="_blank" style="margin-right:10px;background-color:#1d91d0;color:white;padding:5px 10px;border-radius:4px;text-decoration:none;">Ver Carnet</a>'
+            '<a class="button" href="{}" style="background-color:#28a745;color:white;padding:5px 10px;border-radius:4px;text-decoration:none;">Descargar PDF</a>',
+            ver_carnet, descargar_pdf
+        )
+    
+    acciones.short_description = 'Acciones'
+    acciones.allow_tags = True
