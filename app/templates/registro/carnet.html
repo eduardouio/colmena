@@ -60,17 +60,11 @@
       <!-- Cambiado justify-end a justify-between y items-start a items-center para mejor alineación vertical -->
       <div class="h-24 bg-blue-600/50 p-3 flex justify-between items-center backdrop-blur-xs">
           <!-- Contenedor para el texto -->
-          <div class="text-blue-800">
-              <span class="block text-xl font-bold text-with-outline">LIGA BARRIAL</span> <!-- Agregado text-with-outline -->
-              <span class="block text-2xl font-bold text-with-outline">SANTA CLARA</span> <!-- Agregado text-with-outline -->
+          <div class="text-blue-800 text-center">
+              <span class="block text-xl font-bold text-with-outline">LIGA INDEPENDIENTE</span> <!-- Agregado text-with-outline -->
+              <span class="block text-2xl font-bold text-with-outline">SANTA CLARA DE SAN MILLAN</span> <!-- Agregado text-with-outline -->
           </div>
-          <!-- Logo -->
-          {% if logo_url %}
-          <img src="{{ logo_url }}" alt="Logo Liga" class="h-20 w-auto">
-          {% else %}
-          <!-- Placeholder si no hay logo -->
-          <div class="h-20 w-32 bg-gray-300/80 rounded flex items-center justify-center text-xs text-gray-500">Logo</div> <!-- Placeholder mejorado -->
-          {% endif %}
+        
       </div>
   
       <!-- Contenedor principal del contenido -->
