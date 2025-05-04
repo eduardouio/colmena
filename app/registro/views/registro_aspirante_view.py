@@ -36,6 +36,12 @@ class RegistroAspiranteView(CreateView):
         fecha_nacimiento = form.cleaned_data.get('fecha_nacimiento')
         autorizacion = form.cleaned_data.get('autorizacion_menor')
         
+        # Validación: Verificar que fecha_nacimiento no sea None
+        if fecha_nacimiento is None:
+            form.add_error(
+                'fecha_nacimiento', 'La fecha de nacimiento es obligatoria.')
+            return self.form_invalid(form)
+        
         # Validación 1: Verificar que la cédula sea única
         cedula = form.cleaned_data.get('cedula')
         if CalificacionAspirante.objects.filter(cedula=cedula).exists():
@@ -51,20 +57,20 @@ class RegistroAspiranteView(CreateView):
                 'numero_jugador', f'El número {numero_jugador} ya está en uso en el club {club}.')
             return self.form_invalid(form)
 
-        if fecha_nacimiento:
-            hoy = timezone.now().date()
-            edad = hoy.year - fecha_nacimiento.year - \
-                ((hoy.month, hoy.day) < (fecha_nacimiento.month, fecha_nacimiento.day))
+        # Ahora podemos procesar la fecha de nacimiento con seguridad
+        hoy = timezone.now().date()
+        edad = hoy.year - fecha_nacimiento.year - \
+            ((hoy.month, hoy.day) < (fecha_nacimiento.month, fecha_nacimiento.day))
 
-            # Si es menor de edad y no ha adjuntado autorización
-            if edad < 18 and not autorizacion:
-                form.add_error(
-                    'autorizacion_menor', 'La autorización es obligatoria para menores de edad.')
-                return self.form_invalid(form)
+        # Si es menor de edad y no ha adjuntado autorización
+        if edad < 18 and not autorizacion:
+            form.add_error(
+                'autorizacion_menor', 'La autorización es obligatoria para menores de edad.')
+            return self.form_invalid(form)
 
-            # Si es mayor de edad y adjuntó autorización, simplemente la ignoramos
-            if edad >= 18 and autorizacion:
-                form.instance.autorizacion_menor = None
+        # Si es mayor de edad y adjuntó autorización, simplemente la ignoramos
+        if edad >= 18 and autorizacion:
+            form.instance.autorizacion_menor = None
 
         response = super().form_valid(form)
         # Depuración: imprime el objeto guardado

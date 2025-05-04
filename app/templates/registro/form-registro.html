@@ -14,6 +14,12 @@
   </div>
 
   <!-- Contenido del formulario -->
+  <div class="mb-4 mt-4 p-3">
+    <span class="text-red-600 font-semibold">
+      <strong>Advertencia:</strong>
+      De acuerdo a la legislación ecuatoriana, no se puede cambiar o alterar documentos legales. Toda falsificación o alteración podrá ser sancionada conforme a la ley.
+    </span>
+  </div>
   <div class="p-8">
     <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">Formulario de Calificaciones</h1>
     
@@ -119,6 +125,7 @@
             {% endif %}
             <input type="text" name="{{ form.nombres.html_name }}" id="{{ form.nombres.auto_id }}" 
                    class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
+                   style="text-transform: capitalize;"
                    {% if form.nombres.value %}value="{{ form.nombres.value }}"{% endif %}>
           </div>
         </div>
@@ -135,6 +142,7 @@
             {% endif %}
             <input type="text" name="{{ form.apellidos.html_name }}" id="{{ form.apellidos.auto_id }}" 
                    class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
+                   style="text-transform: capitalize;"
                    {% if form.apellidos.value %}value="{{ form.apellidos.value }}"{% endif %}>
           </div>
         </div>
@@ -154,9 +162,10 @@
             {% endif %}
             <input type="text" name="{{ form.cedula.html_name }}" id="{{ form.cedula.auto_id }}" 
                    class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
-                   {% if form.cedula.value %}value="{{ form.cedula.value }}"{% endif %} placeholder="1722919725">
+                   minlength="10" maxlength="10" pattern="[0-9]{10}" title="Ingrese 10 dígitos numéricos"
+                   {% if form.cedula.value %}value="{{ form.cedula.value }}"{% endif %} placeholder="1700000002">
           </div>
-          <p class="text-gray-500 text-xs mt-1">Ejemplo: 1722919725</p>
+          <p class="text-gray-500 text-xs mt-1">La cédula ecuatoriana debe tener exactamente 10 dígitos</p>
         </div>
 
         <div class="bg-gray-50 p-4 rounded-lg">
@@ -172,7 +181,7 @@
             <input type="date" name="{{ form.fecha_nacimiento.html_name }}" id="{{ form.fecha_nacimiento.auto_id }}" 
                    class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
                    {% if form.fecha_nacimiento.value %}value="{{ form.fecha_nacimiento.value|date:'Y-m-d' }}"{% endif %}
-                   onchange="calcularMostrarEdad()">
+                   onchange="calcularMostrarEdad()" required>
             <p id="edad-display" class="text-gray-700 font-medium mt-2"></p>
           </div>
         </div>
@@ -252,7 +261,12 @@
             </div>
             {% endif %}
             <input type="file" name="{{ form.foto_fondo_claro.html_name }}" id="{{ form.foto_fondo_claro.auto_id }}" 
-                   class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
+                   class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
+                   accept="image/*" required>
+            <!-- Previsualización de la imagen cargada -->
+            <div class="mt-4 flex justify-center">
+              <img id="preview-foto-fondo-claro" src="#" alt="Previsualización foto fondo claro" class="max-h-40 rounded shadow hidden" />
+            </div>
           </div>
         </div>
 
@@ -267,7 +281,12 @@
             </div>
             {% endif %}
             <input type="file" name="{{ form.foto_cedula.html_name }}" id="{{ form.foto_cedula.auto_id }}" 
-                   class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
+                   class="w-full px-4 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
+                   accept="image/*" required>
+            <!-- Previsualización de la imagen cargada -->
+            <div class="mt-4 flex justify-center">
+              <img id="preview-foto-cedula" src="#" alt="Previsualización foto cédula" class="max-h-40 rounded shadow hidden" />
+            </div>
           </div>
           <p class="text-gray-500 text-xs mt-1">Por favor recortar los bordes, solo la cédula</p>
         </div>
@@ -404,6 +423,56 @@
     }
   }
 
+  // Previsualización de imágenes cargadas
+  function mostrarPreview(inputId, imgPreviewId) {
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(imgPreviewId);
+    if (!input || !preview) return;
+    input.addEventListener('change', function() {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.classList.remove('hidden');
+          };
+          reader.readAsDataURL(file);
+        } else {
+          preview.src = '#';
+          preview.classList.add('hidden');
+        }
+      } else {
+        preview.src = '#';
+        preview.classList.add('hidden');
+      }
+    });
+  }
+
+  // Función para validar que la cédula solo contenga dígitos
+  function validarCedula() {
+    const cedulaInput = document.getElementById('{{ form.cedula.auto_id }}');
+    
+    cedulaInput.addEventListener('input', function(e) {
+      // Eliminar cualquier carácter que no sea un dígito
+      this.value = this.value.replace(/\D/g, '');
+      
+      // Limitar a 10 caracteres
+      if (this.value.length > 10) {
+        this.value = this.value.slice(0, 10);
+      }
+    });
+
+    cedulaInput.addEventListener('blur', function() {
+      // Validar longitud al perder el foco
+      if (this.value.length > 0 && this.value.length < 10) {
+        this.setCustomValidity('La cédula ecuatoriana debe tener 10 dígitos');
+      } else {
+        this.setCustomValidity('');
+      }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     // Calcular edad al cargar la página si ya hay una fecha seleccionada
     calcularMostrarEdad();
@@ -416,6 +485,13 @@
     }
 
     document.getElementById('registro-form').addEventListener('submit', validarFormulario);
+
+    // Previsualización para foto fondo claro y foto cédula
+    mostrarPreview('{{ form.foto_fondo_claro.auto_id }}', 'preview-foto-fondo-claro');
+    mostrarPreview('{{ form.foto_cedula.auto_id }}', 'preview-foto-cedula');
+
+    // Inicializar validación de cédula
+    validarCedula();
   });
 </script>
 {% endblock %}

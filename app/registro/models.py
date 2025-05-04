@@ -19,9 +19,9 @@ class CalificacionAspirante(models.Model):
     ]
 
     ESTADOS = [
-        ('pendiente', 'Pendiente'),
-        ('aprobado', 'Aprobado'),
-        ('rechazado', 'Rechazado'),
+        ('Pendiente', 'Pendiente'),
+        ('Aprobado', 'Aprobado'),
+        ('Rechazado', 'Rechazado'),
     ]
 
     email = models.EmailField()
@@ -43,8 +43,8 @@ class CalificacionAspirante(models.Model):
     # Campos nuevos
     fecha_registro = models.DateTimeField(auto_now_add=True)
     estado = models.CharField(
-        max_length=10, choices=ESTADOS, default='pendiente')
-
+        max_length=10, choices=ESTADOS, default='Pendiente')
+    notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

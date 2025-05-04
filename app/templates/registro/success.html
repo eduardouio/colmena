@@ -7,6 +7,24 @@
   <h2 class="text-2xl font-bold text-green-600 mb-4 text-center">¡Registro exitoso!</h2>
   <p class="text-gray-700 mb-6 text-center">Gracias por completar el formulario. Tu postulación será revisada por la comisión de calificaciones.</p>
   
+  <!-- Estado del registro -->
+  <div class="mb-4 p-3 rounded-lg text-center 
+    {% if registro.estado == 'Aprobado' %}bg-green-100 text-green-800 border border-green-200
+    {% elif registro.estado == 'Rechazado' %}bg-red-100 text-red-800 border border-red-200
+    {% else %}bg-yellow-100 text-yellow-800 border border-yellow-200{% endif %}">
+    <h3 class="font-bold text-lg">
+      Estado: {{ registro.estado }}
+    </h3>
+    
+    <!-- Mostrar notas si el estado es Rechazado -->
+    {% if registro.estado == 'Rechazado' and registro.notes %}
+    <div class="mt-2 p-2 bg-white rounded border border-red-300 text-left">
+      <p class="font-semibold">Motivo del rechazo:</p>
+      <p class="text-gray-700">{{ registro.notes }}</p>
+    </div>
+    {% endif %}
+  </div>
+  
   <!-- Información del usuario registrado -->
   <div class="bg-gray-50 p-4 rounded-lg mb-6">
     <h3 class="text-lg font-semibold mb-2 text-center">Datos del jugador Ficha de Registro</h3>

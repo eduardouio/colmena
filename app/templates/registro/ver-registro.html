@@ -101,6 +101,12 @@
           <div class="col-md-6 d-flex align-items-center gap-3">
             <span class="info-label">Temporada</span>
             <span class="badge bg-primary-subtle text-primary fs-6">{{ registro.temporada }}</span>
+            <span class="badge fs-6 
+            {% if registro.estado == 'Aprobado' %}bg-success-subtle text-success
+            {% elif registro.estado == 'Rechazado' %}bg-danger-subtle text-danger
+            {% else %}bg-warning-subtle text-warning{% endif %}">
+              {{ registro.estado }}
+            </span>
           </div>
           <div class="col-md-6 d-flex justify-content-md-end align-items-center category-switch">
             <span class="info-label me-2">Categoría:</span>

@@ -18,15 +18,43 @@
     <div class="p-8 text-center">
       <h2 class="text-2xl font-bold text-gray-800 mb-6">Sistema de Registro de Jugadores</h2>
       
+      <!-- Advertencia legal en rojo -->
+      <div class="mb-4 p-3">
+        <span class="text-red-600 font-semibold">
+          <strong>Advertencia:</strong> 
+          De acuerdo a la legislación ecuatoriana, no se puede cambiar o alterar documentos legales. Toda falsificación o alteración podrá ser sancionada conforme a la ley.
+        </span>
+      </div>
+
+      <!-- Aviso de protección de datos personales -->
+      <div class="mb-4 p-3">
+        <span class="text-blue-700 font-semibold">
+          <strong>Protección de Datos Personales:</strong>
+          En cumplimiento de la Ley Orgánica de Protección de Datos Personales del Ecuador, se informa que los datos personales proporcionados serán utilizados únicamente para validar la información y emitir el carnet de la Liga Independiente Santa Clara de San Millán. Los datos serán resguardados en los archivos de la liga y no serán utilizados para otros fines.
+        </span>
+      </div>
+      
       <div class="mb-8 text-gray-700 bg-blue-50 p-6 rounded-lg border border-blue-200 text-left">
         <p class="mb-4">Bienvenido al sistema de registro de la Liga Independiente Santa Clara de San Millán. Este proceso tiene como objetivo calificar a los jugadores de acuerdo con el reglamento interno de la liga.</p>
         
         <p>A través de nuestro formulario de registro, podrá proporcionar la información necesaria para formar parte de nuestra comunidad deportiva. Asegúrese de tener a mano su documento de identidad y una fotografía reciente con fondo claro.</p>
       </div>
       
+      <!-- Casilla de aceptación -->
+      <div class="flex flex-col items-center justify-center mb-6 gap-2">
+        <div class="flex items-center">
+          <input type="checkbox" id="acepto-condiciones" class="mr-2">
+          <label for="acepto-condiciones" class="text-gray-700 select-none">Declaro que he leído y acepto la advertencia legal.</label>
+        </div>
+        <div class="flex items-center">
+          <input type="checkbox" id="acepto-datos" class="mr-2">
+          <label for="acepto-datos" class="text-gray-700 select-none">Autorizo el uso de mis datos personales conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador.</label>
+        </div>
+      </div>
+      
       <!-- Sección de botones principales -->
       <div class="flex flex-col md:flex-row gap-6 justify-center mb-8">
-        <a href="{% url 'registro:formulario' %}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 text-xl">
+        <a href="{% url 'registro:formulario' %}" id="registrar-jugador-btn" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 text-xl opacity-50 pointer-events-none">
           Registrar Jugador
         </a>
         
@@ -52,7 +80,7 @@
   </div>
 </div>
 
-<!-- Script para la búsqueda de fichas -->
+<!-- Script para la búsqueda de fichas y aceptación -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const cedulaInput = document.getElementById('cedula-input');
@@ -105,6 +133,20 @@
         }
       }
     });
+
+    // Funcionalidad de aceptación para habilitar el botón de registro
+    const aceptoCheckbox = document.getElementById('acepto-condiciones');
+    const aceptoDatosCheckbox = document.getElementById('acepto-datos');
+    const registrarBtn = document.getElementById('registrar-jugador-btn');
+    function actualizarEstadoBoton() {
+      if (aceptoCheckbox.checked && aceptoDatosCheckbox.checked) {
+        registrarBtn.classList.remove('opacity-50', 'pointer-events-none');
+      } else {
+        registrarBtn.classList.add('opacity-50', 'pointer-events-none');
+      }
+    }
+    aceptoCheckbox.addEventListener('change', actualizarEstadoBoton);
+    aceptoDatosCheckbox.addEventListener('change', actualizarEstadoBoton);
   });
 </script>
 {% endblock %}
