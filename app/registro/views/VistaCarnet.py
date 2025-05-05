@@ -21,8 +21,11 @@ class VistaCarnet(TemplateView):
         # Agregar datos adicionales al contexto
         context['edad'] = edad
 
-        # Obtener el host base para URLs absolutas
-        base_url = settings.SITE_URL
+        # Obtener el host base dinámicamente desde el request actual
+        request = self.request
+        protocol = 'https' if request.is_secure() else 'http'
+        host = request.get_host()
+        base_url = f"{protocol}://{host}"
         
         # URLs para las imágenes usando el host correcto
         # Logo de la liga
