@@ -22,7 +22,7 @@ class VistaCarnet(TemplateView):
         context['edad'] = edad
 
         # Obtener el host base para URLs absolutas
-        base_url = self.get_base_url()
+        base_url = settings.SITE_URL
         
         # URLs para las imágenes usando el host correcto
         # Logo de la liga
@@ -37,16 +37,6 @@ class VistaCarnet(TemplateView):
             context['foto_url'] = f"{base_url}{default_photo}"
 
         return context
-    
-    def get_base_url(self):
-        """
-        Obtiene la URL base correcta para producción o desarrollo.
-        Si hay un SITE_URL configurado en settings, úsalo, de lo contrario
-        intenta obtenerlo del request.
-        """
-        if hasattr(settings, 'SITE_URL') and settings.SITE_URL:
-            # Usar URL configurada en settings
-            return settings.SITE_URL
 
     def get(self, request, pk, *args, **kwargs):
         try:
