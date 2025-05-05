@@ -56,22 +56,4 @@
     <p>La descarga de tu ficha comenzará automáticamente...</p>
   </div>
 </div>
-
-<!-- Script para descarga automática -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Pequeño retraso para asegurar que la página se ha cargado completamente
-    setTimeout(function() {
-      // Obtener la URL de descarga del botón
-      var descargarUrl = document.getElementById('descargar-btn').href;
-      // Crear un elemento invisible y simular clic para iniciar la descarga
-      var link = document.createElement('a');
-      link.href = descargarUrl;
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }, 1000); // Retraso de 1 segundo
-  });
-</script>
 {% endblock %}

@@ -95,8 +95,8 @@
         const data = await response.json();
         
         if (response.ok && data.id) {
-          // Si encontramos el registro, abrimos la URL en una nueva pestaña
-          window.open(`/exito/${data.id}/`, '_blank');
+          // Redireccionamos a la página de éxito en la misma ventana
+          window.location.href = `/exito/${data.id}/`;
           mensajeError.classList.add('hidden');
         } else {
           // Mostramos mensaje de error

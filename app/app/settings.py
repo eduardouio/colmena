@@ -156,5 +156,6 @@ STATIC_ROOT = os.sep.join(os.path.abspath(
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-SITE_URL = 'http://localhost:8000'
+# En tu archivo settings.py para producción
+# Reemplaza con la URL real de tu sitio
+SITE_URL = 'http://146.190.56.181:8000'
