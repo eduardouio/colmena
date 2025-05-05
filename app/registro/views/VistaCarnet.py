@@ -30,11 +30,11 @@ class VistaCarnet(TemplateView):
         # URLs para las imágenes usando el host correcto
         # Logo de la liga
         logo_path = static('img/logo.jpg')
-        context['logo_url'] = f"{base_url}{logo_path}"
+        context['logo_url'] = f"http://146.190.56.181:8000/{logo_path}"
 
         # Foto del jugador (si existe)
         if registro.foto_fondo_claro:
-            context['foto_url'] = f"{base_url}{registro.foto_fondo_claro.url}"
+            context['foto_url'] = f"http://146.190.56.181:8000/{registro.foto_fondo_claro.url}"
         else:
             default_photo = static('img/perfil-default.png')
             context['foto_url'] = f"{base_url}{default_photo}"
