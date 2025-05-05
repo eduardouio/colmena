@@ -46,17 +46,7 @@ class VistaCarnet(TemplateView):
         """
         if hasattr(settings, 'SITE_URL') and settings.SITE_URL:
             # Usar URL configurada en settings
-            return settings.SITE_URL.rstrip('/')
-        
-        # Como alternativa, obtener del request, pero verificar si es HTTPS
-        if self.request:
-            protocol = 'https' if self.request.is_secure() else 'http'
-            # Intentar obtener el host real mirando los headers de proxy
-            host = self.request.META.get('HTTP_HOST') or \
-                  self.request.get_host()
-            return f"{protocol}://{host}"
-        
-        return "/"
+            return settings.SITE_URL
 
     def get(self, request, pk, *args, **kwargs):
         try:
