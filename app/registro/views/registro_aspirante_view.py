@@ -52,9 +52,9 @@ class RegistroAspiranteView(CreateView):
         # Validación 2: Verificar que el número sea único dentro del club
         club = form.cleaned_data.get('club')
         numero_jugador = form.cleaned_data.get('numero_jugador')
-        if CalificacionAspirante.objects.filter(club=club, numero_jugador=numero_jugador).exists():
+        if CalificacionAspirante.objects.filter(club=club, numero_jugador=numero_jugador, categoria=form.cleaned_data.get('categoria')).exists():
             form.add_error(
-                'numero_jugador', f'El número {numero_jugador} ya está en uso en el club {club}.')
+                'numero_jugador', f'El número {numero_jugador} ya está en uso en el club {club} para la categoría {form.cleaned_data.get('categoria')}.')
             return self.form_invalid(form)
 
         # Ahora podemos procesar la fecha de nacimiento con seguridad
