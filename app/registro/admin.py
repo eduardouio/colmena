@@ -13,11 +13,11 @@ class ClubAdmin(admin.ModelAdmin):
 
 @admin.register(CalificacionAspirante)
 class CalificacionAspiranteAdmin(admin.ModelAdmin):
-    list_display = ('nombres', 'apellidos', 'cedula', 'categoria', 'club', 'temporada', 'email', 'numero_jugador', 'created_at', 'acciones')
-    list_filter = ('temporada', 'categoria', 'club', 'recalificacion', 'tiene_pases', 'created_at')
-    search_fields = ('nombres', 'apellidos', 'cedula', 'email', 'numero_jugador')
+    list_display = ('nombres', 'apellidos', 'cedula', 'categoria', 'club', 'temporada', 'email', 'estado', 'numero_jugador', 'created_at', 'acciones')
+    list_filter = ('temporada', 'categoria', 'club', 'recalificacion', 'tiene_pases', 'created_at' ,'estado')
+    search_fields = ('nombres', 'apellidos', 'cedula', 'email', 'numero_jugador', 'estado')
     date_hierarchy = 'created_at'
-    list_per_page = 25
+    list_per_page = 50
     ordering = ('-created_at',)  # Ordenar por fecha de creación descendente
     fieldsets = (
         ('Información Personal', {
@@ -28,6 +28,10 @@ class CalificacionAspiranteAdmin(admin.ModelAdmin):
         }),
         ('Documentos', {
             'fields': ('foto_fondo_claro', 'foto_cedula', 'autorizacion_menor')
+        }),
+        ('Estado de la Solicitud', {
+            'fields': ('estado',),
+            'classes': ('collapse',),
         }),
         ('Notas y Observaciones', {
             'fields': ('notes',),
