@@ -5,6 +5,7 @@ from datetime import date
 from django.conf import settings # Importar settings
 from urllib.parse import urljoin # Para unir URLs de forma segura
 
+
 class RegistroDetailView(DetailView):
     model = CalificacionAspirante
     template_name = 'registro/ver-registro.html'
@@ -41,7 +42,7 @@ class RegistroDetailView(DetailView):
         if not hasattr(registro, 'fecha_registro'):
             context['registro'].fecha_registro = registro.created_at
 
-        if not hasattr(registro, 'estado'):
+        if not hasattr(registro, 'estado'): 
             registro.estado = 'pendiente'
             registro.get_estado_display = lambda: 'Pendiente'
             # Asegúrate de que el objeto en el contexto también tenga estos atributos si es necesario

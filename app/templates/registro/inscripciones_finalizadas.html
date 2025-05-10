@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inscripciones Finalizadas - Liga Santa Clara{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <!-- Alerta de éxito -->
+    <div class="bg-white border-l-4 border-green-500 shadow-md p-6 mb-8 rounded-lg">
+        <div class="flex items-center">
+            <div class="flex-shrink-0 text-green-500">
+                <svg class="h-12 w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <div class="ml-4">
+                <h3 class="text-xl font-bold text-gray-800">Proceso de inscripciones finalizado</h3>
+                <p class="mt-1 text-gray-600">
+                    Se ha completado la revisión de todas las inscripciones de jugadores para la temporada.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="px-6 py-8">
+            <h2 class="text-2xl font-bold text-center text-blue-800 mb-6">
+                ¡Bienvenido a la Nueva Temporada!
+            </h2>
+            
+            <div class="text-gray-700 space-y-4">
+                <p>
+                    Nos complace informar que el proceso de inscripción y calificación de jugadores ha finalizado exitosamente. 
+                    A partir de este momento, todos los carnets de los jugadores registrados están disponibles para descargar.
+                </p>
+                
+                <p>
+                    Para obtener el carnet de un jugador, por favor utilice la función de búsqueda proporcionada en el sistema. 
+                    Puede buscar por nombre, número de cédula o categoría.
+                </p>
+                
+                <div class="bg-blue-50 p-4 my-6 border-l-4 border-blue-500 rounded">
+                    <h3 class="font-bold text-blue-800">Instrucciones para imprimir los carnets:</h3>
+                    <ul class="list-disc ml-6 mt-2 space-y-1">
+                        <li>Busque al jugador por su nombre o cédula</li>
+                        <li>Haga clic en "Ver Carnet" junto al nombre del jugador</li>
+                        <li>En la página del carnet, use la función de impresión de su navegador (Ctrl+P o Cmd+P)</li>
+                        <li>Seleccione imprimir en alta calidad y sin márgenes para mejores resultados</li>
+                        <li>Se recomienda imprimir en papel grueso o laminarlo después de la impresión</li>
+                    </ul>
+                </div>
+                
+                <p>
+                    Agradecemos su participación y paciencia durante el proceso de inscripción y calificación. 
+                    Les deseamos a todos los equipos y jugadores una excelente temporada.
+                </p>
+            </div>
+            
+            <div class="mt-8 flex justify-center">
+                <a href="{% url 'registro:home_search' %}" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow transition duration-200">
+                    Ir a la Búsqueda de Jugadores
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Logos e información de contacto -->
+    <div class="mt-8 text-center text-sm text-gray-500">
+        <img src="{% static 'img/logo.jpg' %}" alt="Liga Santa Clara" class="h-24 mx-auto mb-4">
+        <p>Liga Independiente Santa Clara de San Millán</p>
+        <p>Para consultas: ligasantaclara@ejemplo.com</p>
+    </div>
+</div>
+{% endblock %}

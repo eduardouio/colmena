@@ -43,11 +43,16 @@
     <a href="{% url 'registro:descargar_pdf' registro.pk %}" id="descargar-btn" class="block bg-green-600 text-white text-center py-4 px-4 rounded-lg text-lg font-bold hover:bg-green-700 transition duration-200 shadow-md">
       Descargar Ficha
     </a>
-    <a href="{% url 'registro:ver_carnet' registro.pk %}" id="descargar-btn" class="block bg-green-600 text-white text-center py-4 px-4 rounded-lg text-lg font-bold hover:bg-green-700 transition duration-200 shadow-md">
+    <a href="{% url 'registro:ver_carnet' registro.pk %}" id="descargar-btn" class="block bg-blue-600 text-white text-center py-4 px-4 rounded-lg text-lg font-bold hover:bg-green-700 transition duration-200 shadow-md">
       Vista del Carnet
     </a>
-    <a href="{% url 'registro:formulario' %}" class="block bg-blue-600 text-white text-center py-4 px-4 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-200 shadow-md">
-      Registrar Otro Jugador
+    <!--
+      <a href="{% url 'registro:formulario' %}" class="block bg-blue-600 text-white text-center py-4 px-4 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-200 shadow-md">
+        Registrar Otro Jugador
+      </a>
+      -->
+    <a href="/" class="block bg-gray-600 text-white text-center py-4 px-4 rounded-lg text-lg font-bold hover:bg-gray-700 transition duration-200 shadow-md">
+        Volver al Inicio
     </a>
   </div>
 

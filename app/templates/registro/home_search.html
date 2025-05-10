@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Búsqueda de Jugadores - Liga Santa Clara{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <!-- Mensaje de Inscripciones Finalizadas -->
+    <div class="bg-white border-l-4 border-green-500 shadow-md p-6 mb-8 rounded-lg">
+        <div class="flex items-center">
+            <div class="flex-shrink-0 text-green-500">
+                <svg class="h-12 w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <div class="ml-4">
+                <h3 class="text-xl font-bold text-gray-800">Proceso de inscripciones finalizado</h3>
+                <p class="mt-1 text-gray-600">
+                    Se ha completado la revisión de todas las inscripciones de jugadores para la temporada.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contenido informativo -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-8">
+        <div class="px-6 py-6">
+            <h2 class="text-2xl font-bold text-center text-blue-800 mb-4">
+                ¡Bienvenido a la Nueva Temporada!
+            </h2>
+            
+            <div class="text-gray-700 space-y-4">
+                <p>
+                    Nos complace informar que el proceso de inscripción y calificación de jugadores ha finalizado exitosamente. 
+                    A partir de este momento, todas las fichas de los jugadores registrados están disponibles para descargar.
+                </p>
+                
+                <div class="bg-blue-50 p-4 my-4 border-l-4 border-blue-500 rounded">
+                    <h3 class="font-bold text-blue-800">Instrucciones para imprimir las fichas:</h3>
+                    <ul class="list-disc ml-6 mt-2 space-y-1">
+                        <li>Busque al jugador por su número de cédula</li>
+                        <li>De click en el Botón  <strong>Buscar Ficha</strong></li>
+                        <li>En la página de la ficha debe dar click en <strong>Descargar Ficha</strong>, tambien hemos dejado la visualización de su carnet, si desea hacer alguna modificación o corrección en el carnet por favor notificarlo a la comisión hasta el 14 de Mayo </li>
+                        <li>Imprima la ficha y guárdela y entregar a la Comisión de Calificaciones</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-6 text-center">  
+        <h1 class="text-2xl font-bold text-blue-800">Búsqueda de Jugadores</h1>
+        <p class="text-gray-600 mt-2">Encuentre los carnets de los jugadores registrados</p>
+    </div>
+
+    <!-- Cuadro de búsqueda por cédula (igual que home.html) -->
+    <div class="flex flex-col md:flex-row gap-6 justify-center mb-8">
+        <div class="bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg transition duration-300 overflow-hidden w-full md:w-auto">
+            <div class="p-4">
+                <div class="flex flex-col sm:flex-row items-center gap-2">
+                    <input type="text" id="cedula-input" placeholder="Ingrese número de cédula" class="w-full sm:w-64 px-4 py-2 text-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <button id="buscar-ficha-btn" class="w-full sm:w-auto px-6 py-2 bg-green-700 hover:bg-green-800 rounded-md transition duration-200">
+                        Buscar Ficha
+                    </button>
+                </div>
+                <div id="mensaje-error" class="text-white text-sm mt-2 hidden"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resultados de la búsqueda (si los hay) -->
+    {% if search_results %}
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <div class="px-4 py-3 bg-gray-50 border-b border-gray-200">
+                <h3 class="text-lg font-medium text-gray-700">Resultados de la búsqueda</h3>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cédula</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Categoría</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for jugador in search_results %}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">{{ jugador.nombres }} {{ jugador.apellidos }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-500">{{ jugador.cedula }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                        {% if jugador.categoria == 'niños' %}bg-green-100 text-green-800
+                                        {% elif jugador.categoria == 'femenino' %}bg-purple-100 text-purple-800
+                                        {% elif jugador.categoria == 'senior' %}bg-blue-100 text-blue-800
+                                        {% else %}bg-yellow-100 text-yellow-800{% endif %}">
+                                        {{ jugador.get_categoria_display }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <a href="{% url 'registro:carnet' jugador.id %}" class="text-blue-600 hover:text-blue-900 mr-3">Ver Carnet</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Paginación si es necesaria -->
+            {% if search_results.has_other_pages %}
+                <div class="px-4 py-3 bg-gray-50 border-t border-gray-200 flex items-center justify-between">
+                    <div class="flex-1 flex justify-center">
+                        <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+                            {% if search_results.has_previous %}
+                                <a href="?page={{ search_results.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                    <span class="sr-only">Anterior</span>
+                                    &laquo; Anterior
+                                </a>
+                            {% endif %}
+
+                            <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
+                                Página {{ search_results.number }} de {{ search_results.paginator.num_pages }}
+                            </span>
+
+                            {% if search_results.has_next %}
+                                <a href="?page={{ search_results.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                    <span class="sr-only">Siguiente</span>
+                                    Siguiente &raquo;
+                                </a>
+                            {% endif %}
+                        </nav>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% elif search_query %}
+        <!-- Mensaje de no resultados -->
+        <div class="bg-white shadow-md rounded-lg p-6 text-center">
+            <p class="text-gray-500">No se encontraron jugadores que coincidan con "{{ search_query }}".</p>
+        </div>
+    {% endif %}
+
+    <!-- Información adicional -->
+    <div class="mt-8 text-center text-sm text-gray-500">
+        <img src="{% static 'img/logo.jpg' %}" alt="Liga Santa Clara" class="h-16 mx-auto mb-4">
+        <p>Liga Independiente Santa Clara de San Millán</p>
+        <p>Para cualquier consulta sobre los carnets, por favor contacte a la administración de la liga.</p>
+    </div>
+</div>
+
+<!-- Script para la búsqueda de fichas por cédula -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const cedulaInput = document.getElementById('cedula-input');
+    const buscarFichaBtn = document.getElementById('buscar-ficha-btn');
+    const mensajeError = document.getElementById('mensaje-error');
+    
+    // Función para buscar por cédula
+    async function buscarPorCedula(cedula) {
+      try {
+        // Hacemos una petición al backend para buscar la cédula
+        const response = await fetch(`/api/buscar-ficha/?cedula=${encodeURIComponent(cedula)}`);
+        const data = await response.json();
+        
+        if (response.ok && data.id) {
+          // Redireccionamos a la página de éxito en la misma ventana
+          window.location.href = `/exito/${data.id}/`;
+          mensajeError.classList.add('hidden');
+        } else {
+          // Mostramos mensaje de error
+          mensajeError.textContent = data.error || 'No se encontró ningún registro con esa cédula';
+          mensajeError.classList.remove('hidden');
+        }
+      } catch (error) {
+        console.error('Error al buscar ficha:', error);
+        mensajeError.textContent = 'Ocurrió un error al buscar la ficha. Inténtelo nuevamente.';
+        mensajeError.classList.remove('hidden');
+      }
+    }
+    
+    // Manejador del botón de búsqueda
+    buscarFichaBtn.addEventListener('click', function() {
+      const cedula = cedulaInput.value.trim();
+      if (cedula) {
+        buscarPorCedula(cedula);
+      } else {
+        mensajeError.textContent = 'Por favor, ingrese un número de cédula';
+        mensajeError.classList.remove('hidden');
+      }
+    });
+    
+    // También permitir buscar presionando Enter en el input
+    cedulaInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const cedula = cedulaInput.value.trim();
+        if (cedula) {
+          buscarPorCedula(cedula);
+        } else {
+          mensajeError.textContent = 'Por favor, ingrese un número de cédula';
+          mensajeError.classList.remove('hidden');
+        }
+      }
+    });
+  });
+</script>
+{% endblock %}
