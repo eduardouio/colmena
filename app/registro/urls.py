@@ -9,7 +9,8 @@ from .views import (
     preview_registro,
     descargar_pdf,
     buscar_ficha,
-    VistaCarnet
+    VistaCarnet,
+    VistaMasivaCarnet,
 )
 
 app_name = 'registro'
@@ -25,4 +26,5 @@ urlpatterns = [
     path('descargar/<int:pk>/', descargar_pdf, name='descargar_pdf'),
     path('api/buscar-ficha/', buscar_ficha, name='buscar_ficha'),
     path('carnet/<int:pk>/', VistaCarnet.as_view(), name='ver_carnet'),
+    path('carnet-masivo/', VistaMasivaCarnet.as_view(), name='ver_carnet_masivo'),
 ]

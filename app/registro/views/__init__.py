@@ -7,6 +7,7 @@ from .views import descargar_registro_pdf, preview_registro
 from .report import descargar_pdf
 from .VistaCarnet import VistaCarnet
 from .buscar_ficha_view import buscar_ficha
+from .VistaMasivaCarnet import VistaMasivaCarnet
 
 __all__ = [
     'RegistroAspiranteView',
@@ -17,5 +18,6 @@ __all__ = [
     'descargar_registro_pdf',
     'preview_registro',
     'descargar_pdf',
-    'buscar_ficha'
+    'buscar_ficha',
+    'VistaMasivaCarnet',
 ]
