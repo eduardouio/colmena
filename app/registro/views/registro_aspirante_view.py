@@ -35,6 +35,7 @@ class RegistroAspiranteView(CreateView):
         # Validar autorización para menores de edad
         fecha_nacimiento = form.cleaned_data.get('fecha_nacimiento')
         autorizacion = form.cleaned_data.get('autorizacion_menor')
+        categoria = form.cleaned_data.get('categoria')
         
         # Validación: Verificar que fecha_nacimiento no sea None
         if fecha_nacimiento is None:
@@ -52,9 +53,9 @@ class RegistroAspiranteView(CreateView):
         # Validación 2: Verificar que el número sea único dentro del club
         club = form.cleaned_data.get('club')
         numero_jugador = form.cleaned_data.get('numero_jugador')
-        if CalificacionAspirante.objects.filter(club=club, numero_jugador=numero_jugador, categoria=form.cleaned_data.get('categoria')).exists():
+        if CalificacionAspirante.objects.filter(club=club, numero_jugador=numero_jugador, categoria=categoria).exists():
             form.add_error(
-                'numero_jugador', f'El número {numero_jugador} ya está en uso en el club {club} para la categoría {form.cleaned_data.get('categoria')}.')
+                'numero_jugador', f'El número {numero_jugador} ya está en uso en el club {club} para la categoría {categoria}.')
             return self.form_invalid(form)
 
         # Ahora podemos procesar la fecha de nacimiento con seguridad
@@ -62,14 +63,14 @@ class RegistroAspiranteView(CreateView):
         edad = hoy.year - fecha_nacimiento.year - \
             ((hoy.month, hoy.day) < (fecha_nacimiento.month, fecha_nacimiento.day))
 
-        # Si es menor de edad y no ha adjuntado autorización
-        if edad < 18 and not autorizacion:
+        # Si es menor de edad (no categoría niños) y no ha adjuntado autorización
+        if edad < 18 and categoria != 'niños' and not autorizacion:
             form.add_error(
-                'autorizacion_menor', 'La autorización es obligatoria para menores de edad.')
+                'autorizacion_menor', 'La autorización es obligatoria para menores de edad en categorías distintas a "Niños".')
             return self.form_invalid(form)
 
-        # Si es mayor de edad y adjuntó autorización, simplemente la ignoramos
-        if edad >= 18 and autorizacion:
+        # Si es mayor de edad o categoría niños, y adjuntó autorización, simplemente la ignoramos
+        if (edad >= 18 or categoria == 'niños') and autorizacion:
             form.instance.autorizacion_menor = None
 
         response = super().form_valid(form)

@@ -58,9 +58,9 @@ class CalificacionAspirante(models.Model):
              (self.fecha_nacimiento.month, self.fecha_nacimiento.day))
 
         if self.categoria == 'niños':
-            if not (8 <= age <= 10):
+            if not (7 <= age <= 11):
                 raise ValidationError(
-                    'La categoría "Niños" requiere una edad entre 8 y 10 años.')
+                    'La categoría "Niños" requiere una edad entre 7 y 11 años.')
 
         elif self.categoria in ['senior', 'femenino']:
             if age < 18 and self.numero_jugador < 50:

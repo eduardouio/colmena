@@ -351,14 +351,17 @@
     const edadDisplay = document.getElementById('edad-display');
     const autorizacionContainer = document.getElementById('autorizacion-menor-container');
     const autorizacionInput = document.getElementById('{{ form.autorizacion_menor.auto_id }}');
+    const categoriaSelect = document.getElementById('{{ form.categoria.auto_id }}');
     
     if (fechaInput && fechaInput.value && edadDisplay) {
       const edad = calcularEdad(fechaInput.value);
       edadDisplay.textContent = `Edad: ${edad} años`;
       edadDisplay.style.color = edad < 18 ? '#2563eb' : '#1f2937'; // Azul para menores, gris oscuro para adultos
       
-      // Controlar visibilidad del campo de autorización
-      if (edad < 18) {
+      const esCategoriaNinos = categoriaSelect && categoriaSelect.value === 'niños';
+      
+      // Controlar visibilidad del campo de autorización: mostrar solo si es menor de edad Y NO es categoría niños
+      if (edad < 18 && !esCategoriaNinos) {
         autorizacionContainer.style.display = 'block';
         autorizacionInput.setAttribute('required', 'required');
       } else {
@@ -386,8 +389,8 @@
 
     // Validación para categoría "niños"
     if (categoria === 'niños') {
-      if (!(edad >= 8 && edad <= 10)) {
-        errores.push('La categoría "Niños" requiere una edad entre 8 y 10 años.');
+      if (!(edad >= 7 && edad <= 11)) {
+        errores.push('La categoría "Niños" requiere una edad entre 7 y 11 años.');
       }
     }
 
@@ -482,6 +485,12 @@
     if (fechaInput) {
       fechaInput.addEventListener('change', calcularMostrarEdad);
       fechaInput.addEventListener('input', calcularMostrarEdad);
+    }
+
+    // Añadir listener para cuando cambie la categoría
+    const categoriaSelect = document.getElementById('{{ form.categoria.auto_id }}');
+    if (categoriaSelect) {
+      categoriaSelect.addEventListener('change', calcularMostrarEdad);
     }
 
     document.getElementById('registro-form').addEventListener('submit', validarFormulario);
