@@ -63,6 +63,12 @@ class RegistroAspiranteView(CreateView):
         edad = hoy.year - fecha_nacimiento.year - \
             ((hoy.month, hoy.day) < (fecha_nacimiento.month, fecha_nacimiento.day))
 
+        # Validación 3: Verificar edad mínima para categorías senior y master
+        if categoria in ['senior', 'master'] and edad < 12:
+            form.add_error(
+                'fecha_nacimiento', 'Para las categorías Senior y Master, la edad mínima es de 12 años cumplidos.')
+            return self.form_invalid(form)
+
         # Si es menor de edad (no categoría niños) y no ha adjuntado autorización
         if edad < 18 and categoria != 'niños' and not autorizacion:
             form.add_error(

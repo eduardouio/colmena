@@ -394,6 +394,11 @@
       }
     }
 
+       // Validación para edad mínima en categorías "senior" y "master"
+    if ((categoria === 'senior' || categoria === 'master') && edad < 12) {
+      errores.push('Para las categorías Senior y Master, la edad mínima es de 12 años cumplidos.');
+    }
+
     // Validación para "senior" y "femenino"
     if (categoria === 'senior' || categoria === 'femenino') {
       if (edad !== null) {
