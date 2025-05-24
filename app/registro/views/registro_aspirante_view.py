@@ -36,20 +36,20 @@ class RegistroAspiranteView(CreateView):
         fecha_nacimiento = form.cleaned_data.get('fecha_nacimiento')
         autorizacion = form.cleaned_data.get('autorizacion_menor')
         categoria = form.cleaned_data.get('categoria')
-        
+
         # Validación: Verificar que fecha_nacimiento no sea None
         if fecha_nacimiento is None:
             form.add_error(
                 'fecha_nacimiento', 'La fecha de nacimiento es obligatoria.')
             return self.form_invalid(form)
-        
+
         # Validación 1: Verificar que la cédula sea única
         cedula = form.cleaned_data.get('cedula')
         if CalificacionAspirante.objects.filter(cedula=cedula).exists():
             form.add_error(
                 'cedula', 'Ya existe un jugador registrado con esta cédula.')
             return self.form_invalid(form)
-            
+
         # Validación 2: Verificar que el número sea único dentro del club
         club = form.cleaned_data.get('club')
         numero_jugador = form.cleaned_data.get('numero_jugador')
