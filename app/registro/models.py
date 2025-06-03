@@ -47,6 +47,11 @@ class CalificacionAspirante(models.Model):
     notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Calificación Aspirante'
+        verbose_name_plural = 'Calificaciones Aspirantes'
+        ordering = ['-fecha_registro']
+
     def __str__(self):
         return f"{self.nombres} {self.apellidos} ({self.cedula})"
 
