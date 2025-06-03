@@ -64,7 +64,7 @@ class VistaMasivaCarnet(TemplateView):
                 page_number = 1
 
             # Obtener todos los registros ordenados
-            registros = CalificacionAspirante.objects.all().order_by('categoria', 'apellidos')
+            registros = CalificacionAspirante.objects.all()
 
             # Paginar los resultados (100 por página)
             paginator = Paginator(registros, 300)
