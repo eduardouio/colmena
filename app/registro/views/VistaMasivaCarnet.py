@@ -67,7 +67,7 @@ class VistaMasivaCarnet(TemplateView):
             registros = CalificacionAspirante.objects.all()
 
             # Paginar los resultados (100 por página)
-            paginator = Paginator(registros, 300)
+            paginator = Paginator(registros, 100)
             try:
                 registros_pagina = paginator.page(page_number)
             except:
