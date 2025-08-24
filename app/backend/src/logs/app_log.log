@@ -559,3 +559,306 @@
 2025-08-24 13:09:20 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
 2025-08-24 13:09:20 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
 2025-08-24 13:09:20 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 3.02ms
+2025-08-24 14:26:26 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:26:26 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 10.47ms
+2025-08-24 14:26:26 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:26:26 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 35.76ms
+2025-08-24 14:29:54 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:29:54 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 18.73ms
+2025-08-24 14:29:56 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:29:56 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 14.24ms
+2025-08-24 14:30:02 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:30:02 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 5.22ms
+2025-08-24 14:30:06 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:30:06 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 6.62ms
+2025-08-24 14:30:12 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:30:12 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 4.89ms
+2025-08-24 14:31:05 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:31:05 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 4.89ms
+2025-08-24 14:31:55 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:31:55 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 615.4ms
+2025-08-24 14:32:01 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:32:01 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 14:32:01 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com no tiene licencias activas
+2025-08-24 14:32:01 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login fallido para eduardouio7@gmail.com: Sin licencias válidas
+2025-08-24 14:32:01 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 466.79ms
+2025-08-24 14:32:14 | INFO | Usuario: AnonymousUser | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:14 | INFO | Usuario: AnonymousUser | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 18.76ms
+2025-08-24 14:32:15 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:15 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 31.55ms
+2025-08-24 14:32:16 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:32:17 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 447.21ms
+2025-08-24 14:32:19 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:32:20 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 467.52ms
+2025-08-24 14:32:20 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 14:32:20 | ERROR | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 14:32:20 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:20 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 17.23ms
+2025-08-24 14:32:22 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/customusermodel/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:22 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/customusermodel/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 49.86ms
+2025-08-24 14:32:22 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:22 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 10.56ms
+2025-08-24 14:32:27 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:27 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 8.45ms
+2025-08-24 14:32:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 32.3ms
+2025-08-24 14:32:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.47ms
+2025-08-24 14:32:32 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/customusermodel/?_to_field=id&_popup=1 | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:32 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/customusermodel/?_to_field=id&_popup=1 | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:32 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/customusermodel/?_to_field=id&_popup=1 | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 42.07ms
+2025-08-24 14:32:32 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/customusermodel/?_to_field=id&_popup=1 | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 54.25ms
+2025-08-24 14:32:39 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/add/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:32:40 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/add/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 14.35ms
+2025-08-24 14:32:40 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:40 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 35.34ms
+2025-08-24 14:32:40 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:40 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 7.31ms
+2025-08-24 14:32:49 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:49 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 14:32:49 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.21ms
+2025-08-24 14:32:53 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:32:53 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: eduardouio7@gmail.com
+2025-08-24 14:32:53 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 4.28ms
+2025-08-24 14:32:53 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:32:53 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 7.27ms
+2025-08-24 14:32:55 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:32:57 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 1276.93ms
+2025-08-24 14:33:04 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:33:08 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 4437.13ms
+2025-08-24 14:33:08 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Respuesta lenta detectada: 4437.13ms
+2025-08-24 14:33:35 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:33:35 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 33.16ms
+2025-08-24 14:34:03 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:34:03 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 124.62ms
+2025-08-24 14:34:12 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:34:15 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 14:34:15 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com no tiene licencias activas
+2025-08-24 14:34:15 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login fallido para eduardouio7@gmail.com: Sin licencias válidas
+2025-08-24 14:34:15 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 2413.42ms
+2025-08-24 14:34:15 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Respuesta lenta detectada: 2413.42ms
+2025-08-24 14:34:45 | INFO | Usuario: AnonymousUser | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:34:45 | INFO | Usuario: AnonymousUser | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 103.2ms
+2025-08-24 14:34:45 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:34:45 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 118.14ms
+2025-08-24 14:34:48 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:34:50 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 1671.59ms
+2025-08-24 14:34:56 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:34:57 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 1118.13ms
+2025-08-24 14:34:57 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 14:34:57 | ERROR | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 14:34:57 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:34:57 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 30.54ms
+2025-08-24 14:35:01 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:35:01 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 63.54ms
+2025-08-24 14:35:01 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:35:01 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 12.0ms
+2025-08-24 14:35:04 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:35:04 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 74.47ms
+2025-08-24 14:35:04 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:35:04 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 12.31ms
+2025-08-24 14:35:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:35:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 89.99ms
+2025-08-24 14:35:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:35:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 23.97ms
+2025-08-24 14:35:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:35:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 7.15ms
+2025-08-24 14:35:15 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:35:16 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 893.13ms
+2025-08-24 14:35:21 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:35:22 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 14:35:22 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com no tiene licencias activas
+2025-08-24 14:35:22 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login fallido para eduardouio7@gmail.com: Sin licencias válidas
+2025-08-24 14:35:22 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 1222.18ms
+2025-08-24 14:36:20 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:36:20 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.74ms
+2025-08-24 14:36:20 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:36:20 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 6.25ms
+2025-08-24 14:36:27 | INFO | Usuario: AnonymousUser | URL: /admin | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:36:27 | INFO | Usuario: AnonymousUser | URL: /admin | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 404 - Tiempo: 19.06ms
+2025-08-24 14:36:27 | INFO | Usuario: AnonymousUser | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:36:27 | INFO | Usuario: AnonymousUser | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 14.82ms
+2025-08-24 14:36:27 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:36:27 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 27.5ms
+2025-08-24 14:36:32 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:36:33 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 1220.24ms
+2025-08-24 14:36:33 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 14:36:33 | ERROR | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 14:36:33 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:36:33 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 19.25ms
+2025-08-24 14:36:35 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:36:35 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 46.48ms
+2025-08-24 14:36:35 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:36:35 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 20.51ms
+2025-08-24 14:36:38 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:36:38 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 29.3ms
+2025-08-24 14:36:38 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:36:38 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 5.05ms
+2025-08-24 14:36:39 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:36:39 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 41.86ms
+2025-08-24 14:36:39 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:36:39 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 4.8ms
+2025-08-24 14:37:03 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:37:03 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 37.9ms
+2025-08-24 14:37:03 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:03 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.39ms
+2025-08-24 14:37:13 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:37:13 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 18.58ms
+2025-08-24 14:37:13 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:14 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 21.65ms
+2025-08-24 14:37:14 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:14 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.05ms
+2025-08-24 14:37:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 14:37:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 9.39ms
+2025-08-24 14:37:19 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:19 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: ProfileTempView | Mensaje: Acceso a perfil por usuario: eduardouio7@gmail.com
+2025-08-24 14:37:19 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 8.28ms
+2025-08-24 14:37:25 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:25 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 14:37:25 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 1.87ms
+2025-08-24 14:37:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 404 - Tiempo: 6.18ms
+2025-08-24 14:37:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 11.38ms
+2025-08-24 14:37:31 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/customusermodel/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:31 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/customusermodel/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 19.89ms
+2025-08-24 14:37:31 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:31 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 5.53ms
+2025-08-24 14:37:32 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:32 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 11.13ms
+2025-08-24 14:37:34 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 14:37:34 | ERROR | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 14:37:34 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:34 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 18.33ms
+2025-08-24 14:37:34 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:34 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 9.5ms
+2025-08-24 14:37:36 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:36 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 32.23ms
+2025-08-24 14:37:36 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:37:36 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 5.16ms
+2025-08-24 14:38:17 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/add/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:38:17 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/add/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 16.37ms
+2025-08-24 14:38:17 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:38:17 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 18.49ms
+2025-08-24 14:38:17 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:38:17 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 4.33ms
+2025-08-24 14:38:33 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:38:34 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 30.8ms
+2025-08-24 14:38:34 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:38:34 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 5.29ms
+2025-08-24 14:38:45 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 14:38:45 | ERROR | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 14:38:45 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:38:45 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/clubs/club/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 17.98ms
+2025-08-24 14:38:47 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:38:47 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 12.45ms
+2025-08-24 14:38:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/player/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:38:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/player/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 16.25ms
+2025-08-24 14:38:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:38:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 6.37ms
+2025-08-24 14:38:52 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/player/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:38:52 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/player/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 28.55ms
+2025-08-24 14:38:52 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:38:52 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.15ms
+2025-08-24 14:39:42 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:39:42 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 15.89ms
+2025-08-24 14:39:44 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:39:44 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 13.05ms
+2025-08-24 14:39:47 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/seasons/season/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 14:39:47 | ERROR | Usuario: eduardouio7@gmail.com | URL: /admin/seasons/season/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 14:39:47 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/seasons/season/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:39:47 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/seasons/season/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 19.37ms
+2025-08-24 14:39:48 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:39:48 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 1.41ms
+2025-08-24 14:39:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:39:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 23.48ms
+2025-08-24 14:39:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:39:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 6.0ms
+2025-08-24 14:39:50 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/seasons/season/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:39:50 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/seasons/season/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 23.07ms
+2025-08-24 14:39:50 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:39:50 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 11.79ms
+2025-08-24 14:41:07 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/seasons/season/add/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 14:41:07 | ERROR | Usuario: eduardouio7@gmail.com | URL: /admin/seasons/season/add/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 14:41:07 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/seasons/season/add/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:41:07 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/seasons/season/add/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 20.15ms
+2025-08-24 14:41:07 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/seasons/season/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:41:08 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/seasons/season/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 20.25ms
+2025-08-24 14:41:08 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:41:08 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 3.71ms
+2025-08-24 14:41:10 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:41:10 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 12.28ms
+2025-08-24 14:41:13 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/player/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:41:13 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/player/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 16.93ms
+2025-08-24 14:41:13 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:41:13 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 3.44ms
+2025-08-24 14:41:14 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/player/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:41:14 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/player/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 26.02ms
+2025-08-24 14:41:14 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:41:14 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 4.12ms
+2025-08-24 14:41:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/player/add/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:41:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/player/add/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 18.96ms
+2025-08-24 14:41:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/player/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:41:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/player/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 19.37ms
+2025-08-24 14:41:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:41:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.77ms
+2025-08-24 14:41:31 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:41:31 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/players/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 8.13ms
+2025-08-24 14:41:32 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:41:32 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 12.06ms
+2025-08-24 14:41:35 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:41:35 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 41.66ms
+2025-08-24 14:41:35 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:41:35 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.24ms
+2025-08-24 14:42:05 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/add/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:42:05 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/add/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 25.87ms
+2025-08-24 14:42:05 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:42:05 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 24.66ms
+2025-08-24 14:42:05 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:42:05 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 3.11ms
+2025-08-24 14:42:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/1/change/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 14:42:09 | ERROR | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/1/change/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 14:42:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:42:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 35.86ms
+2025-08-24 14:42:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:42:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.28ms
+2025-08-24 14:42:18 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:42:18 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/register/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 16.95ms
+2025-08-24 14:42:18 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:42:18 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.72ms
+2025-08-24 14:42:19 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:42:19 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/register/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 6.66ms
+2025-08-24 14:42:19 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:42:19 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 12.31ms
+2025-08-24 14:42:43 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:42:44 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 616.53ms
+2025-08-24 14:42:48 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:42:48 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 14:42:48 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 1.77ms
+2025-08-24 14:42:50 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:42:50 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 14:42:50 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.01ms
+2025-08-24 14:42:52 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:42:52 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: ProfileTempView | Mensaje: Acceso a perfil por usuario: eduardouio7@gmail.com
+2025-08-24 14:42:52 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 3.32ms
+2025-08-24 14:42:54 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:42:54 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Acceso a formulario de edición de perfil por: eduardouio7@gmail.com
+2025-08-24 14:42:54 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 11.97ms
+2025-08-24 14:42:58 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 14:42:58 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Perfil actualizado exitosamente por: eduardouio7@gmail.com
+2025-08-24 14:42:58 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 10.54ms
+2025-08-24 14:42:58 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:42:58 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: ProfileTempView | Mensaje: Acceso a perfil por usuario: eduardouio7@gmail.com
+2025-08-24 14:42:58 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 8.46ms
+2025-08-24 14:43:00 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:43:00 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 14:43:00 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 1.32ms
+2025-08-24 14:45:10 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 14:45:10 | ERROR | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 14:45:10 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:45:10 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 11.84ms
+2025-08-24 14:45:11 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/customusermodel/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:45:11 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/customusermodel/add/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 42.21ms
+2025-08-24 14:45:11 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 14:45:11 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 4.92ms

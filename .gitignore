@@ -144,4 +144,4 @@ app/registro/migrations/__init__.py
 # ignore all migrations
 
 
-    
+    app/backend/src/logs/app_log.log
