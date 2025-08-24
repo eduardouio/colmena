@@ -1,0 +1,561 @@
+2025-08-24 11:41:04 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 11:41:05 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoginTempView | Mensaje: Licencia ABC123 no encontrada en servicio externo
+2025-08-24 11:41:05 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com no tiene licencias válidas en el servicio externo
+2025-08-24 11:41:05 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login fallido para eduardouio7@gmail.com: Sin licencias válidas
+2025-08-24 11:45:21 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 11:45:21 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 22.63ms
+2025-08-24 11:57:36 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 11:57:36 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 19.9ms
+2025-08-24 11:57:45 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 11:57:45 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 11:57:47 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoginTempView | Mensaje: Licencia ABC123 no encontrada en servicio externo
+2025-08-24 11:57:47 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com no tiene licencias válidas en el servicio externo
+2025-08-24 11:57:47 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login fallido para eduardouio7@gmail.com: Sin licencias válidas
+2025-08-24 11:57:47 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 2496.6ms
+2025-08-24 11:57:47 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Respuesta lenta detectada: 2496.6ms
+2025-08-24 11:58:50 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 11:58:51 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 11:59:55 | ERROR | Usuario: AnonymousUser | URL: /login/ | Archivo: LoginTempView | Mensaje: Error inesperado al validar licencia ABC123: 
+2025-08-24 11:59:55 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com no tiene licencias válidas en el servicio externo
+2025-08-24 11:59:55 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login fallido para eduardouio7@gmail.com: Sin licencias válidas
+2025-08-24 11:59:55 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 65558.59ms
+2025-08-24 11:59:55 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Respuesta lenta detectada: 65558.59ms
+2025-08-24 12:00:03 | INFO | Usuario: AnonymousUser | URL: /admin | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:00:03 | INFO | Usuario: AnonymousUser | URL: /admin | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 404 - Tiempo: 12.04ms
+2025-08-24 12:00:03 | INFO | Usuario: AnonymousUser | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:00:03 | INFO | Usuario: AnonymousUser | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 14.3ms
+2025-08-24 12:00:04 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:00:04 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 34.26ms
+2025-08-24 12:00:07 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:00:07 | INFO | Usuario: AnonymousUser | URL: /admin/login/?next=/admin/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 456.43ms
+2025-08-24 12:00:07 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:00:07 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 18.76ms
+2025-08-24 12:00:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:00:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 48.03ms
+2025-08-24 12:00:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:00:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 15.52ms
+2025-08-24 12:00:10 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:00:10 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 98.86ms
+2025-08-24 12:00:10 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:00:10 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 31.41ms
+2025-08-24 12:01:50 | INFO | Usuario: AnonymousUser | URL: /login/?next=/profile/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:01:51 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 12:01:53 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoginTempView | Mensaje: Licencia ABC123 no encontrada en servicio externo
+2025-08-24 12:01:53 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com no tiene licencias válidas en el servicio externo
+2025-08-24 12:01:53 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login fallido para eduardouio7@gmail.com: Sin licencias válidas
+2025-08-24 12:01:53 | INFO | Usuario: AnonymousUser | URL: /login/?next=/profile/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 2568.42ms
+2025-08-24 12:01:53 | WARNING | Usuario: AnonymousUser | URL: /login/?next=/profile/ | Archivo: LoggingMiddleware | Mensaje: Respuesta lenta detectada: 2568.42ms
+2025-08-24 12:02:54 | INFO | Usuario: AnonymousUser | URL: /login/?next=/profile/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:02:54 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 12:02:56 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoginTempView | Mensaje: Licencia ABC123 no encontrada  https://dev-7.com/licences/validator.php?licence=?licence=ABC123 en servicio externo
+2025-08-24 12:02:56 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com no tiene licencias válidas en el servicio externo
+2025-08-24 12:02:56 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login fallido para eduardouio7@gmail.com: Sin licencias válidas
+2025-08-24 12:02:56 | INFO | Usuario: AnonymousUser | URL: /login/?next=/profile/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 2070.84ms
+2025-08-24 12:02:56 | WARNING | Usuario: AnonymousUser | URL: /login/?next=/profile/ | Archivo: LoggingMiddleware | Mensaje: Respuesta lenta detectada: 2070.84ms
+2025-08-24 12:03:25 | INFO | Usuario: AnonymousUser | URL: /login/?next=/profile/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:03:26 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 12:03:28 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoginTempView | Mensaje: Licencia ABC123 validada exitosamente
+2025-08-24 12:03:28 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com tiene 1 licencia(s) válida(s)
+2025-08-24 12:03:28 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login exitoso para eduardouio7@gmail.com - Sesión: temporal (hasta cerrar navegador)
+2025-08-24 12:03:28 | INFO | Usuario: AnonymousUser | URL: /login/?next=/profile/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 2707.38ms
+2025-08-24 12:03:28 | WARNING | Usuario: AnonymousUser | URL: /login/?next=/profile/ | Archivo: LoggingMiddleware | Mensaje: Respuesta lenta detectada: 2707.38ms
+2025-08-24 12:03:28 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:03:28 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: ProfileTempView | Mensaje: Acceso a perfil por usuario: eduardouio7@gmail.com
+2025-08-24 12:03:28 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 23.05ms
+2025-08-24 12:03:28 | INFO | Usuario: eduardouio7@gmail.com | URL: /media/accounts/pictures/logo.jpeg | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:03:28 | INFO | Usuario: eduardouio7@gmail.com | URL: /media/accounts/pictures/logo.jpeg | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 304 - Tiempo: 5.4ms
+2025-08-24 12:04:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:04:09 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 4.16ms
+2025-08-24 12:04:09 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:04:09 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:04:09 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 7.06ms
+2025-08-24 12:04:11 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:04:11 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: eduardouio7@gmail.com
+2025-08-24 12:04:11 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 6.57ms
+2025-08-24 12:04:11 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:04:11 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 14.38ms
+2025-08-24 12:04:13 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:04:14 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 12:04:16 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoginTempView | Mensaje: Licencia ABC123 validada exitosamente
+2025-08-24 12:04:16 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com tiene 1 licencia(s) válida(s)
+2025-08-24 12:04:16 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login exitoso para eduardouio7@gmail.com - Sesión: temporal (hasta cerrar navegador)
+2025-08-24 12:04:16 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 2463.12ms
+2025-08-24 12:04:16 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Respuesta lenta detectada: 2463.12ms
+2025-08-24 12:04:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:04:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:04:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 4.34ms
+2025-08-24 12:04:21 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:04:21 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 88.08ms
+2025-08-24 12:04:21 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:04:21 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 73.36ms
+2025-08-24 12:04:21 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:04:21 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 10.35ms
+2025-08-24 12:04:27 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:04:27 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: eduardouio7@gmail.com
+2025-08-24 12:04:27 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 6.35ms
+2025-08-24 12:04:27 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:04:27 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 4.14ms
+2025-08-24 12:04:30 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:04:30 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 12:04:31 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoginTempView | Mensaje: Licencia ABC123s no encontrada  https://dev-7.com/licences/validator.php?licence=ABC123s en servicio externo
+2025-08-24 12:04:31 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com no tiene licencias válidas en el servicio externo
+2025-08-24 12:04:31 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login fallido para eduardouio7@gmail.com: Sin licencias válidas
+2025-08-24 12:04:31 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 987.39ms
+2025-08-24 12:12:35 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:12:35 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 23.75ms
+2025-08-24 12:12:38 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:12:39 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 12:12:40 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoginTempView | Mensaje: Licencia ABC123s no encontrada  https://dev-7.com/licences/validator.php?licence=ABC123s en servicio externo
+2025-08-24 12:12:40 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com no tiene licencias válidas en el servicio externo
+2025-08-24 12:12:40 | WARNING | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login fallido para eduardouio7@gmail.com: Sin licencias válidas
+2025-08-24 12:12:40 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 2127.28ms
+2025-08-24 12:12:40 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Respuesta lenta detectada: 2127.28ms
+2025-08-24 12:12:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:12:49 | ERROR | Usuario: eduardouio7@gmail.com | URL: /admin | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:12:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:12:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 404 - Tiempo: 10.35ms
+2025-08-24 12:12:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:12:50 | ERROR | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:12:50 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:12:50 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 33.84ms
+2025-08-24 12:12:51 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:12:51 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 49.64ms
+2025-08-24 12:12:51 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:12:51 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 6.27ms
+2025-08-24 12:12:52 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:12:52 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 110.89ms
+2025-08-24 12:12:52 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:12:52 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 3.2ms
+2025-08-24 12:12:54 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:12:54 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/1/change/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 14.49ms
+2025-08-24 12:12:54 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:12:54 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/accounts/license/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 22.12ms
+2025-08-24 12:12:54 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:12:54 | INFO | Usuario: eduardouio7@gmail.com | URL: /admin/jsi18n/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.9ms
+2025-08-24 12:13:01 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:13:01 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 12:13:03 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoginTempView | Mensaje: Licencia ABC123 validada exitosamente
+2025-08-24 12:13:03 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com tiene 1 licencia(s) válida(s)
+2025-08-24 12:13:03 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login exitoso para eduardouio7@gmail.com - Sesión: temporal (hasta cerrar navegador)
+2025-08-24 12:13:03 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 2037.78ms
+2025-08-24 12:13:03 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Respuesta lenta detectada: 2037.78ms
+2025-08-24 12:13:03 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:13:03 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:13:03 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:13:03 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:13:03 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 8.81ms
+2025-08-24 12:13:06 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:13:06 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: ProfileTempView | Mensaje: Acceso a perfil por usuario: eduardouio7@gmail.com
+2025-08-24 12:13:06 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 8.49ms
+2025-08-24 12:13:06 | INFO | Usuario: eduardouio7@gmail.com | URL: /media/accounts/pictures/logo.jpeg | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:13:06 | INFO | Usuario: eduardouio7@gmail.com | URL: /media/accounts/pictures/logo.jpeg | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 10.63ms
+2025-08-24 12:13:09 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:13:09 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:13:09 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 1.3ms
+2025-08-24 12:13:11 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:13:11 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: ProfileTempView | Mensaje: Acceso a perfil por usuario: eduardouio7@gmail.com
+2025-08-24 12:13:11 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.8ms
+2025-08-24 12:13:34 | INFO | Usuario: eduardouio7@gmail.com | URL: /accounts/license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:13:34 | INFO | Usuario: eduardouio7@gmail.com | URL: /accounts/license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 404 - Tiempo: 4.86ms
+2025-08-24 12:13:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /accounts/license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:13:49 | INFO | Usuario: eduardouio7@gmail.com | URL: /accounts/license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 404 - Tiempo: 6.21ms
+2025-08-24 12:13:54 | INFO | Usuario: eduardouio7@gmail.com | URL: /accounts/license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:13:54 | INFO | Usuario: eduardouio7@gmail.com | URL: /accounts/license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 404 - Tiempo: 7.75ms
+2025-08-24 12:13:57 | INFO | Usuario: eduardouio7@gmail.com | URL: /license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:13:57 | INFO | Usuario: eduardouio7@gmail.com | URL: /license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 10.02ms
+2025-08-24 12:14:27 | INFO | Usuario: eduardouio7@gmail.com | URL: /license-status/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:14:28 | ERROR | Usuario: eduardouio7@gmail.com | URL: /license-status/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:14:28 | INFO | Usuario: eduardouio7@gmail.com | URL: /license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:14:28 | INFO | Usuario: eduardouio7@gmail.com | URL: /license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 1.2ms
+2025-08-24 12:14:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:14:29 | INFO | Usuario: eduardouio7@gmail.com | URL: /license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 29.38ms
+2025-08-24 12:14:59 | INFO | Usuario: eduardouio7@gmail.com | URL: /license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:14:59 | INFO | Usuario: eduardouio7@gmail.com | URL: /license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 0.89ms
+2025-08-24 12:14:59 | INFO | Usuario: eduardouio7@gmail.com | URL: /license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:14:59 | ERROR | Usuario: eduardouio7@gmail.com | URL: /license-status/ | Archivo: LoggingMiddleware | Mensaje: Excepción no capturada: TemplateDoesNotExist: pages/license_status.html
+2025-08-24 12:14:59 | INFO | Usuario: eduardouio7@gmail.com | URL: /license-status/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 500 - Tiempo: 58.99ms
+2025-08-24 12:21:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:21:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:21:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 23.39ms
+2025-08-24 12:21:18 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:21:18 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: eduardouio7@gmail.com
+2025-08-24 12:21:18 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 11.28ms
+2025-08-24 12:21:18 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:21:18 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 36.77ms
+2025-08-24 12:21:21 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:21:21 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 12:21:24 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoginTempView | Mensaje: Licencia ABC123 validada exitosamente
+2025-08-24 12:21:24 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com tiene 1 licencia(s) válida(s)
+2025-08-24 12:21:24 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login exitoso para eduardouio7@gmail.com - Sesión: temporal (hasta cerrar navegador)
+2025-08-24 12:21:24 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 3813.27ms
+2025-08-24 12:21:24 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Respuesta lenta detectada: 3813.27ms
+2025-08-24 12:21:24 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:21:26 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:21:26 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:21:26 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:21:26 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 5.33ms
+2025-08-24 12:22:10 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:22:10 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: eduardouio7@gmail.com
+2025-08-24 12:22:10 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 4.17ms
+2025-08-24 12:22:10 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:22:10 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 3.71ms
+2025-08-24 12:22:13 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:22:14 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 12:22:15 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoginTempView | Mensaje: Licencia ABC123 validada exitosamente
+2025-08-24 12:22:15 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com tiene 1 licencia(s) válida(s)
+2025-08-24 12:22:15 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login exitoso para eduardouio7@gmail.com - Sesión: temporal (hasta cerrar navegador)
+2025-08-24 12:22:15 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 2004.56ms
+2025-08-24 12:22:15 | WARNING | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Respuesta lenta detectada: 2004.56ms
+2025-08-24 12:22:15 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:22:15 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:22:15 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:22:15 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:22:15 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 1.64ms
+2025-08-24 12:22:17 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:22:17 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: ProfileTempView | Mensaje: Acceso a perfil por usuario: eduardouio7@gmail.com
+2025-08-24 12:22:17 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 9.77ms
+2025-08-24 12:22:17 | INFO | Usuario: eduardouio7@gmail.com | URL: /media/accounts/pictures/logo.jpeg | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:22:17 | INFO | Usuario: eduardouio7@gmail.com | URL: /media/accounts/pictures/logo.jpeg | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 12.17ms
+2025-08-24 12:22:19 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/change-password/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:22:19 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/change-password/ | Archivo: ChangePassUpdtView | Mensaje: Solicitud de formulario de cambio de contraseña para: eduardouio7@gmail.com
+2025-08-24 12:22:19 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/change-password/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 3.21ms
+2025-08-24 12:22:20 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:22:20 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Acceso a formulario de edición de perfil por: eduardouio7@gmail.com
+2025-08-24 12:22:20 | INFO | Usuario: eduardouio7@gmail.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 15.04ms
+2025-08-24 12:22:44 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:22:44 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: eduardouio7@gmail.com
+2025-08-24 12:22:44 | INFO | Usuario: eduardouio7@gmail.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 4.09ms
+2025-08-24 12:22:44 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:22:44 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 3.19ms
+2025-08-24 12:23:54 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:23:54 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.6ms
+2025-08-24 12:23:54 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:23:54 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.72ms
+2025-08-24 12:24:02 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:24:03 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Intento de login para usuario: eduardouio7@gmail.com
+2025-08-24 12:24:04 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoginTempView | Mensaje: Licencia ABC123 validada exitosamente
+2025-08-24 12:24:04 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Usuario eduardouio7@gmail.com tiene 1 licencia(s) válida(s)
+2025-08-24 12:24:04 | INFO | Usuario: eduardouio7@gmail.com | URL: /login/ | Archivo: LoginTempView | Mensaje: Login exitoso para eduardouio7@gmail.com - Sesión: temporal (hasta cerrar navegador)
+2025-08-24 12:24:04 | INFO | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 2089.26ms
+2025-08-24 12:24:04 | WARNING | Usuario: AnonymousUser | URL: /login/?next=/ | Archivo: LoggingMiddleware | Mensaje: Respuesta lenta detectada: 2089.26ms
+2025-08-24 12:24:04 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:24:05 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:24:05 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:24:05 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:24:05 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 1.8ms
+2025-08-24 12:24:07 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:24:07 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:24:07 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 1.08ms
+2025-08-24 12:29:17 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:29:17 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:29:17 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:29:17 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:29:17 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 33.9ms
+2025-08-24 12:29:17 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:29:17 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.47ms
+2025-08-24 12:29:17 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:29:17 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:29:17 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:29:17 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:29:17 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 1.18ms
+2025-08-24 12:30:21 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:30:21 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:30:21 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:30:21 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:30:21 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 32.63ms
+2025-08-24 12:30:21 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:30:21 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.48ms
+2025-08-24 12:30:21 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:30:21 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:30:21 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:30:21 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:30:21 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 1.44ms
+2025-08-24 12:32:30 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:32:30 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:32:30 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:32:30 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:32:30 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 53.49ms
+2025-08-24 12:32:30 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:32:30 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.48ms
+2025-08-24 12:32:30 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:32:30 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:32:30 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:32:30 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:32:30 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 1.34ms
+2025-08-24 12:32:30 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:32:30 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 12.1ms
+2025-08-24 12:32:31 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:32:31 | ERROR | Usuario: loginuser@example.com | URL: /login/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:32:31 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:32:31 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.6ms
+2025-08-24 12:32:31 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:32:31 | ERROR | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:32:31 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:32:31 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: logoutuser@example.com
+2025-08-24 12:32:31 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 1.05ms
+2025-08-24 12:32:31 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:32:31 | ERROR | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:32:31 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:32:31 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: logoutuser@example.com
+2025-08-24 12:32:31 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 0.93ms
+2025-08-24 12:32:31 | INFO | Usuario: AnonymousUser | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:32:31 | INFO | Usuario: AnonymousUser | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.65ms
+2025-08-24 12:32:32 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:32:32 | ERROR | Usuario: profile@example.com | URL: /profile/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:32:32 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:32:32 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: ProfileTempView | Mensaje: Acceso a perfil por usuario: profile@example.com
+2025-08-24 12:32:32 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 16.69ms
+2025-08-24 12:32:32 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:32:32 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:32:32 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:32:32 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Acceso a formulario de edición de perfil por: editprofile@example.com
+2025-08-24 12:32:32 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 15.43ms
+2025-08-24 12:32:33 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:32:33 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:32:33 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:32:33 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Perfil actualizado exitosamente por: editprofile@example.com
+2025-08-24 12:32:33 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 4.72ms
+2025-08-24 12:32:34 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:32:34 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:32:34 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:32:34 | WARNING | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Errores en formulario de perfil para: editprofile@example.com
+2025-08-24 12:32:34 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Acceso a formulario de edición de perfil por: editprofile@example.com
+2025-08-24 12:32:34 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 6.04ms
+2025-08-24 12:35:11 | INFO | Usuario: tester@example.com | URL: /x | Archivo: TestFile | Mensaje: TEST_INFO_05145a7b-e0f3-4738-904f-7a3f10306c49
+2025-08-24 12:35:11 | WARNING | Usuario: Sistema/Anónimo | URL: /warn | Archivo: WarnFile | Mensaje: TEST_WARN_33fe2d5f-2fe0-4541-8eca-28fa8b665bc1
+2025-08-24 12:35:11 | ERROR | Usuario: Sistema/Anónimo | URL: /err | Archivo: ErrFile | Mensaje: TEST_ERR_0b93ad1c-7c99-4bed-aae7-9b524fd03ef4
+2025-08-24 12:35:11 | CRITICAL | Usuario: u | URL: /c | Archivo: CritFile | Mensaje: TEST_CRIT_3521a723-63f9-4bc9-b1c4-35680cf33aef
+2025-08-24 12:35:11 | INFO | Usuario: Sistema/Anónimo | URL: /demo | Archivo: test_LoggerApp | Mensaje: Acceso a vista: demo_view
+2025-08-24 12:35:11 | INFO | Usuario: Sistema/Anónimo | URL: /boom | Archivo: test_LoggerApp | Mensaje: Acceso a vista: boom_view
+2025-08-24 12:35:11 | ERROR | Usuario: Sistema/Anónimo | URL: /boom | Archivo: test_LoggerApp | Mensaje: Error en vista boom_view: Boom!
+2025-08-24 12:35:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:16 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:35:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 70.46ms
+2025-08-24 12:35:16 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:16 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.97ms
+2025-08-24 12:35:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:16 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:35:16 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.49ms
+2025-08-24 12:35:16 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:16 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 18.91ms
+2025-08-24 12:35:17 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:17 | ERROR | Usuario: loginuser@example.com | URL: /login/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:17 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:17 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.93ms
+2025-08-24 12:35:17 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:17 | ERROR | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:17 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:17 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: logoutuser@example.com
+2025-08-24 12:35:17 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 1.73ms
+2025-08-24 12:35:18 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:18 | ERROR | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:18 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:35:18 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: logoutuser@example.com
+2025-08-24 12:35:18 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 1.56ms
+2025-08-24 12:35:18 | INFO | Usuario: AnonymousUser | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:18 | INFO | Usuario: AnonymousUser | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.6ms
+2025-08-24 12:35:19 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:19 | ERROR | Usuario: profile@example.com | URL: /profile/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:19 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:19 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: ProfileTempView | Mensaje: Acceso a perfil por usuario: profile@example.com
+2025-08-24 12:35:19 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 12.68ms
+2025-08-24 12:35:19 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:19 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:19 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:19 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Acceso a formulario de edición de perfil por: editprofile@example.com
+2025-08-24 12:35:19 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 33.03ms
+2025-08-24 12:35:20 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:20 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:20 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:35:20 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Perfil actualizado exitosamente por: editprofile@example.com
+2025-08-24 12:35:20 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 5.67ms
+2025-08-24 12:35:21 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:21 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:21 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:35:21 | WARNING | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Errores en formulario de perfil para: editprofile@example.com
+2025-08-24 12:35:21 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Acceso a formulario de edición de perfil por: editprofile@example.com
+2025-08-24 12:35:21 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 7.09ms
+2025-08-24 12:35:51 | INFO | Usuario: tester@example.com | URL: /x | Archivo: TestFile | Mensaje: TEST_INFO_9b3b7972-819c-463e-b522-a5d35016087b
+2025-08-24 12:35:51 | WARNING | Usuario: Sistema/Anónimo | URL: /warn | Archivo: WarnFile | Mensaje: TEST_WARN_4346fb5c-54c2-4874-9bcc-d469cf4de0c4
+2025-08-24 12:35:51 | ERROR | Usuario: Sistema/Anónimo | URL: /err | Archivo: ErrFile | Mensaje: TEST_ERR_05a3b82a-09a7-440b-8d71-341074bad986
+2025-08-24 12:35:51 | CRITICAL | Usuario: u | URL: /c | Archivo: CritFile | Mensaje: TEST_CRIT_496c1613-6af7-45a1-aaa5-bdf8e3ea572e
+2025-08-24 12:35:51 | INFO | Usuario: Sistema/Anónimo | URL: /demo | Archivo: test_LoggerApp | Mensaje: Acceso a vista: demo_view
+2025-08-24 12:35:52 | INFO | Usuario: Sistema/Anónimo | URL: /boom | Archivo: test_LoggerApp | Mensaje: Acceso a vista: boom_view
+2025-08-24 12:35:52 | ERROR | Usuario: Sistema/Anónimo | URL: /boom | Archivo: test_LoggerApp | Mensaje: Error en vista boom_view: Boom!
+2025-08-24 12:35:55 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:55 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:55 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:55 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:35:55 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 44.87ms
+2025-08-24 12:35:55 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:55 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 2.26ms
+2025-08-24 12:35:55 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:55 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:55 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:55 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:35:55 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.24ms
+2025-08-24 12:35:55 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:55 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 15.87ms
+2025-08-24 12:35:56 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:56 | ERROR | Usuario: loginuser@example.com | URL: /login/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:56 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:56 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.62ms
+2025-08-24 12:35:56 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:56 | ERROR | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:56 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:56 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: logoutuser@example.com
+2025-08-24 12:35:56 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 1.03ms
+2025-08-24 12:35:56 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:56 | ERROR | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:56 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:35:56 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: logoutuser@example.com
+2025-08-24 12:35:56 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 0.86ms
+2025-08-24 12:35:56 | INFO | Usuario: AnonymousUser | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:56 | INFO | Usuario: AnonymousUser | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.35ms
+2025-08-24 12:35:57 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:57 | ERROR | Usuario: profile@example.com | URL: /profile/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:57 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:57 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: ProfileTempView | Mensaje: Acceso a perfil por usuario: profile@example.com
+2025-08-24 12:35:57 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 15.59ms
+2025-08-24 12:35:57 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:57 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:57 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:35:57 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Acceso a formulario de edición de perfil por: editprofile@example.com
+2025-08-24 12:35:57 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 10.69ms
+2025-08-24 12:35:58 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:58 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:58 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:35:58 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Perfil actualizado exitosamente por: editprofile@example.com
+2025-08-24 12:35:58 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 6.11ms
+2025-08-24 12:35:59 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:35:59 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:35:59 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:35:59 | WARNING | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Errores en formulario de perfil para: editprofile@example.com
+2025-08-24 12:35:59 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Acceso a formulario de edición de perfil por: editprofile@example.com
+2025-08-24 12:35:59 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 7.09ms
+2025-08-24 12:36:28 | INFO | Usuario: tester@example.com | URL: /x | Archivo: TestFile | Mensaje: TEST_INFO_40c7e046-64dc-4843-8e17-90f6c80e25cd
+2025-08-24 12:36:28 | WARNING | Usuario: Sistema/Anónimo | URL: /warn | Archivo: WarnFile | Mensaje: TEST_WARN_bada6484-dc48-4d4d-a4aa-d2223851dcf3
+2025-08-24 12:36:28 | ERROR | Usuario: Sistema/Anónimo | URL: /err | Archivo: ErrFile | Mensaje: TEST_ERR_d3283697-c437-48a6-81ec-0c6d27d0176e
+2025-08-24 12:36:28 | CRITICAL | Usuario: u | URL: /c | Archivo: CritFile | Mensaje: TEST_CRIT_998d5ac8-427f-4eac-a1d2-81df80b514f6
+2025-08-24 12:36:28 | INFO | Usuario: Sistema/Anónimo | URL: /demo | Archivo: test_LoggerApp | Mensaje: Acceso a vista: demo_view
+2025-08-24 12:36:28 | ERROR | Usuario: Sistema/Anónimo | URL: /boom | Archivo: test_LoggerApp | Mensaje: Error en vista boom_view: Boom!
+2025-08-24 12:36:32 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:36:32 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:36:32 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:36:32 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:36:32 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 35.42ms
+2025-08-24 12:36:32 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:36:32 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.93ms
+2025-08-24 12:36:32 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:36:32 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:36:32 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:36:32 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:36:32 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 2.6ms
+2025-08-24 12:36:32 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:36:32 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 16.82ms
+2025-08-24 12:36:32 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:36:32 | ERROR | Usuario: loginuser@example.com | URL: /login/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:36:32 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:36:32 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.62ms
+2025-08-24 12:36:33 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:36:33 | ERROR | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:36:33 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:36:33 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: logoutuser@example.com
+2025-08-24 12:36:33 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.95ms
+2025-08-24 12:36:33 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:36:33 | ERROR | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:36:33 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:36:33 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: logoutuser@example.com
+2025-08-24 12:36:33 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 0.92ms
+2025-08-24 12:36:33 | INFO | Usuario: AnonymousUser | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:36:33 | INFO | Usuario: AnonymousUser | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.54ms
+2025-08-24 12:36:34 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:36:34 | ERROR | Usuario: profile@example.com | URL: /profile/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:36:34 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:36:34 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: ProfileTempView | Mensaje: Acceso a perfil por usuario: profile@example.com
+2025-08-24 12:36:34 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 6.03ms
+2025-08-24 12:36:34 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:36:34 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:36:34 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:36:34 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Acceso a formulario de edición de perfil por: editprofile@example.com
+2025-08-24 12:36:34 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 9.4ms
+2025-08-24 12:36:35 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:36:35 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:36:35 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:36:35 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Perfil actualizado exitosamente por: editprofile@example.com
+2025-08-24 12:36:35 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 5.32ms
+2025-08-24 12:36:36 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:36:36 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:36:36 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:36:36 | WARNING | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Errores en formulario de perfil para: editprofile@example.com
+2025-08-24 12:36:36 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Acceso a formulario de edición de perfil por: editprofile@example.com
+2025-08-24 12:36:36 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 6.13ms
+2025-08-24 12:37:00 | INFO | Usuario: tester@example.com | URL: /x | Archivo: TestFile | Mensaje: TEST_INFO_018a0a9e-9c68-4ce9-ae0b-664164d9fd72
+2025-08-24 12:37:00 | WARNING | Usuario: Sistema/Anónimo | URL: /warn | Archivo: WarnFile | Mensaje: TEST_WARN_96407189-9088-448b-b0bb-c84014a4c201
+2025-08-24 12:37:00 | ERROR | Usuario: Sistema/Anónimo | URL: /err | Archivo: ErrFile | Mensaje: TEST_ERR_4b9e6891-fca7-4f20-8edf-5ff1d2968b75
+2025-08-24 12:37:00 | CRITICAL | Usuario: u | URL: /c | Archivo: CritFile | Mensaje: TEST_CRIT_bf717054-a543-495c-928d-ab91704654b0
+2025-08-24 12:37:00 | INFO | Usuario: Sistema/Anónimo | URL: /demo | Archivo: test_LoggerApp | Mensaje: Acceso a vista: demo_view
+2025-08-24 12:37:00 | ERROR | Usuario: Sistema/Anónimo | URL: /boom | Archivo: test_LoggerApp | Mensaje: Error en vista boom_view: Boom!
+2025-08-24 12:37:03 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:37:03 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:37:03 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:37:03 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:37:03 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 26.8ms
+2025-08-24 12:37:03 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:37:03 | INFO | Usuario: AnonymousUser | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.51ms
+2025-08-24 12:37:03 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:37:03 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:37:03 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:37:03 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 12:37:03 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 1.96ms
+2025-08-24 12:37:03 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:37:03 | INFO | Usuario: AnonymousUser | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 9.24ms
+2025-08-24 12:37:04 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:37:04 | ERROR | Usuario: loginuser@example.com | URL: /login/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:37:04 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:37:04 | INFO | Usuario: loginuser@example.com | URL: /login/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.49ms
+2025-08-24 12:37:04 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:37:04 | ERROR | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:37:04 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:37:04 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: logoutuser@example.com
+2025-08-24 12:37:04 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.92ms
+2025-08-24 12:37:05 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:37:05 | ERROR | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:37:05 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:37:05 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoguoutRedView | Mensaje: Logout exitoso para usuario: logoutuser@example.com
+2025-08-24 12:37:05 | INFO | Usuario: logoutuser@example.com | URL: /logout/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 0.97ms
+2025-08-24 12:37:05 | INFO | Usuario: AnonymousUser | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:37:05 | INFO | Usuario: AnonymousUser | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 302 - Tiempo: 0.44ms
+2025-08-24 12:37:05 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:37:05 | ERROR | Usuario: profile@example.com | URL: /profile/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:37:05 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:37:05 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: ProfileTempView | Mensaje: Acceso a perfil por usuario: profile@example.com
+2025-08-24 12:37:05 | INFO | Usuario: profile@example.com | URL: /profile/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 5.41ms
+2025-08-24 12:37:06 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:37:06 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:37:06 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 12:37:06 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Acceso a formulario de edición de perfil por: editprofile@example.com
+2025-08-24 12:37:06 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 6.97ms
+2025-08-24 12:37:06 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:37:06 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:37:06 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:37:06 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Perfil actualizado exitosamente por: editprofile@example.com
+2025-08-24 12:37:06 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 302 - Tiempo: 4.8ms
+2025-08-24 12:37:07 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 12:37:07 | ERROR | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 12:37:07 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST iniciada
+2025-08-24 12:37:07 | WARNING | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Errores en formulario de perfil para: editprofile@example.com
+2025-08-24 12:37:07 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: ProfileUpdtView | Mensaje: Acceso a formulario de edición de perfil por: editprofile@example.com
+2025-08-24 12:37:07 | INFO | Usuario: editprofile@example.com | URL: /profile/edit/ | Archivo: LoggingMiddleware | Mensaje: Petición POST completada - Status: 200 - Tiempo: 6.47ms
+2025-08-24 13:09:11 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Iniciando validación periódica de licencias
+2025-08-24 13:09:13 | ERROR | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LicenseValidationMiddleware | Mensaje: Error en validación periódica: 'LoginTempView' object has no attribute 'request'
+2025-08-24 13:09:13 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 13:09:13 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 13:09:13 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 15.68ms
+2025-08-24 13:09:20 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET iniciada
+2025-08-24 13:09:20 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: HomeTempView | Mensaje: Acceso a página principal por: eduardouio7@gmail.com
+2025-08-24 13:09:20 | INFO | Usuario: eduardouio7@gmail.com | URL: / | Archivo: LoggingMiddleware | Mensaje: Petición GET completada - Status: 200 - Tiempo: 3.02ms
