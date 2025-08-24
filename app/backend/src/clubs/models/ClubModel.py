@@ -1,5 +1,6 @@
 from django.db import models
 from common.BaseModel import BaseModel
+from accounts.models.CustomUserModel import CustomUserModel
 
 
 class Club(BaseModel):
@@ -57,6 +58,13 @@ class Club(BaseModel):
         'fecha de aprobación',
         null=True,
         blank=True
+    )
+    users = models.ForeignKey(
+        CustomUserModel,
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+        help_text='Usuario asociado al club.'
     )
 
     class Meta:

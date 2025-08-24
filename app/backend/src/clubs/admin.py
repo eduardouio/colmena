@@ -27,3 +27,4 @@ class ClubAdmin(BaseModelAdmin):
     list_filter = BaseModelAdmin.list_filter + (
         'date_review', 'date_approval'
     )
+    ordering = ('name',)

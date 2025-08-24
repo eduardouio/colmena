@@ -25,22 +25,29 @@ class Register(BaseModel):
     ]
 
     season = models.ForeignKey(
-        Season, on_delete=models.PROTECT, related_name='registers'
+        Season, 
+        on_delete=models.PROTECT,
+        related_name='registers'
     )
     club = models.ForeignKey(
         Club, on_delete=models.PROTECT
     )
     category = models.CharField(
-        'categoría', max_length=10, choices=CATEGORY_CHOICES
+        'categoría',
+        max_length=10,
+        choices=CATEGORY_CHOICES
     )
     player = models.ForeignKey(
-        Player, on_delete=models.PROTECT, related_name='registers'
+        Player,
+        on_delete=models.PROTECT,
+        related_name='registers'
     )
     number = models.PositiveIntegerField(
         'número jugador'
     )
     minor_authorization = models.FileField(
-        'autorización menor', upload_to='autorizaciones/',
+        'autorización menor',
+        upload_to='autorizaciones/',
         null=True, blank=True
     )
     photo = models.FileField(
@@ -60,7 +67,9 @@ class Register(BaseModel):
         default=False
     )
     status = models.CharField(
-        'estado', max_length=10, choices=STATUS_CHOICES, default='PENDIENTE'
+        'estado', 
+        max_length=10, choices=STATUS_CHOICES,
+        default='PENDIENTE'
     )
     have_pass = models.BooleanField(
         'tiene pase',
