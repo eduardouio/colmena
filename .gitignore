@@ -145,3 +145,4 @@ app/registro/migrations/__init__.py
 
 app/backend/src/logs/app_log.log
 
+app/backend/src/config/secrets.py

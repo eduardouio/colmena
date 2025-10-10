@@ -19,12 +19,10 @@
         <div class="flex flex-col items-center mb-6">
           {% comment %} Logo: coloca tu archivo en static/img/logo.png {% endcomment %}
           {% if logo_path %}{% endif %}
-          {% with 'img/logo.png' as logo %}
-            <img src="{% static logo %}" alt="Logo" class="h-28 md:h-32 object-contain mb-6 transition-all" onerror="this.style.display='none'" />
-          {% endwith %}
-          <h5 class="font-semibold text-center flex items-center gap-2"><i class="las la-user"></i> 
-            Inicie sesión con su cuenta
-        </h5>
+            <img src="{% static 'img/logo-colmena.jpg' %}" alt="Logo" class="w-full max-w-xs h-48 object-contain mb-6 transition-all" onerror="this.style.display='none'" />
+        <span class="text-blue-500 text-center">
+          Liga Independiente de Santa Clara de San Millan
+        </span>
         </div>
         <form method="post" class="space-y-4" novalidate>
           {% csrf_token %}
@@ -54,7 +52,20 @@
             </button>
           </div>
         </form>
-        <div class="pt-6 text-center text-xs opacity-70">&copy;dev-7.com Derechos Reservados</div>
+        <div class="pt-6 text-xs">
+          <div class="flex items-center justify-center gap-3">
+            <a href="https://dev-7.com" target="_blank" class="flex-shrink-0 pr-3 border-r border-gray-400">
+              <img src="{% static 'img/logo.png' %}" alt="Dev-7" class="h-10 w-auto object-contain">
+            </a>
+            <div class="flex flex-col text-left leading-relaxed">
+              <span>&copy;dev-7.com</span>
+              <span>Derechos Reservados</span>
+              <a class="text-cyan-700 hover:text-cyan-500 transition-colors" href="mailto:soluciones@dev-7.com">
+                soluciones@dev-7.com
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
