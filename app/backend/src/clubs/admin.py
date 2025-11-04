@@ -103,6 +103,7 @@ class CategorieAdmin(BaseModelAdmin):
         }),
         ('Configuración de Jugadores', {
             'fields': ('max_players', 'max_youth_player', 
+                      'youth_min_age', 'youth_max_age',  # Añadir estos campos
                       'min_number_youth_player', 'max_number_youth_player',
                       'min_number_player', 'max_number_player')
         }),
