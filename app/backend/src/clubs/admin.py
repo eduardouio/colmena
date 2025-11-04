@@ -92,7 +92,6 @@ class RegisterAdmin(BaseModelAdmin):
         'club__name', 'season__name', 'number'
     )
     list_select_related = ('player', 'club', 'season')
-    raw_id_fields = ('player', 'club', 'season')
     
     def view_on_site(self, obj):
         # Opcional: Añadir un enlace para ver documentos si es necesario

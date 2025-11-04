@@ -180,7 +180,7 @@
                                 <tr class="hover player-row" data-player-name="{{ player.full_name|lower }}" data-player-id="{{ player.national_id }}">
                                     <td>{{ forloop.counter }}</td>
                                     <td>
-                                        <span class="badge badge-outline badge-lg">--</span>
+                                        <span class="badge badge-outline badge-lg">{{ player.jersey_number|default:"--" }}</span>
                                     </td>
                                     <td class="font-medium">{{ player.first_name }}</td>
                                     <td class="font-medium">{{ player.last_name }}</td>
@@ -195,21 +195,31 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        {% if player.birth_date %}
-                                            <span class="badge badge-sm">-- años</span>
+                                        {% if player.age is not None %}
+                                            <span class="badge badge-sm">{{ player.age }} años</span>
                                         {% else %}
                                             <span class="text-gray-400">--</span>
                                         {% endif %}
                                     </td>
                                     <td>
-                                        {% if player.has_transfers %}
+                                        {% if player.is_requalification %}
+                                            <span class="badge badge-info badge-sm">Recalificación</span>
+                                        {% elif player.has_transfers %}
                                             <span class="badge badge-warning badge-sm">Con pases</span>
                                         {% else %}
                                             <span class="badge badge-success badge-sm">Sin pases</span>
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <span class="badge badge-success badge-sm">Activo</span>
+                                        {% if player.registration_status == 'APROBADO' %}
+                                            <span class="badge badge-success badge-sm">Aprobado</span>
+                                        {% elif player.registration_status == 'PENDIENTE' %}
+                                            <span class="badge badge-warning badge-sm">Pendiente</span>
+                                        {% elif player.registration_status == 'RECHAZADO' %}
+                                            <span class="badge badge-error badge-sm">Rechazado</span>
+                                        {% else %}
+                                            <span class="badge badge-ghost badge-sm">Sin estado</span>
+                                        {% endif %}
                                     </td>
                                     <td>
                                         <div class="flex justify-center gap-1">

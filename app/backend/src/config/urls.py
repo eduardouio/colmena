@@ -23,6 +23,7 @@ from accounts.views.HomeTempView import HomeTempView
 
 urlpatterns = [
     path('', HomeTempView.as_view(), name='home'),
+    path('grappelli/', include('grappelli.urls')),  # grappelli URLS - debe ir ANTES del admin
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('clubs/', include('clubs.urls', namespace='clubs')),  # Agregar esta línea

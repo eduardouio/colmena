@@ -60,3 +60,7 @@ class Season(BaseModel):
         verbose_name = 'Temporada'
         verbose_name_plural = 'Temporadas'
         ordering = ['-start_date']
+
+
+    def __str__(self):
+        return f"{self.name} - {self.categorie.name}"
