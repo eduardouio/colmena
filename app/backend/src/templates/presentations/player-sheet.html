@@ -1,29 +1,43 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Ficha del Jugador</title>
+  <title>Ficha del Jugador - {{ player.full_name }}</title>
   <style>
+    @media print {
+      body { margin: 0; }
+      .no-print { display: none !important; }
+      .page { page-break-after: always; }
+    }
+    
     body {
       margin: 10px;
       padding: 10px;
       font-family: Arial, sans-serif;
       font-size: 12pt;
+      background: white;
     }
     .page {
       width: 210mm;
       min-height: 297mm;
       box-sizing: border-box;
+      margin: 0 auto;
+      background: white;
+      padding: 15mm;
     }
     .header {
       display: flex;
       align-items: center;
+      margin-bottom: 10mm;
     }
     .logo {
       width: 40mm;
+      margin-right: 10mm;
     }
     .logo img {
       max-width: 100%;
+      height: auto;
     }
     .texts {
       flex: 1;
@@ -33,6 +47,7 @@
       margin: 0;
       font-size: 16pt;
       font-weight: bold;
+      color: #4a7c59;
     }
     .texts h2 {
       margin: 2mm 0 0;
@@ -44,7 +59,7 @@
       text-transform: uppercase;
     }
     .title {
-      margin: 4mm 0;
+      margin: 8mm 0;
       text-align: center;
       font-size: 14pt;
       font-weight: bold;
@@ -54,39 +69,65 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 3mm 0;
+      margin: 5mm 0;
+    }
+    .category {
+      display: flex;
+      gap: 10mm;
     }
     .category span {
-      margin-right: 6mm;
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+    }
+    .checkbox {
+      width: 5mm;
+      height: 5mm;
+      border: 1px solid #000;
+      display: inline-block;
+    }
+    .checkbox.checked::after {
+      content: "✓";
+      display: block;
+      text-align: center;
+      line-height: 5mm;
     }
     .section {
-      margin: 4mm 0;
+      margin: 6mm 0;
     }
     .section h4 {
-      margin: 0 0 2mm;
+      margin: 0 0 3mm;
       font-size: 12pt;
       font-weight: bold;
+      color: #4a7c59;
     }
     .fields {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
+      gap: 10mm;
     }
     .labels {
+      flex: 1;
       display: flex;
       flex-direction: column;
     }
     .field-label {
-      margin-bottom: 4mm;
+      margin-bottom: 5mm;
     }
-    .field-label .line {
+    .field-label strong {
+      display: inline-block;
+      width: 35mm;
+    }
+    .field-value {
       border-bottom: 1px solid #000;
-      height: 0;
-      width: 100mm;
-      margin-top: 1mm;
+      display: inline-block;
+      min-width: 70mm;
+      padding-bottom: 1mm;
+      font-weight: bold;
     }
     .box {
-      border: 1px solid #000;
+      border: 2px solid #4a7c59;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -94,82 +135,166 @@
       font-size: 10pt;
     }
     .photo {
-      width: 40mm;
-      height: 50mm;
+      width: 35mm;
+      height: 45mm;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .copy-id {
-      margin-top: 4mm;
-      border: 1px solid #000;
-      width: 110mm;
+      margin-top: 5mm;
+      border: 2px solid #4a7c59;
+      width: 100%;
       height: 60mm;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       font-size: 10pt;
+      background: #f5f5f5;
+      overflow: hidden;
+    }
+    .copy-id img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
     }
     .club-info {
       display: flex;
       align-items: center;
-      gap: 4mm;
-      margin: 4mm 0;
+      gap: 5mm;
+      margin: 6mm 0;
     }
-    .club-info .line {
+    .club-info strong {
+      white-space: nowrap;
+    }
+    .club-info .value {
       border-bottom: 1px solid #000;
-      height: 8mm;
-      margin-top: 0;
+      padding-bottom: 1mm;
+      font-weight: bold;
     }
-    .club-info .club { width: 60mm; }
-    .club-info .num  { width: 20mm; }
+    .club-info .club { 
+      flex: 1;
+      min-width: 60mm; 
+    }
+    .club-info .num  { 
+      width: 25mm;
+      text-align: center;
+      font-size: 14pt;
+    }
     .footer-line {
       display: flex;
       align-items: center;
-      gap: 4mm;
-      margin: 6mm 0;
-    }
-    .checkbox {
-      width: 6mm;
-      height: 6mm;
-      border: 1px solid #000;
+      gap: 5mm;
+      margin: 8mm 0;
     }
     .recal-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 4mm;
+      margin-top: 6mm;
     }
     .recal-table th,
     .recal-table td {
       border: 1px solid #000;
-      padding: 2mm;
+      padding: 3mm;
       text-align: center;
       font-size: 10pt;
+    }
+    .recal-table th {
+      background: #f0f0f0;
+      font-weight: bold;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 2mm 4mm;
+      border-radius: 3mm;
+      font-size: 10pt;
+      font-weight: bold;
+      margin-left: 5mm;
+    }
+    .status-badge.aprobado {
+      background: #d4f4dd;
+      color: #2e7d32;
+      border: 1px solid #2e7d32;
+    }
+    .status-badge.pendiente {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #856404;
+    }
+    .status-badge.rechazado {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #721c24;
+    }
+    .print-actions {
+      text-align: center;
+      margin: 20px 0;
+      padding: 20px;
+      background: #f5f5f5;
+      border-radius: 5px;
+    }
+    .btn-print {
+      background: #4a7c59;
+      color: white;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14pt;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+    .btn-print:hover {
+      background: #3d6649;
     }
   </style>
 </head>
 <body>
-  <div class="page">
+  <!-- Botones de acción (no se imprimen) -->
+  <div class="print-actions no-print">
+    <button onclick="window.print()" class="btn-print">🖨️ Imprimir Ficha</button>
+    <button onclick="window.close()" class="btn-print">❌ Cerrar</button>
+  </div>
 
+  <div class="page">
     <div class="header">
       <div class="logo">
-        <img src="logo.png" alt="Logo Liga">
+        <img src="{% static 'img/logo-colmena.png' %}" alt="Logo Liga">
       </div>
       <div class="texts">
-        <h1>LIGA INDEPENDIENTE DE INDOR FUTBOL</h1>
+        <h1>LIGA INDEPENDIENTE DE INDOOR FUTBOL</h1>
         <h2>SANTA CLARA DE SAN MILLAN</h2>
         <h3>FUNDADA EL 08 DE ENERO DE 1997</h3>
       </div>
     </div>
 
-    <div class="title">FICHA DEL JUGADOR</div>
+    <div class="title">
+      FICHA DEL JUGADOR
+      <span class="status-badge {% if register.status == 'APROBADO' %}aprobado{% elif register.status == 'PENDIENTE' %}pendiente{% else %}rechazado{% endif %}">
+        {{ register.get_status_display }}
+      </span>
+    </div>
 
     <div class="row">
-      <div>Temporada 20__ – 20__</div>
+      <div><strong>Temporada:</strong> {{ season.name }} ({{ season_start_year }} - {{ season_end_year }})</div>
       <div class="category">
-        <span>Categoría</span>
-        <span>Femenino</span>
-        <span>Niños</span>
-        <span>Señor</span>
-        <span>Master</span>
+        <span><strong>Categoría:</strong></span>
+        <span>
+          <div class="checkbox {% if category.name == 'FEMENINO' %}checked{% endif %}"></div> Femenino
+        </span>
+        <span>
+          <div class="checkbox {% if is_youth %}checked{% endif %}"></div> Juvenil
+        </span>
+        <span>
+          <div class="checkbox {% if category.name == 'SENIOR' %}checked{% endif %}"></div> Senior
+        </span>
+        <span>
+          <div class="checkbox {% if category.name == 'MASTER' %}checked{% endif %}"></div> Master
+        </span>
       </div>
     </div>
 
@@ -178,34 +303,70 @@
       <div class="fields">
         <div class="labels">
           <div class="field-label">
-            Nombres
-            <div class="line"></div>
+            <strong>Nombres:</strong>
+            <span class="field-value">{{ player.first_name }}</span>
           </div>
           <div class="field-label">
-            Apellidos
-            <div class="line"></div>
+            <strong>Apellidos:</strong>
+            <span class="field-value">{{ player.last_name }}</span>
           </div>
           <div class="field-label">
-            Número de cédula
-            <div class="line"></div>
+            <strong>Número de cédula:</strong>
+            <span class="field-value">{{ player.national_id }}</span>
+          </div>
+          <div class="field-label">
+            <strong>Fecha de nacimiento:</strong>
+            <span class="field-value">
+              {% if player.birth_date %}
+                {{ player.birth_date|date:"d/m/Y" }} ({{ player_age }} años)
+              {% else %}
+                No registrada
+              {% endif %}
+            </span>
+          </div>
+          <div class="field-label">
+            <strong>Email:</strong>
+            <span class="field-value">{{ player.email|default:"No registrado" }}</span>
           </div>
         </div>
-        <div class="box photo">Foto</div>
+        <div class="box photo">
+          {% if register.photo %}
+            <img src="{{ register.photo.url }}" alt="Foto del jugador">
+          {% else %}
+            <span>Sin foto</span>
+          {% endif %}
+        </div>
       </div>
-      <div class="copy-id">Copia de cédula</div>
+      
+      <div class="copy-id">
+        {% if register.id_document %}
+          <img src="{{ register.id_document.url }}" alt="Cédula">
+        {% else %}
+          <span>Copia de cédula no adjuntada</span>
+        {% endif %}
+      </div>
     </div>
 
     <div class="club-info">
-      <span>Nombre del Club</span>
-      <div class="line club"></div>
-      <span>Número del Jugador</span>
-      <div class="line num"></div>
+      <strong>Nombre del Club:</strong>
+      <span class="value club">{{ club_display_name }}</span>
+      <strong>Número del Jugador:</strong>
+      <span class="value num">{{ register.number }}</span>
     </div>
 
     <div class="footer-line">
-      <span>Recalificación</span>
-      <div class="checkbox"></div>
-      <span>Pase: nombre del Club que proviene</span>
+      <span>
+        <strong>Recalificación:</strong>
+        <div class="checkbox {% if register.is_requalification %}checked{% endif %}" style="display: inline-block; vertical-align: middle;"></div>
+      </span>
+      <span>
+        <strong>Pase:</strong> 
+        {% if register.have_pass %}
+          Sí - Club anterior: {{ register.before_club|default:"No especificado" }}
+        {% else %}
+          No tiene pase
+        {% endif %}
+      </span>
     </div>
 
     <table class="recal-table">
@@ -219,14 +380,52 @@
       </thead>
       <tbody>
         <tr>
-          <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+          <td>
+            {% if qualification_date %}
+              {{ qualification_date|date:"d/m/Y" }}
+            {% else %}
+              &nbsp;
+            {% endif %}
+          </td>
+          <td>{{ club.president|default:"&nbsp;" }}</td>
+          <td>
+            {% if register.is_requalification and approval_date %}
+              {{ approval_date|date:"d/m/Y" }}
+            {% else %}
+              &nbsp;
+            {% endif %}
+          </td>
+          <td>
+            {% if register.have_pass %}
+              ✓
+            {% else %}
+              &nbsp;
+            {% endif %}
+          </td>
         </tr>
         <tr>
-          <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+          <td colspan="4" style="text-align: left; padding: 5mm;">
+            <strong>Observaciones:</strong><br>
+            {% if is_youth %}
+              • Jugador juvenil - Requiere autorización de menor<br>
+              {% if register.minor_authorization %}
+                • Autorización adjuntada ✓
+              {% else %}
+                • Autorización pendiente ✗
+              {% endif %}
+            {% endif %}
+            {% if player.has_transfers %}
+              • Jugador con historial de pases
+            {% endif %}
+          </td>
         </tr>
       </tbody>
     </table>
 
+    <div style="margin-top: 15mm; text-align: center; font-size: 10pt; color: #666;">
+      <hr style="border: none; border-top: 1px solid #ccc; margin: 10mm 0 5mm;">
+      Documento generado el {{ "now"|date:"d/m/Y H:i" }}
+    </div>
   </div>
 </body>
 </html>

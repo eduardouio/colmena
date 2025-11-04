@@ -73,6 +73,14 @@ class Club(BaseModel):
         help_text='Usuario asociado al club.'
     )
 
+    @property
+    def display_name(self):
+        """Retorna el nombre del club sin las palabras FEMENINO y MASTER."""
+        name = self.name
+        name = name.replace('FEMENINO', '').replace('MASTER', '').strip()
+        # Limpiar espacios dobles que puedan quedar
+        return ' '.join(name.split())
+
     @classmethod
     def get_by_name(cls, name):
         try:
