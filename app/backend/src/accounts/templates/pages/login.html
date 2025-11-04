@@ -6,22 +6,20 @@
 {# Oculta header y footer #}
 {% block header %}{% endblock %}
 {% block footer %}{% endblock %}
-
-{% block body_class %}login-page{% endblock %}
-{% block body_extra %}style="background: url('{% static 'img/background.jpg' %}') center/cover no-repeat fixed;"{% endblock %}
-
 {% block content %}
-<div class="min-h-screen w-full flex flex-col items-center justify-center px-4 py-10 bg-base-200/30">
+<div class="min-h-screen w-full flex flex-col items-center justify-center px-4 py-10">
   <div class="w-full max-w-md">
     <div class="card bg-base-100 shadow-xl border border-lime-400/80 backdrop-blur-xl relative overflow-hidden">
-      <div class="absolute -inset-0.5 rounded-xl opacity-20 pointer-events-none" style="background: radial-gradient(circle at 30% 20%, rgba(163,230,53,.35), transparent 70%);"></div>
+      <div class="absolute -inset-0.5 rounded-xl opacity-20 pointer-events-none"></div>
       <div class="card-body relative">
         <div class="flex flex-col items-center mb-6">
           {% comment %} Logo: coloca tu archivo en static/img/logo.png {% endcomment %}
           {% if logo_path %}{% endif %}
-            <img src="{% static 'img/logo-colmena.jpg' %}" alt="Logo" class="w-full max-w-xs h-48 object-contain mb-6 transition-all" onerror="this.style.display='none'" />
-        <span class="text-blue-500 text-center">
-          Liga Independiente de Santa Clara de San Millan
+            <img src="{% static 'img/logo-colmena.png' %}" alt="Logo" class="w-full max-w-xs h-48 object-contain mb-6 transition-all" onerror="this.style.display='none'" />
+        <span class="text-blue-600 text-center text-2xl">
+          Gestión
+          <br />
+           Ligas Deportivas Barriales
         </span>
         </div>
         <form method="post" class="space-y-4" novalidate>
