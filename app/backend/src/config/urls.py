@@ -26,6 +26,7 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')),  # grappelli URLS - debe ir ANTES del admin
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls', namespace='accounts')),
+    path('api/', include('api.urls', namespace='api')),
     path('clubs/', include('clubs.urls', namespace='clubs')),  # Agregar esta línea
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

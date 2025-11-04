@@ -1,7 +1,7 @@
 from django.urls import path
 from .views.PlayersClubLists import PlayersClubListView
 from .views.PlayerCreate import PlayerCreateView
-from api.views.CheckPlayerExist import CheckPlayerExistView
+from api.views.CheckPlayerExistView import CheckPlayerExistView
 
 app_name = 'clubs'
 

@@ -91,12 +91,16 @@
                         <div class="form-control">
                             <label class="label" for="birth_date">
                                 <span class="label-text">Fecha de Nacimiento</span>
+                                <span class="label-text-alt text-primary font-semibold" id="age-display"></span>
                             </label>
                             <input type="date" 
                                    id="birth_date" 
                                    name="birth_date" 
                                    class="input input-bordered"
                                    value="{{ form_data.birth_date|default:'' }}">
+                            <label class="label">
+                                <span class="label-text-alt" id="age-category-hint"></span>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -107,6 +111,16 @@
                         <i class="las la-futbol text-xl mr-2"></i>
                         Información de Registro
                     </h3>
+                    
+                    <!-- Mostrar información de la categoría seleccionada -->
+                    <div id="category-info" class="alert alert-info mb-4" style="display: none;">
+                        <i class="las la-info-circle text-xl"></i>
+                        <div>
+                            <p class="font-semibold">Información de la Categoría:</p>
+                            <ul id="category-details" class="text-sm mt-1 space-y-1"></ul>
+                        </div>
+                    </div>
+                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="form-control">
                             <label class="label" for="season_id">
@@ -119,6 +133,14 @@
                                 <option value="">Seleccione una temporada</option>
                                 {% for season in seasons %}
                                 <option value="{{ season.id }}" 
+                                        data-category="{{ season.categorie.name }}"
+                                        data-min-age="{{ season.categorie.min_age|default:'' }}"
+                                        data-max-players="{{ season.categorie.max_players }}"
+                                        data-max-youth="{{ season.categorie.max_youth_player }}"
+                                        data-min-youth-num="{{ season.categorie.min_number_youth_player }}"
+                                        data-max-youth-num="{{ season.categorie.max_number_youth_player }}"
+                                        data-min-adult-num="{{ season.categorie.min_number_player }}"
+                                        data-max-adult-num="{{ season.categorie.max_number_player }}"
                                         {% if form_data.season_id == season.id|stringformat:"i" %}selected{% endif %}>
                                     {{ season.categorie.name }} - {{ season.name }}
                                 </option>
@@ -129,6 +151,7 @@
                         <div class="form-control">
                             <label class="label" for="number">
                                 <span class="label-text">Número de Jugador <span class="text-error">*</span></span>
+                                <span class="label-text-alt" id="number-range-hint"></span>
                             </label>
                             <input type="number" 
                                    id="number" 
@@ -139,6 +162,9 @@
                                    placeholder="Ej: 10"
                                    value="{{ form_data.number|default:'' }}"
                                    required>
+                            <label class="label">
+                                <span class="label-text-alt text-warning" id="number-validation-msg"></span>
+                            </label>
                         </div>
 
                         <div class="form-control">
@@ -214,7 +240,7 @@
 
                         <div class="form-control">
                             <label class="label" for="minor_authorization">
-                                <span class="label-text">Autorización (menores)</span>
+                                <span class="label-text">Autorización (menores) <span id="minor-required" class="text-error" style="display: none;">*</span></span>
                             </label>
                             <input type="file" 
                                    id="minor_authorization" 
@@ -222,7 +248,7 @@
                                    class="file-input file-input-bordered file-input-sm w-full"
                                    accept="image/*,application/pdf">
                             <label class="label">
-                                <span class="label-text-alt">JPG, PNG, PDF (Max: 5MB)</span>
+                                <span class="label-text-alt" id="minor-hint">JPG, PNG, PDF (Max: 5MB)</span>
                             </label>
                         </div>
                     </div>
@@ -233,10 +259,10 @@
                     <a href="{% url 'clubs:players_list' club_id=club.id %}" class="btn btn-ghost">
                         <i class="las la-times"></i> Cancelar
                     </a>
-                    <button type="submit" name="save_and_new" class="btn btn-outline btn-primary">
+                    <button type="submit" name="save_and_new" id="save-and-new-btn" class="btn btn-outline btn-primary">
                         <i class="las la-save"></i> Guardar y Nuevo
                     </button>
-                    <button type="submit" name="save" class="btn btn-primary">
+                    <button type="submit" name="save" id="save-btn" class="btn btn-primary">
                         <i class="las la-check"></i> Guardar
                     </button>
                 </div>
@@ -250,6 +276,9 @@
     let playerCheckTimeout;
     let playerExists = false;
     let playerData = null;
+    let categoryRules = null;
+    let numberCheckTimeout;
+    let formIsValid = false;
 
     // Función para verificar si el jugador existe
     async function checkPlayerExists(nationalId) {
@@ -312,14 +341,391 @@
         }
     }
 
+    // Función para calcular edad
+    function calculateAge(birthDate) {
+        if (!birthDate) return null;
+        const today = new Date();
+        const birth = new Date(birthDate);
+        let age = today.getFullYear() - birth.getFullYear();
+        const monthDiff = today.getMonth() - birth.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+    // Nueva función para mostrar la edad calculada
+    function displayAge() {
+        const birthDate = document.getElementById('birth_date').value;
+        const ageDisplay = document.getElementById('age-display');
+        const ageCategoryHint = document.getElementById('age-category-hint');
+        
+        if (!birthDate) {
+            ageDisplay.textContent = '';
+            ageCategoryHint.textContent = '';
+            validateForm(); // Validar formulario
+            return;
+        }
+        
+        const age = calculateAge(birthDate);
+        
+        if (age !== null) {
+            // Mostrar edad
+            ageDisplay.textContent = `(${age} años)`;
+            
+            // Determinar si es juvenil o adulto según la categoría seleccionada
+            if (categoryRules) {
+                if (categoryRules.name === 'SENIOR' || categoryRules.name === 'FEMENINO') {
+                    if (age < 18) {
+                        ageCategoryHint.textContent = '👶 Jugador Juvenil (menor de 18 años)';
+                        ageCategoryHint.className = 'label-text-alt text-info font-medium';
+                    } else {
+                        ageCategoryHint.textContent = '👤 Jugador Adulto';
+                        ageCategoryHint.className = 'label-text-alt text-success font-medium';
+                    }
+                } else {
+                    // Para otras categorías, verificar edad mínima
+                    if (categoryRules.minAge && age < categoryRules.minAge) {
+                        ageCategoryHint.textContent = `⚠️ Edad insuficiente (mínimo ${categoryRules.minAge} años) - NO PUEDE CONTINUAR`;
+                        ageCategoryHint.className = 'label-text-alt text-error font-bold text-base';
+                    } else {
+                        ageCategoryHint.textContent = '✓ Edad válida para la categoría';
+                        ageCategoryHint.className = 'label-text-alt text-success font-medium';
+                    }
+                }
+            } else {
+                // Si no hay categoría seleccionada, solo mostrar si es menor o mayor de edad
+                if (age < 18) {
+                    ageCategoryHint.textContent = 'Menor de edad';
+                    ageCategoryHint.className = 'label-text-alt text-info';
+                } else {
+                    ageCategoryHint.textContent = 'Mayor de edad';
+                    ageCategoryHint.className = 'label-text-alt text-base';
+                }
+            }
+            
+            // Cambiar color de la edad según rango
+            if (age < 18) {
+                ageDisplay.className = 'label-text-alt text-info font-semibold';
+            } else if (age >= 35) {
+                ageDisplay.className = 'label-text-alt text-warning font-semibold';
+            } else {
+                ageDisplay.className = 'label-text-alt text-primary font-semibold';
+            }
+        } else {
+            ageDisplay.textContent = '';
+            ageCategoryHint.textContent = 'Fecha inválida';
+            ageCategoryHint.className = 'label-text-alt text-error';
+        }
+        
+        // Actualizar el rango de números permitidos
+        updateNumberRange();
+        
+        // Validar formulario completo
+        validateForm();
+    }
+
+    // Función para actualizar información de categoría
+    function updateCategoryInfo() {
+        const seasonSelect = document.getElementById('season_id');
+        const selectedOption = seasonSelect.options[seasonSelect.selectedIndex];
+        const categoryInfo = document.getElementById('category-info');
+        const categoryDetails = document.getElementById('category-details');
+        const numberInput = document.getElementById('number');
+        const numberRangeHint = document.getElementById('number-range-hint');
+        const birthDateInput = document.getElementById('birth_date');
+        
+        if (!selectedOption || !selectedOption.value) {
+            categoryInfo.style.display = 'none';
+            numberRangeHint.textContent = '';
+            categoryRules = null; // Limpiar reglas
+            displayAge(); // Actualizar display de edad
+            return;
+        }
+        
+        // Obtener datos de la categoría
+        categoryRules = {
+            name: selectedOption.dataset.category,
+            minAge: parseInt(selectedOption.dataset.minAge) || null,
+            maxPlayers: parseInt(selectedOption.dataset.maxPlayers),
+            maxYouth: parseInt(selectedOption.dataset.maxYouth),
+            minYouthNum: parseInt(selectedOption.dataset.minYouthNum),
+            maxYouthNum: parseInt(selectedOption.dataset.maxYouthNum),
+            minAdultNum: parseInt(selectedOption.dataset.minAdultNum),
+            maxAdultNum: parseInt(selectedOption.dataset.maxAdultNum)
+        };
+        
+        // Actualizar información visible
+        let details = [];
+        details.push(`<li>• Máximo de jugadores: ${categoryRules.maxPlayers}</li>`);
+        if (categoryRules.minAge) {
+            details.push(`<li>• Edad mínima: ${categoryRules.minAge} años</li>`);
+        }
+        details.push(`<li>• Números adultos: ${categoryRules.minAdultNum} - ${categoryRules.maxAdultNum}</li>`);
+        details.push(`<li>• Números juveniles (menores 18): ${categoryRules.minYouthNum} - ${categoryRules.maxYouthNum}</li>`);
+        details.push(`<li>• Máximo juveniles: ${categoryRules.maxYouth}</li>`);
+        
+        categoryDetails.innerHTML = details.join('');
+        categoryInfo.style.display = 'flex';
+        
+        // Actualizar display de edad con las nuevas reglas de categoría
+        displayAge();
+        
+        // Actualizar rango de números según edad
+        updateNumberRange();
+    }
+    
+    // Función para actualizar el rango de números permitidos
+    function updateNumberRange() {
+        if (!categoryRules) return;
+        
+        const birthDate = document.getElementById('birth_date').value;
+        const numberInput = document.getElementById('number');
+        const numberRangeHint = document.getElementById('number-range-hint');
+        const minorRequired = document.getElementById('minor-required');
+        const minorHint = document.getElementById('minor-hint');
+        
+        const age = calculateAge(birthDate);
+        let isYouth = false;
+        
+        // Determinar si es juvenil para SENIOR y FEMENINO
+        if (categoryRules.name === 'SENIOR' || categoryRules.name === 'FEMENINO') {
+            isYouth = age !== null && age < 18;
+        }
+        
+        if (isYouth) {
+            numberInput.min = categoryRules.minYouthNum;
+            numberInput.max = categoryRules.maxYouthNum;
+            numberRangeHint.textContent = `(${categoryRules.minYouthNum} - ${categoryRules.maxYouthNum})`;
+            numberRangeHint.className = 'label-text-alt text-info';
+            
+            // Hacer obligatoria la autorización
+            minorRequired.style.display = 'inline';
+            minorHint.textContent = 'Obligatorio para menores de 18 años';
+            minorHint.className = 'label-text-alt text-warning';
+        } else {
+            numberInput.min = categoryRules.minAdultNum;
+            numberInput.max = categoryRules.maxAdultNum;
+            numberRangeHint.textContent = `(${categoryRules.minAdultNum} - ${categoryRules.maxAdultNum})`;
+            numberRangeHint.className = 'label-text-alt';
+            
+            // Quitar obligatoriedad de autorización
+            minorRequired.style.display = 'none';
+            minorHint.textContent = 'JPG, PNG, PDF (Max: 5MB)';
+            minorHint.className = 'label-text-alt';
+        }
+        
+        // Validar número actual
+        validateNumber();
+    }
+    
+    // Nueva función para validar todo el formulario
+    function validateForm() {
+        const saveBtn = document.getElementById('save-btn');
+        const saveAndNewBtn = document.getElementById('save-and-new-btn');
+        const birthDate = document.getElementById('birth_date').value;
+        const seasonId = document.getElementById('season_id').value;
+        const numberInput = document.getElementById('number');
+        const number = parseInt(numberInput.value);
+        
+        let isValid = true;
+        let errorMessages = [];
+        
+        // Validar que haya temporada seleccionada
+        if (!seasonId || !categoryRules) {
+            isValid = false;
+            errorMessages.push('Debe seleccionar una temporada');
+        }
+        
+        // Validar edad mínima si la categoría lo requiere
+        if (categoryRules && categoryRules.minAge && birthDate) {
+            const age = calculateAge(birthDate);
+            if (age !== null && age < categoryRules.minAge) {
+                isValid = false;
+                errorMessages.push(`El jugador debe tener al menos ${categoryRules.minAge} años`);
+            }
+        }
+        
+        // Validar número
+        if (categoryRules && number) {
+            const age = calculateAge(birthDate);
+            let isYouth = (categoryRules.name === 'SENIOR' || categoryRules.name === 'FEMENINO') && age !== null && age < 18;
+            
+            if (isYouth) {
+                if (number < categoryRules.minYouthNum || number > categoryRules.maxYouthNum) {
+                    isValid = false;
+                    errorMessages.push(`Número debe estar entre ${categoryRules.minYouthNum} y ${categoryRules.maxYouthNum} (juvenil)`);
+                }
+            } else {
+                if (number < categoryRules.minAdultNum || number > categoryRules.maxAdultNum) {
+                    isValid = false;
+                    errorMessages.push(`Número debe estar entre ${categoryRules.minAdultNum} y ${categoryRules.maxAdultNum} (adulto)`);
+                }
+            }
+            
+            // Verificar si el número tiene la clase input-error (ya está asignado)
+            if (numberInput.classList.contains('input-error')) {
+                isValid = false;
+                errorMessages.push('El número ya está asignado');
+            }
+        }
+        
+        // Actualizar estado de los botones
+        if (isValid) {
+            saveBtn.disabled = false;
+            saveAndNewBtn.disabled = false;
+            saveBtn.classList.remove('btn-disabled');
+            saveAndNewBtn.classList.remove('btn-disabled');
+            formIsValid = true;
+        } else {
+            saveBtn.disabled = true;
+            saveAndNewBtn.disabled = true;
+            saveBtn.classList.add('btn-disabled');
+            saveAndNewBtn.classList.add('btn-disabled');
+            formIsValid = false;
+            
+            // Mostrar tooltip con errores
+            if (errorMessages.length > 0) {
+                saveBtn.title = 'Errores:\n' + errorMessages.join('\n');
+                saveAndNewBtn.title = 'Errores:\n' + errorMessages.join('\n');
+            }
+        }
+        
+        return isValid;
+    }
+    
+    // Función para validar número de jugador
+    async function validateNumber() {
+        const numberInput = document.getElementById('number');
+        const number = parseInt(numberInput.value);
+        const validationMsg = document.getElementById('number-validation-msg');
+        const seasonId = document.getElementById('season_id').value;
+        const clubId = {{ club.id }};
+        
+        if (!number || !seasonId || !categoryRules) {
+            validationMsg.textContent = '';
+            validateForm(); // Validar formulario completo
+            return;
+        }
+        
+        // Verificar rango local primero
+        const birthDate = document.getElementById('birth_date').value;
+        const age = calculateAge(birthDate);
+        let isYouth = (categoryRules.name === 'SENIOR' || categoryRules.name === 'FEMENINO') && age !== null && age < 18;
+        
+        let validRange = true;
+        if (isYouth) {
+            validRange = number >= categoryRules.minYouthNum && number <= categoryRules.maxYouthNum;
+            if (!validRange) {
+                validationMsg.textContent = `Número fuera del rango juvenil (${categoryRules.minYouthNum} - ${categoryRules.maxYouthNum})`;
+                validationMsg.className = 'label-text-alt text-error font-bold';
+                numberInput.classList.add('input-error');
+                numberInput.classList.remove('input-success');
+                validateForm(); // Validar formulario completo
+                return;
+            }
+        } else {
+            validRange = number >= categoryRules.minAdultNum && number <= categoryRules.maxAdultNum;
+            if (!validRange) {
+                validationMsg.textContent = `Número fuera del rango adulto (${categoryRules.minAdultNum} - ${categoryRules.maxAdultNum})`;
+                validationMsg.className = 'label-text-alt text-error font-bold';
+                numberInput.classList.add('input-error');
+                numberInput.classList.remove('input-success');
+                validateForm(); // Validar formulario completo
+                return;
+            }
+        }
+        
+        // Verificar disponibilidad del número con llamada AJAX
+        try {
+            validationMsg.textContent = 'Verificando disponibilidad...';
+            validationMsg.className = 'label-text-alt text-info';
+            
+            const response = await fetch(`/api/check-player-number/?number=${number}&season_id=${seasonId}&club_id=${clubId}`);
+            const data = await response.json();
+            
+            if (data.success) {
+                if (data.available) {
+                    validationMsg.textContent = '✓ Número disponible';
+                    validationMsg.className = 'label-text-alt text-success font-semibold';
+                    numberInput.classList.remove('input-error');
+                    numberInput.classList.add('input-success');
+                } else {
+                    validationMsg.textContent = `✗ ${data.message}`;
+                    validationMsg.className = 'label-text-alt text-error font-semibold';
+                    numberInput.classList.remove('input-success');
+                    numberInput.classList.add('input-error');
+                }
+                
+                // Mostrar advertencia si está fuera de rango
+                if (data.warning) {
+                    validationMsg.textContent += ` - ${data.warning}`;
+                }
+            } else {
+                validationMsg.textContent = data.error || 'Error al verificar el número';
+                validationMsg.className = 'label-text-alt text-error';
+                numberInput.classList.remove('input-success');
+                numberInput.classList.add('input-error');
+            }
+        } catch (error) {
+            console.error('Error checking number:', error);
+            validationMsg.textContent = 'Error de conexión al verificar número';
+            validationMsg.className = 'label-text-alt text-warning';
+        } finally {
+            // Validar formulario completo después de verificar número
+            validateForm();
+        }
+    }
+
     // Ejecutar al cargar la página
     document.addEventListener('DOMContentLoaded', function() {
         toggleBeforeClub();
+        updateCategoryInfo();
+        displayAge(); // Mostrar edad si ya hay fecha cargada
+        validateForm(); // Validar formulario al cargar
         
         // Agregar listener al checkbox have_pass
         const havePassCheckbox = document.getElementById('have_pass');
         if (havePassCheckbox) {
             havePassCheckbox.addEventListener('change', toggleBeforeClub);
+        }
+        
+        // Agregar listener para cambio de temporada
+        const seasonSelect = document.getElementById('season_id');
+        if (seasonSelect) {
+            seasonSelect.addEventListener('change', function() {
+                updateCategoryInfo();
+                validateForm(); // Validar al cambiar temporada
+            });
+        }
+        
+        // Agregar listener para cambio de fecha de nacimiento
+        const birthDateInput = document.getElementById('birth_date');
+        if (birthDateInput) {
+            birthDateInput.addEventListener('change', function() {
+                displayAge();
+            });
+            // También actualizar cuando se escribe
+            birthDateInput.addEventListener('input', function() {
+                displayAge();
+            });
+        }
+        
+        // Agregar listener para validar número con debounce
+        const numberInput = document.getElementById('number');
+        if (numberInput) {
+            numberInput.addEventListener('input', function() {
+                // Limpiar timeout anterior
+                clearTimeout(numberCheckTimeout);
+                
+                // Limpiar clases de validación
+                this.classList.remove('input-success', 'input-error');
+                
+                // Verificar después de 500ms de inactividad
+                numberCheckTimeout = setTimeout(() => {
+                    validateNumber();
+                }, 500);
+            });
         }
         
         // Agregar listener para verificar jugador
@@ -341,6 +747,25 @@
                 checkPlayerExists(this.value);
             }, 500);
         });
+        
+        // Prevenir envío si el formulario no es válido
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                if (!formIsValid) {
+                    e.preventDefault();
+                    alert('Por favor, corrija los errores antes de continuar:\n\n' + 
+                          (categoryRules && categoryRules.minAge && calculateAge(document.getElementById('birth_date').value) < categoryRules.minAge 
+                           ? `- El jugador debe tener al menos ${categoryRules.minAge} años\n` 
+                           : '') +
+                          (document.getElementById('number').classList.contains('input-error') 
+                           ? '- El número seleccionado no está disponible o está fuera del rango permitido\n' 
+                           : '')
+                    );
+                    return false;
+                }
+            });
+        }
     });
 </script>
 {% endblock %}

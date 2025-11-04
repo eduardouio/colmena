@@ -26,6 +26,11 @@ class Season(BaseModel):
     end_date = models.DateField(
         'fecha fin'
     )
+    is_active = models.BooleanField(
+        'activa',
+        default=True,
+        help_text='Indica si la temporada está activa'
+    )
     winner = models.ForeignKey(
         Club,
         on_delete=models.PROTECT,
@@ -60,7 +65,6 @@ class Season(BaseModel):
         verbose_name = 'Temporada'
         verbose_name_plural = 'Temporadas'
         ordering = ['-start_date']
-
 
     def __str__(self):
         return f"{self.name} - {self.categorie.name}"
