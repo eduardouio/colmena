@@ -1,0 +1,460 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Ficha de Registro - {{ player.full_name }}{% endblock %}
+
+{% block body_extra %}data-theme="winter"{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    
+    <!-- Header con Estado -->
+    <div class="bg-gradient-to-r from-lime-50 to-lime-100 rounded-box p-6 mb-6 shadow-lg">
+        <div class="flex justify-between items-center flex-wrap">
+            <div>
+                <h1 class="text-3xl font-bold text-lime-700 mb-2">
+                    <i class="las la-user-circle text-4xl mr-2"></i>
+                    {{ player.full_name }}
+                </h1>
+                <div class="flex items-center gap-3 flex-wrap">
+                    <span class="badge badge-lg">{{ season.name }}</span>
+                    <span class="badge badge-lg badge-secondary">{{ category.name }}</span>
+                    <span class="badge badge-lg badge-primary">{{ club.name }}</span>
+                    <span class="badge badge-lg {% if register.status == 'APROBADO' %}badge-success{% elif register.status == 'PENDIENTE' %}badge-warning{% else %}badge-error{% endif %}">
+                        {{ register.get_status_display }}
+                    </span>
+                </div>
+            </div>
+            <div class="text-4xl font-bold text-lime-700 bg-white rounded-full w-20 h-20 flex items-center justify-center shadow-md">
+                #{{ register.number }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Left Column - Información del Jugador -->
+        <div class="lg:col-span-2 space-y-6">
+            
+            <!-- Información Personal -->
+            <div class="bg-base-100 rounded-box shadow-lg p-6">
+                <h2 class="text-2xl font-semibold text-lime-700 mb-6 flex items-center">
+                    <i class="las la-user text-3xl mr-2"></i>
+                    Información del Jugador
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-lime-600 border-b pb-2">Datos Personales</h3>
+                        
+                        <div class="flex items-start">
+                            <i class="las la-id-card text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Cédula</h4>
+                                <p class="text-gray-700 font-medium">{{ player.national_id }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="las la-user text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Nombres</h4>
+                                <p class="text-gray-700">{{ player.first_name }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="las la-user text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Apellidos</h4>
+                                <p class="text-gray-700">{{ player.last_name }}</p>
+                            </div>
+                        </div>
+                        
+                        {% if player.email %}
+                        <div class="flex items-start">
+                            <i class="las la-envelope text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Correo Electrónico</h4>
+                                <a href="mailto:{{ player.email }}" class="text-primary hover:underline break-all">{{ player.email }}</a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-lime-600 border-b pb-2">Información Adicional</h3>
+                        
+                        {% if player.birth_date %}
+                        <div class="flex items-start">
+                            <i class="las la-birthday-cake text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Fecha de Nacimiento</h4>
+                                <p class="text-gray-700">{{ player.birth_date|date:"d/m/Y" }}</p>
+                                {% if player_age %}
+                                <p class="text-sm text-gray-500">{{ player_age }} años</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="flex items-start">
+                            <i class="las la-user-tag text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Tipo de Jugador</h4>
+                                <span class="badge {% if is_youth %}badge-warning{% else %}badge-info{% endif %}">
+                                    {% if is_youth %}Juvenil{% else %}Adulto{% endif %}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="las la-exchange-alt text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Pases</h4>
+                                <span class="badge {% if player.has_transfers %}badge-success{% else %}badge-ghost{% endif %}">
+                                    {{ player.has_transfers|yesno:"Con Pases,Sin Pases" }}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        {% if register.is_requalification %}
+                        <div class="flex items-start">
+                            <i class="las la-redo-alt text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Tipo de Registro</h4>
+                                <span class="badge badge-accent">Recalificación</span>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Información del Registro -->
+            <div class="bg-base-100 rounded-box shadow-lg p-6">
+                <h2 class="text-2xl font-semibold text-lime-700 mb-6 flex items-center">
+                    <i class="las la-clipboard-list text-3xl mr-2"></i>
+                    Detalles del Registro
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-lime-600 border-b pb-2">Información de Temporada</h3>
+                        
+                        <div class="flex items-start">
+                            <i class="las la-calendar text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Temporada</h4>
+                                <p class="text-gray-700 font-medium">{{ season.name }}</p>
+                                <p class="text-xs text-gray-500">{{ season.start_date|date:"d/m/Y" }} - {{ season.end_date|date:"d/m/Y" }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="las la-layer-group text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Categoría</h4>
+                                <p class="text-gray-700">{{ category.name }}</p>
+                                {% if category.description %}
+                                <p class="text-xs text-gray-500">{{ category.description }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="las la-futbol text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Club</h4>
+                                <p class="text-gray-700 font-medium">{{ club.name }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="las la-tshirt text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Número de Camiseta</h4>
+                                <p class="text-gray-700 text-2xl font-bold">#{{ register.number }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-lime-600 border-b pb-2">Información de Pase</h3>
+                        
+                        <div class="flex items-start">
+                            <i class="las la-toggle-{{ register.have_pass|yesno:'on,off' }} text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">¿Tiene Pase?</h4>
+                                <span class="badge {% if register.have_pass %}badge-success{% else %}badge-ghost{% endif %}">
+                                    {{ register.have_pass|yesno:"Sí,No" }}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        {% if register.before_club %}
+                        <div class="flex items-start">
+                            <i class="las la-history text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Club Anterior</h4>
+                                <p class="text-gray-700">{{ register.before_club }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <h3 class="text-lg font-semibold text-lime-600 border-b pb-2 mt-6">Auditoría</h3>
+                        
+                        <div class="flex items-start">
+                            <i class="las la-calendar-plus text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Fecha de Registro</h4>
+                                <p class="text-gray-700 text-sm">{{ register.created_at|date:"d/m/Y H:i" }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="las la-calendar-check text-2xl text-lime-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-500">Última Actualización</h4>
+                                <p class="text-gray-700 text-sm">{{ register.updated_at|date:"d/m/Y H:i" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Documentos -->
+            <div class="bg-base-100 rounded-box shadow-lg p-6">
+                <h2 class="text-2xl font-semibold text-lime-700 mb-6 flex items-center">
+                    <i class="las la-file-alt text-3xl mr-2"></i>
+                    Documentos Adjuntos
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Columna izquierda: Foto -->
+                    <div>
+                        <h3 class="font-semibold text-base mb-3 flex items-center text-lime-600">
+                            <i class="las la-camera text-xl mr-2"></i>
+                            Foto Fondo Claro
+                        </h3>
+                        <div class="card bg-base-200">
+                            <div class="card-body p-4">
+                                {% if register.photo %}
+                                    <div class="aspect-[3/4] bg-white rounded-lg overflow-hidden mb-3 shadow-md">
+                                        <img src="{{ register.photo.url }}" alt="Foto del jugador" class="w-full h-full object-cover">
+                                    </div>
+                                    <a href="{{ register.photo.url }}" target="_blank" class="btn btn-sm btn-primary btn-block">
+                                        <i class="las la-external-link-alt"></i> Ver en tamaño completo
+                                    </a>
+                                {% else %}
+                                    <div class="aspect-[3/4] bg-gray-100 rounded-lg flex items-center justify-center">
+                                        <div class="text-center">
+                                            <i class="las la-image text-6xl text-gray-400"></i>
+                                            <p class="text-sm text-error mt-2">No adjuntado</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Columna derecha: Cédula y Autorización -->
+                    <div class="space-y-6">
+                        <!-- Cédula -->
+                        <div>
+                            <h3 class="font-semibold text-base mb-3 flex items-center text-lime-600">
+                                <i class="las la-id-card text-xl mr-2"></i>
+                                Foto de Cédula
+                            </h3>
+                            <div class="card bg-base-200">
+                                <div class="card-body p-4">
+                                    {% if register.id_document %}
+                                        <div class="aspect-[16/10] bg-white rounded-lg overflow-hidden mb-3 shadow-md">
+                                            <img src="{{ register.id_document.url }}" alt="Cédula" class="w-full h-full object-cover">
+                                        </div>
+                                        <a href="{{ register.id_document.url }}" target="_blank" class="btn btn-sm btn-primary btn-block">
+                                            <i class="las la-external-link-alt"></i> Ver documento completo
+                                        </a>
+                                    {% else %}
+                                        <div class="aspect-[16/10] bg-gray-100 rounded-lg flex items-center justify-center">
+                                            <div class="text-center">
+                                                <i class="las la-id-card text-6xl text-gray-400"></i>
+                                                <p class="text-sm text-error mt-2">No adjuntado</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Autorización Menor -->
+                        <div>
+                            <h3 class="font-semibold text-base mb-3 flex items-center text-lime-600">
+                                <i class="las la-file-contract text-xl mr-2"></i>
+                                Autorización de Menor
+                            </h3>
+                            {% if is_youth %}
+                                {% if register.minor_authorization %}
+                                    <a href="{{ register.minor_authorization.url }}" 
+                                       target="_blank" 
+                                       class="btn btn-outline btn-primary btn-block">
+                                        <i class="las la-file-pdf text-xl"></i>
+                                        Ver Autorización de Menor
+                                    </a>
+                                {% else %}
+                                    <div class="alert alert-error">
+                                        <i class="las la-exclamation-triangle text-xl"></i>
+                                        <span>Documento requerido - No adjuntado</span>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <div class="alert">
+                                    <i class="las la-info-circle text-xl"></i>
+                                    <span class="text-sm">No requerido para jugadores adultos</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Estado de documentos -->
+                <div class="mt-6 p-4 rounded-lg {% if has_all_documents %}bg-success/10 border border-success{% else %}bg-warning/10 border border-warning{% endif %}">
+                    <div class="flex items-center">
+                        <i class="las {% if has_all_documents %}la-check-circle text-success{% else %}la-exclamation-triangle text-warning{% endif %} text-2xl mr-3"></i>
+                        <div class="flex-1">
+                            <p class="{% if has_all_documents %}text-success{% else %}text-warning{% endif %} font-medium">
+                                {% if has_all_documents %}
+                                    Todos los documentos requeridos han sido adjuntados
+                                {% else %}
+                                    Faltan documentos por adjuntar
+                                {% endif %}
+                            </p>
+                            <p class="text-sm opacity-70 mt-1">
+                                {% if has_all_documents %}
+                                    El registro cuenta con toda la documentación necesaria.
+                                {% else %}
+                                    Por favor, complete la documentación faltante para procesar el registro.
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Column - Estadísticas e Historial -->
+        <div class="space-y-6">
+            <!-- Estadísticas del Jugador -->
+            <div class="card bg-gradient-to-br from-lime-50 to-lime-100 shadow-lg">
+                <div class="card-body">
+                    <h3 class="card-title text-lime-700 mb-4">
+                        <i class="las la-chart-bar text-2xl"></i>
+                        Resumen del Jugador
+                    </h3>
+                    
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-white rounded-lg">
+                            <div class="flex items-center">
+                                <i class="las la-calendar text-2xl text-lime-600 mr-2"></i>
+                                <span class="text-sm font-medium">Temporadas</span>
+                            </div>
+                            <span class="badge badge-lg badge-primary">{{ total_seasons }}</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center p-3 bg-white rounded-lg">
+                            <i class="las la-futbol text-2xl text-lime-600 mr-2"></i>
+                            <span class="text-sm font-medium">Clubes</span>
+                            <span class="badge badge-lg badge-secondary">{{ total_clubs }}</span>
+                        </div>
+                        
+                        {% if player_age %}
+                        <div class="flex justify-between items-center p-3 bg-white rounded-lg">
+                            <i class="las la-birthday-cake text-2xl text-lime-600 mr-2"></i>
+                            <span class="text-sm font-medium">Edad</span>
+                            <span class="badge badge-lg badge-accent">{{ player_age }} años</span>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="flex justify-between items-center p-3 bg-white rounded-lg">
+                            <i class="las la-tshirt text-2xl text-lime-600 mr-2"></i>
+                            <span class="text-sm font-medium">Número</span>
+                            <span class="text-xl font-bold text-lime-700">#{{ register.number }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Historial -->
+            {% if player_history %}
+            <div class="card bg-base-100 shadow-lg">
+                <div class="card-body">
+                    <h3 class="card-title text-lime-700 mb-4">
+                        <i class="las la-history text-2xl"></i>
+                        Historial Reciente
+                    </h3>
+                    
+                    <div class="space-y-2">
+                        {% for history in player_history %}
+                        <div class="p-3 bg-base-200 rounded-lg">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="font-semibold text-sm">{{ history.season.name }}</p>
+                                    <p class="text-xs text-gray-600">{{ history.club.name }}</p>
+                                    <p class="text-xs">{{ history.season.categorie.name }}</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="badge badge-sm {% if history.status == 'APROBADO' %}badge-success{% elif history.status == 'PENDIENTE' %}badge-warning{% else %}badge-error{% endif %}">
+                                        {{ history.get_status_display }}
+                                    </span>
+                                    <p class="text-xs mt-1">#{{ history.number }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Acciones Rápidas -->
+            <div class="card bg-base-100 shadow-lg">
+                <div class="card-body">
+                    <h3 class="card-title text-lime-700 mb-4">
+                        <i class="las la-bolt text-2xl"></i>
+                        Acciones Rápidas
+                    </h3>
+                    
+                    <div class="space-y-2">
+                        {% if register.status == 'PENDIENTE' %}
+                        <button class="btn btn-outline btn-success btn-block justify-start">
+                            <i class="las la-check text-xl mr-2"></i>
+                            Aprobar Registro
+                        </button>
+                        <button class="btn btn-outline btn-error btn-block justify-start">
+                            <i class="las la-times text-xl mr-2"></i>
+                            Rechazar Registro
+                        </button>
+                        {% endif %}
+                        
+                        <a href="#" class="btn btn-outline btn-primary btn-block justify-start">
+                            <i class="las la-edit text-xl mr-2"></i>
+                            Editar Registro
+                        </a>
+                        
+                        <a href="#" class="btn btn-outline btn-secondary btn-block justify-start">
+                            <i class="las la-print text-xl mr-2"></i>
+                            Imprimir Ficha
+                        </a>
+                        
+                        <a href="{% url 'clubs:players_list' club_id=club.id %}" class="btn btn-outline btn-accent btn-block justify-start">
+                            <i class="las la-list text-xl mr-2"></i>
+                            Ver Lista de Jugadores
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

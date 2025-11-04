@@ -35,11 +35,6 @@
                     <span class="hidden sm:inline">Exportar PDF</span>
                     <span class="sm:hidden">PDF</span>
                 </button>
-                <button class="btn btn-primary btn-sm sm:btn-md w-full sm:w-auto">
-                    <i class="las la-user-plus"></i> 
-                    <span class="hidden sm:inline">Inscribir Jugador</span>
-                    <span class="sm:hidden">Inscribir</span>
-                </button>
             </div>
         </div>
     </div>
@@ -199,8 +194,8 @@
                                     <td>
                                         <div class="avatar">
                                             <div class="w-10 h-10 rounded-full ring ring-lime-400 ring-offset-base-100 ring-offset-1 overflow-hidden">
-                                                {% if player.photo %}
-                                                    <img src="{{ player.photo }}" alt="{{ player.full_name }}" class="w-full h-full object-cover" loading="lazy" />
+                                                {% if player.register_photo %}
+                                                    <img src="{{ player.register_photo.url }}" alt="{{ player.full_name }}" class="w-full h-full object-cover" loading="lazy" />
                                                 {% else %}
                                                     <div class="bg-lime-100 text-lime-700 flex items-center justify-center w-full h-full">
                                                         <i class="las la-user text-lg"></i>
@@ -249,20 +244,22 @@
                                     </td>
                                     <td>
                                         {% if player.registration_status == 'APROBADO' %}
-                                            Aprobado
+                                            <span class="badge badge-success badge-sm">Aprobado</span>
                                         {% elif player.registration_status == 'PENDIENTE' %}
-                                            Pendiente
+                                            <span class="badge badge-warning badge-sm">Pendiente</span>
                                         {% elif player.registration_status == 'RECHAZADO' %}
-                                            Rechazado
+                                            <span class="badge badge-error badge-sm">Rechazado</span>
                                         {% else %}
-                                            Sin estado
+                                            <span class="badge badge-ghost badge-sm">Sin estado</span>
                                         {% endif %}
                                     </td>
                                     <td>
                                         <div class="flex justify-center gap-1">
-                                            <button class="btn btn-ghost btn-xs" title="Ver detalles">
+                                            <a href="{% url 'clubs:player_register_presentation' register_id=player.register_id %}" 
+                                               class="btn btn-ghost btn-xs" 
+                                               title="Ver registro">
                                                 <i class="las la-eye text-lg"></i>
-                                            </button>
+                                            </a>
                                             <button class="btn btn-ghost btn-xs" title="Editar">
                                                 <i class="las la-edit text-lg"></i>
                                             </button>
@@ -293,7 +290,6 @@
     {% endif %}
 
 </div>
-
 <!-- Modal para acciones rápidas -->
 <dialog id="playerModal" class="modal">
     <div class="modal-box">

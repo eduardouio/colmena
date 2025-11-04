@@ -73,10 +73,12 @@ class PlayersClubListView(LoginRequiredMixin, ListView):
                     for register in registers:
                         player = register.player
                         # Añadir información del registro al jugador
+                        player.register_id = register.id  # Agregar el ID del registro
                         player.jersey_number = register.number
                         player.registration_status = register.status
                         player.is_requalification = register.is_requalification
                         player.registration_date = register.created_at  # Fecha de registro
+                        player.register_photo = register.photo  # Foto del registro
                         # Calcular y añadir la edad
                         player.age = self.calculate_age(player.birth_date)
                         players_data.append(player)

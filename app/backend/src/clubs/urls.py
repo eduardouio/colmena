@@ -2,6 +2,7 @@ from django.urls import path
 from .views.PlayersClubLists import PlayersClubListView
 from .views.PlayerCreate import PlayerCreateView
 from api.views.CheckPlayerExistView import CheckPlayerExistView
+from .views.PlayerPresentation import player_register_presentation
 
 app_name = 'clubs'
 
@@ -11,4 +12,7 @@ urlpatterns = [
     
     # API endpoints
     path('api/check-player/', CheckPlayerExistView.as_view(), name='api_check_player'),
+    
+    # Player Register Presentation
+    path('register/<int:register_id>/presentation/', player_register_presentation, name='player_register_presentation'),
 ]
