@@ -133,7 +133,7 @@
                     <div class="flex gap-4 mt-2 text-sm text-gray-600">
                         <span><i class="las la-calendar-check"></i> Inicio: {{ season_data.season.start_date|date:"d/m/Y" }}</span>
                         <span><i class="las la-calendar-times"></i> Fin: {{ season_data.season.end_date|date:"d/m/Y" }}</span>
-                        <span class="badge badge-outline badge-primary">{{ season_data.categorie.name }}</span>
+                        <span>{{ season_data.categorie.name }}</span>
                     </div>
                 </div>
                 <div class="text-right">
@@ -179,46 +179,42 @@
                                 {% for player in season_data.players %}
                                 <tr class="hover player-row" data-player-name="{{ player.full_name|lower }}" data-player-id="{{ player.national_id }}">
                                     <td>{{ forloop.counter }}</td>
-                                    <td>
-                                        <span class="badge badge-outline badge-lg">{{ player.jersey_number|default:"--" }}</span>
-                                    </td>
+                                    <td>{{ player.jersey_number|default:"--" }}</td>
                                     <td class="font-medium">{{ player.first_name }}</td>
                                     <td class="font-medium">{{ player.last_name }}</td>
-                                    <td>
-                                        <span class="font-mono">{{ player.national_id }}</span>
-                                    </td>
+                                    <td>{{ player.national_id }}</td>
                                     <td>
                                         {% if player.birth_date %}
                                             {{ player.birth_date|date:"d/m/Y" }}
                                         {% else %}
-                                            <span class="text-gray-400">--</span>
+                                            --
                                         {% endif %}
                                     </td>
                                     <td>
                                         {% if player.age is not None %}
-                                            <span class="badge badge-sm">{{ player.age }} años</span>
+                                            {{ player.age }} años
                                         {% else %}
-                                            <span class="text-gray-400">--</span>
+                                            --
                                         {% endif %}
                                     </td>
                                     <td>
                                         {% if player.is_requalification %}
-                                            <span class="badge badge-info badge-sm">Recalificación</span>
+                                            Recalificación
                                         {% elif player.has_transfers %}
-                                            <span class="badge badge-warning badge-sm">Con pases</span>
+                                            Con pases
                                         {% else %}
-                                            <span class="badge badge-success badge-sm">Sin pases</span>
+                                            Sin pases
                                         {% endif %}
                                     </td>
                                     <td>
                                         {% if player.registration_status == 'APROBADO' %}
-                                            <span class="badge badge-success badge-sm">Aprobado</span>
+                                            Aprobado
                                         {% elif player.registration_status == 'PENDIENTE' %}
-                                            <span class="badge badge-warning badge-sm">Pendiente</span>
+                                            Pendiente
                                         {% elif player.registration_status == 'RECHAZADO' %}
-                                            <span class="badge badge-error badge-sm">Rechazado</span>
+                                            Rechazado
                                         {% else %}
-                                            <span class="badge badge-ghost badge-sm">Sin estado</span>
+                                            Sin estado
                                         {% endif %}
                                     </td>
                                     <td>
@@ -228,9 +224,6 @@
                                             </button>
                                             <button class="btn btn-ghost btn-xs" title="Editar">
                                                 <i class="las la-edit text-lg"></i>
-                                            </button>
-                                            <button class="btn btn-ghost btn-xs text-error" title="Eliminar">
-                                                <i class="las la-trash text-lg"></i>
                                             </button>
                                         </div>
                                     </td>
