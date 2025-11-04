@@ -73,6 +73,13 @@ class Club(BaseModel):
         help_text='Usuario asociado al club.'
     )
 
+    @classmethod
+    def get_by_name(cls, name):
+        try:
+            return cls.objects.get(name=name)
+        except cls.DoesNotExist:
+            return None
+
     class Meta:
         verbose_name = 'Club'
         verbose_name_plural = 'Clubs'

@@ -38,6 +38,13 @@ class Player(BaseModel):
         default=False
     )
 
+    @classmethod
+    def get_by_national_id(cls, national_id):
+        try:
+            return cls.objects.get(national_id=national_id)
+        except cls.DoesNotExist:
+            return None
+
     class Meta:
         verbose_name = 'Jugador'
         verbose_name_plural = 'Jugadores'
@@ -45,7 +52,7 @@ class Player(BaseModel):
         indexes = [
             models.Index(fields=['last_name', 'first_name']),
         ]
-
+    
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.national_id})"
 
