@@ -15,7 +15,9 @@ class Club(BaseModel):
     )
     president = models.CharField(
         'presidente',
-        max_length=100
+        max_length=100,
+        blank=True,
+        null=True
     )
     email = models.EmailField(
         'email',
