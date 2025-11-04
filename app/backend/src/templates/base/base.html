@@ -78,7 +78,11 @@
 		<nav class="flex-none">
 			<ul class="menu menu-horizontal hidden md:flex gap-2">
 				<li><a href="{% url 'home' %}" class="gap-1"><i class="las la-home"></i><span>My Club</span></a></li>
+				{% if club %}
+				<li><a href="{% url 'clubs:player_create' club_id=club.id %}" class="gap-1"><i class="las la-user-plus"></i><span>Registrar</span></a></li>
+				{% else %}
 				<li><a href="#" class="gap-1"><i class="las la-user-plus"></i><span>Registrar</span></a></li>
+				{% endif %}
 				{% if club %}
 				<li><a href="{% url 'clubs:players_list' club_id=club.id %}" class="gap-1"><i class="las la-users"></i><span>Jugadores</span></a></li>
 				{% else %}
@@ -91,7 +95,11 @@
 				</label>
 				<ul tabindex="0" class="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-50">
 					<li><a href="{% url 'home' %}" class="gap-1"><i class="las la-home"></i>My Club</a></li>
+					{% if club %}
+					<li><a href="{% url 'clubs:player_create' club_id=club.id %}" class="gap-1"><i class="las la-user-plus"></i> Registrar</a></li>
+					{% else %}
 					<li><a href="#" class="gap-1"><i class="las la-user-plus"></i> Registrar</a></li>
+					{% endif %}
 					{% if club %}
 					<li><a href="{% url 'clubs:players_list' club_id=club.id %}" class="gap-1"><i class="las la-users"></i> Jugadores</a></li>
 					{% else %}

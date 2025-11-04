@@ -1,0 +1,346 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Registrar Jugador - {{ club.name }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+        <div class="flex items-center gap-2 text-sm breadcrumbs mb-2">
+            <a href="{% url 'home' %}" class="link link-hover">Inicio</a>
+            <span>/</span>
+            <a href="{% url 'clubs:players_list' club_id=club.id %}" class="link link-hover">Jugadores</a>
+            <span>/</span>
+            <span class="text-gray-600">Registrar Jugador</span>
+        </div>
+        <h1 class="text-3xl font-bold text-lime-700 flex items-center">
+            <i class="las la-user-plus text-4xl mr-2"></i>
+            Registrar Nuevo Jugador
+        </h1>
+        <p class="text-gray-600 mt-2">Complete el formulario para registrar un jugador en {{ club.name }}</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="card bg-base-100 shadow-lg">
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data" class="space-y-6">
+                {% csrf_token %}
+                
+                <!-- Información Personal -->
+                <div>
+                    <h3 class="text-lg font-semibold text-lime-600 border-b pb-2 mb-4 flex items-center">
+                        <i class="las la-id-card text-xl mr-2"></i>
+                        Información Personal
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label" for="national_id">
+                                <span class="label-text">Cédula <span class="text-error">*</span></span>
+                            </label>
+                            <input type="text" 
+                                   id="national_id" 
+                                   name="national_id" 
+                                   class="input input-bordered" 
+                                   placeholder="Ej: 0123456789"
+                                   maxlength="10"
+                                   value="{{ form_data.national_id|default:'' }}"
+                                   required>
+                            <label class="label">
+                                <span class="label-text-alt text-info" id="player-check-message">Se verificará si el jugador ya existe</span>
+                            </label>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label" for="email">   
+                                <span class="label-text">Correo Electrónico</span>
+                            </label>
+                            <input type="email" 
+                                   id="email" 
+                                   name="email" 
+                                   class="input input-bordered" 
+                                   placeholder="jugador@email.com"
+                                   value="{{ form_data.email|default:'' }}">
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label" for="first_name">
+                                <span class="label-text">Nombres <span class="text-error">*</span></span>
+                            </label>
+                            <input type="text" 
+                                   id="first_name" 
+                                   name="first_name" 
+                                   class="input input-bordered" 
+                                   placeholder="Ej: Juan Carlos"
+                                   value="{{ form_data.first_name|default:'' }}"
+                                   required>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label" for="last_name">
+                                <span class="label-text">Apellidos <span class="text-error">*</span></span>
+                            </label>
+                            <input type="text" 
+                                   id="last_name" 
+                                   name="last_name" 
+                                   class="input input-bordered" 
+                                   placeholder="Ej: Pérez García"
+                                   value="{{ form_data.last_name|default:'' }}"
+                                   required>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label" for="birth_date">
+                                <span class="label-text">Fecha de Nacimiento</span>
+                            </label>
+                            <input type="date" 
+                                   id="birth_date" 
+                                   name="birth_date" 
+                                   class="input input-bordered"
+                                   value="{{ form_data.birth_date|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información de Registro -->
+                <div>
+                    <h3 class="text-lg font-semibold text-lime-600 border-b pb-2 mb-4 flex items-center">
+                        <i class="las la-futbol text-xl mr-2"></i>
+                        Información de Registro
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label" for="season_id">
+                                <span class="label-text">Temporada / Categoría <span class="text-error">*</span></span>
+                            </label>
+                            <select id="season_id" 
+                                    name="season_id" 
+                                    class="select select-bordered" 
+                                    required>
+                                <option value="">Seleccione una temporada</option>
+                                {% for season in seasons %}
+                                <option value="{{ season.id }}" 
+                                        {% if form_data.season_id == season.id|stringformat:"i" %}selected{% endif %}>
+                                    {{ season.categorie.name }} - {{ season.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label" for="number">
+                                <span class="label-text">Número de Jugador <span class="text-error">*</span></span>
+                            </label>
+                            <input type="number" 
+                                   id="number" 
+                                   name="number" 
+                                   class="input input-bordered" 
+                                   min="1" 
+                                   max="999"
+                                   placeholder="Ej: 10"
+                                   value="{{ form_data.number|default:'' }}"
+                                   required>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label cursor-pointer justify-start gap-3" for="is_requalification">
+                                <input type="checkbox" 
+                                       id="is_requalification"
+                                       name="is_requalification" 
+                                       class="checkbox checkbox-sm checkbox-primary"
+                                       {% if form_data.is_requalification == 'on' %}checked{% endif %}>
+                                <span class="label-text">¿Es recalificación?</span>
+                            </label>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label cursor-pointer justify-start gap-3" for="have_pass">
+                                <input type="checkbox" 
+                                       id="have_pass"
+                                       name="have_pass" 
+                                       class="checkbox checkbox-sm checkbox-primary"
+                                       {% if form_data.have_pass == 'on' %}checked{% endif %}>
+                                <span class="label-text">¿Tiene pase?</span>
+                            </label>
+                        </div>
+
+                        <div class="form-control md:col-span-2" id="before_club_container" style="display: none;">
+                            <label class="label" for="before_club">
+                                <span class="label-text">Club Anterior</span>
+                            </label>
+                            <input type="text" 
+                                   id="before_club" 
+                                   name="before_club" 
+                                   class="input input-bordered" 
+                                   placeholder="Nombre del club anterior"
+                                   value="{{ form_data.before_club|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documentos -->
+                <div>
+                    <h3 class="text-lg font-semibold text-lime-600 border-b pb-2 mb-4 flex items-center">
+                        <i class="las la-file-upload text-xl mr-2"></i>
+                        Documentos
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="form-control">
+                            <label class="label" for="photo">
+                                <span class="label-text">Foto (fondo claro)</span>
+                            </label>
+                            <input type="file" 
+                                   id="photo" 
+                                   name="photo" 
+                                   class="file-input file-input-bordered file-input-sm w-full"
+                                   accept="image/*">
+                            <label class="label">
+                                <span class="label-text-alt">JPG, PNG (Max: 5MB)</span>
+                            </label>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label" for="id_document">
+                                <span class="label-text">Foto de Cédula</span>
+                            </label>
+                            <input type="file" 
+                                   id="id_document" 
+                                   name="id_document" 
+                                   class="file-input file-input-bordered file-input-sm w-full"
+                                   accept="image/*,application/pdf">
+                            <label class="label">
+                                <span class="label-text-alt">JPG, PNG, PDF (Max: 5MB)</span>
+                            </label>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label" for="minor_authorization">
+                                <span class="label-text">Autorización (menores)</span>
+                            </label>
+                            <input type="file" 
+                                   id="minor_authorization" 
+                                   name="minor_authorization" 
+                                   class="file-input file-input-bordered file-input-sm w-full"
+                                   accept="image/*,application/pdf">
+                            <label class="label">
+                                <span class="label-text-alt">JPG, PNG, PDF (Max: 5MB)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="flex justify-end gap-2 pt-4 border-t">
+                    <a href="{% url 'clubs:players_list' club_id=club.id %}" class="btn btn-ghost">
+                        <i class="las la-times"></i> Cancelar
+                    </a>
+                    <button type="submit" name="save_and_new" class="btn btn-outline btn-primary">
+                        <i class="las la-save"></i> Guardar y Nuevo
+                    </button>
+                    <button type="submit" name="save" class="btn btn-primary">
+                        <i class="las la-check"></i> Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Variables globales
+    let playerCheckTimeout;
+    let playerExists = false;
+    let playerData = null;
+
+    // Función para verificar si el jugador existe
+    async function checkPlayerExists(nationalId) {
+        if (!nationalId || nationalId.length < 10) {
+            document.getElementById('player-check-message').textContent = 'Se verificará si el jugador ya existe';
+            document.getElementById('player-check-message').className = 'label-text-alt text-info';
+            return;
+        }
+
+        try {
+            const response = await fetch(`{% url 'clubs:api_check_player' %}?national_id=${nationalId}`);
+            const data = await response.json();
+            
+            if (data.success && data.exists) {
+                playerExists = true;
+                playerData = data;
+                
+                // Actualizar campos del formulario con datos existentes
+                document.getElementById('first_name').value = data.player.first_name;
+                document.getElementById('last_name').value = data.player.last_name;
+                if (data.player.email) {
+                    document.getElementById('email').value = data.player.email;
+                }
+                if (data.player.birth_date) {
+                    document.getElementById('birth_date').value = data.player.birth_date;
+                }
+                
+                // Mostrar información del club actual
+                let message = `Jugador existente: ${data.player.full_name}`;
+                if (data.current_registration) {
+                    message += ` (Club actual: ${data.current_registration.club.name})`;
+                    document.getElementById('player-check-message').className = 'label-text text-lg font-semibold text-red-800';
+                } else if (data.last_registration) {
+                    message += ` (Último club: ${data.last_registration.club.name})`;
+                    document.getElementById('player-check-message').className = 'label-text text-base font-medium text-info';
+                }
+                
+                document.getElementById('player-check-message').textContent = message;
+                
+            } else {
+                playerExists = false;
+                playerData = null;
+                document.getElementById('player-check-message').textContent = 'Jugador nuevo - se creará un registro';
+                document.getElementById('player-check-message').className = 'label-text text-base font-medium text-success';
+            }
+        } catch (error) {
+            console.error('Error checking player:', error);
+            document.getElementById('player-check-message').textContent = 'ERROR: No se pudo verificar el jugador. Revise su conexión.';
+            document.getElementById('player-check-message').className = 'label-text text-lg font-bold text-error bg-error bg-opacity-10 p-2 rounded';
+        }
+    }
+
+    // Mostrar/ocultar campo de club anterior basado solo en el checkbox "have_pass"
+    function toggleBeforeClub() {
+        const havePassCheckbox = document.getElementById('have_pass');
+        const container = document.getElementById('before_club_container');
+        
+        if (havePassCheckbox && container) {
+            container.style.display = havePassCheckbox.checked ? 'block' : 'none';
+        }
+    }
+
+    // Ejecutar al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        toggleBeforeClub();
+        
+        // Agregar listener al checkbox have_pass
+        const havePassCheckbox = document.getElementById('have_pass');
+        if (havePassCheckbox) {
+            havePassCheckbox.addEventListener('change', toggleBeforeClub);
+        }
+        
+        // Agregar listener para verificar jugador
+        const nationalIdInput = document.getElementById('national_id');
+        nationalIdInput.addEventListener('input', function(e) {
+            // Limpiar timeout anterior
+            clearTimeout(playerCheckTimeout);
+            
+            // Validar solo números
+            this.value = this.value.replace(/[^0-9]/g, '');
+            
+            // Opcional: Validar longitud para cédula ecuatoriana
+            if (this.value.length > 10) {
+                this.value = this.value.slice(0, 10);
+            }
+            
+            // Verificar jugador después de 500ms de inactividad
+            playerCheckTimeout = setTimeout(() => {
+                checkPlayerExists(this.value);
+            }, 500);
+        });
+    });
+</script>
+{% endblock %}
