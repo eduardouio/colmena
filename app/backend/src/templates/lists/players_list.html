@@ -9,27 +9,36 @@
     
     <!-- Header con información del club -->
     <div class="mb-8">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div class="flex flex-col gap-4">
             <div>
-                <h1 class="text-3xl font-bold text-lime-700 flex items-center">
-                    <i class="las la-users text-4xl mr-2"></i>
+                <h1 class="text-2xl sm:text-3xl font-bold text-lime-700 flex items-center">
+                    <i class="las la-users text-3xl sm:text-4xl mr-2"></i>
                     Jugadores del Club {{ club.display_name }}
                 </h1>
-                <p class="text-gray-600 mt-2">Lista completa de jugadores organizados por temporada y categoría</p>
+                <p class="text-gray-600 mt-2 text-sm sm:text-base">Lista completa de jugadores organizados por temporada y categoría</p>
             </div>
-            <div class="flex gap-2">
-                <!-- Usar onclick para volver al club o usar la URL del home por ahora -->
-                <a href="{% url 'home' %}" class="btn btn-outline btn-primary">
-                    <i class="las la-arrow-left"></i> Volver al Club
+            
+            <!-- Botones responsivos -->
+            <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                <a href="{% url 'home' %}" class="btn btn-outline btn-primary btn-sm sm:btn-md w-full sm:w-auto">
+                    <i class="las la-arrow-left"></i> 
+                    <span class="hidden sm:inline">Volver al Club</span>
+                    <span class="sm:hidden">Volver</span>
                 </a>
-                <button class="btn btn-success" onclick="exportToExcel()">
-                    <i class="las la-file-excel"></i> Exportar Excel
+                <button class="btn btn-success btn-sm sm:btn-md w-full sm:w-auto" onclick="exportToExcel()">
+                    <i class="las la-file-excel"></i> 
+                    <span class="hidden sm:inline">Exportar Excel</span>
+                    <span class="sm:hidden">Excel</span>
                 </button>
-                <button class="btn btn-error" onclick="exportToPDF()">
-                    <i class="las la-file-pdf"></i> Exportar PDF
+                <button class="btn btn-error btn-sm sm:btn-md w-full sm:w-auto" onclick="exportToPDF()">
+                    <i class="las la-file-pdf"></i> 
+                    <span class="hidden sm:inline">Exportar PDF</span>
+                    <span class="sm:hidden">PDF</span>
                 </button>
-                <button class="btn btn-primary">
-                    <i class="las la-user-plus"></i> Inscribir Jugador
+                <button class="btn btn-primary btn-sm sm:btn-md w-full sm:w-auto">
+                    <i class="las la-user-plus"></i> 
+                    <span class="hidden sm:inline">Inscribir Jugador</span>
+                    <span class="sm:hidden">Inscribir</span>
                 </button>
             </div>
         </div>
