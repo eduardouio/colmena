@@ -8,7 +8,6 @@ mapfile -t deleted_py < <(find "$BASE_DIR" -type f -path "*/migrations/*.py" ! -
 
 mapfile -t deleted_pyc < <(find "$BASE_DIR" -type f -path "*/migrations/*.pyc" -print -delete)
 
-mapfile -t deleted_db < <(find "$BASE_DIR" -type f -name "db.sqlite3" -print -delete)
 
 total=$(( ${#deleted_py[@]} + ${#deleted_pyc[@]} + ${#deleted_db[@]} ))
 

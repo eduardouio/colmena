@@ -41,10 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'accounts',
-    'clubs',
-    'players',
-    'register',
-    'seasons',
+    'clubs'
 ]
 
 MIDDLEWARE = [  

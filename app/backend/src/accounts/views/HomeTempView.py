@@ -1,6 +1,8 @@
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from common.LoggerApp import log_info
+from clubs.models import Club
+from django.utils import timezone
 
 
 class HomeTempView(LoginRequiredMixin, TemplateView):
@@ -16,5 +18,42 @@ class HomeTempView(LoginRequiredMixin, TemplateView):
         )
         
         context = super().get_context_data(**kwargs)
-        context['title'] = "Bienvenido a Base Sistema"
+        
+        # Obtener el club del usuario actual (ajusta según tu lógica de autenticación)
+        try:
+            club = Club.objects.first()  # Obtener el club correspondiente al usuario
+        except Club.DoesNotExist:
+            club = None
+        
+        # Obtener campeonatos activos (fecha actual entre start_date y end_date)
+        today = timezone.now().date()
+        championships = Season.objects.filter(
+            start_date__lte=today,
+            end_date__gte=today
+        ).order_by('start_date')[:3]  # Limitar a 3 campeonatos
+        
+        # Obtener jugadores del club (ajusta según tu modelo de relación)
+        players = Player.objects.all()[:5]  # Limitar a 5 jugadores
+        
+        # Agregar datos al contexto
+        context.update({
+            'title': f"Bienvenido a {club.name if club else 'tu club'}",
+            'club': club,
+            'championships': [{
+                'id': champ.id,
+                'name': champ.name,
+                'start_date': champ.start_date,
+                'end_date': champ.end_date,
+                'team_count': 8  # Valor de ejemplo, ajusta según tu modelo
+            } for champ in championships],
+            'players': [{
+                'id': player.id,
+                'first_name': player.first_name,
+                'last_name': player.last_name,
+                'national_id': player.national_id,
+                'age': 25,  # Calcular la edad a partir de la fecha de nacimiento
+                'position': 'Delantero'  # Ajusta según tu modelo
+            } for player in players]
+        })
+        
         return context
