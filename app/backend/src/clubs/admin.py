@@ -4,7 +4,7 @@ from .models.Club import Club
 from .models.Categorie import Categorie
 from .models.Player import Player
 from .models.Season import Season
-from .models.RegisterModel import Register
+from .models.Register import Register
 
 
 class BaseModelAdmin(admin.ModelAdmin):
