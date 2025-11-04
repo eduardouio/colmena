@@ -33,11 +33,11 @@ class Command(BaseCommand):
 	help = 'Load players from a CSV file'
 
 	def handle(self,*args,**options):
-		file = open('common/data/female_categorie.csv','r')
+		file = open('common/data/male_categorie.csv','r')
 		lines = file.readlines()
 		lines = [i.strip().split(',') for i in lines]
 
-		season = Season.objects.get(name='Temporada FEMENINO 2024')
+		season = Season.objects.get(name='Temporada SENIOR 2024')
 
 		for i,line in zip(range(len(lines[1:])),lines[1:]):
 			new_player = Player.get_by_national_id(line[1])
@@ -65,6 +65,6 @@ class Command(BaseCommand):
 			print(sql)
 			with connection.cursor() as cursor:
 				cursor.execute(sql)
-				print(f'R{i} Registro de jugadora {new_player.full_name} {new_player.national_id} en club {club.name} insertado.')
+				print(f'R{i} Registro de jugador {new_player.full_name} {new_player.national_id} en club {club.name} insertado.')
 		file.close()
 		

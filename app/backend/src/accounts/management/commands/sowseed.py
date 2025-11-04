@@ -26,9 +26,9 @@ SAN CARLOS,sanCarlos@colmenaec.com
 VALLADOLID,valladolid@colmenaec.com
 VODARS,vodars@colmenaec.com
 ARSENAL,arsenal@colmenaec.com
-ATLTICO A,atlticoA@colmenaec.com
-ATLTICO MADRID,atlticoMadrid@colmenaec.com
-ATLTICO PHARMA,atlticoPharma@colmenaec.com
+ATLETICO A,atlticoA@colmenaec.com
+ATLETICO MADRID,atlticoMadrid@colmenaec.com
+ATLETICO PHARMA,atlticoPharma@colmenaec.com
 BARON ROJO,baronRojo@colmenaec.com
 CATOLICA JUVENIL,catOlicajuvenil@colmenaec.com
 CRUCEIRO,cruceiro@colmenaec.com
@@ -41,7 +41,7 @@ LIVERPOOL,liverpool@colmenaec.com
 LIBERTAD F.C,libertadFC@colmenaec.com
 MAFICK F.C,mafickFC@colmenaec.com
 METALES,metales@colmenaec.com
-MXICO,mexico@colmenaec.com
+MEXICO,mexico@colmenaec.com
 MILAN,milAn@colmenaec.com
 MINERVEN,minerven@colmenaec.com
 NUEVA ALIANZA,nuevaAlianza@colmenaec.com
@@ -76,7 +76,6 @@ class Command(BaseCommand):
         self.create_categories()
         self.create_club_categories()
         self.create_seasons()
-        self.create_players()
 
     def createUsers(self):
         all_users = CustomUserModel.objects.all()
