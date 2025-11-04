@@ -59,16 +59,15 @@ class PlayerCreateView(LoginRequiredMixin, View):
             elif player_age < category.min_age:
                 errors.append(f'El jugador debe tener al menos {category.min_age} años para la categoría {category.name}')
         
-        # Determinar si es juvenil
-        is_youth = False
-        if category.name in ['SENIOR', 'FEMENINO'] and player_age and player_age < 18:
-            is_youth = True
+        # Determinar si es juvenil usando el método de la categoría
+        is_youth = category.is_youth_player(player_age)
         
         # Validar rango de números
         if is_youth:
             if number < category.min_number_youth_player or number > category.max_number_youth_player:
                 errors.append(f'Jugadores juveniles deben usar números entre {category.min_number_youth_player} y {category.max_number_youth_player}')
-            if not minor_authorization:
+            # Solo requerir autorización para menores de 18 años
+            if player_age and player_age < 18 and not minor_authorization:
                 errors.append('La autorización de menor es obligatoria para jugadores menores de 18 años')
         else:
             if number < category.min_number_player or number > category.max_number_player:
@@ -205,7 +204,8 @@ class PlayerCreateView(LoginRequiredMixin, View):
                             if today.month < birth_date_obj.month or \
                                (today.month == birth_date_obj.month and today.day < birth_date_obj.day):
                                 age -= 1
-                            if age < 18:
+                            # Usar el método de la categoría para determinar si es juvenil
+                            if season.categorie.is_youth_player(age):
                                 youth_count += 1
                     
                     if youth_count >= season.categorie.max_youth_player:

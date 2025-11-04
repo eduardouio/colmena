@@ -103,10 +103,8 @@ class Register(BaseModel):
         if category.min_age and player_age and player_age < category.min_age:
             raise ValidationError(f'El jugador debe tener al menos {category.min_age} años para esta categoría')
         
-        # Determinar si es juvenil (menor de 18 años para SENIOR y FEMENINO)
-        is_youth = False
-        if category.name in ['SENIOR', 'FEMENINO'] and player_age and player_age < 18:
-            is_youth = True
+        # Determinar si es juvenil usando el método de la categoría
+        is_youth = category.is_youth_player(player_age)
         
         # Validar rango de números según edad
         if is_youth:
@@ -114,9 +112,9 @@ class Register(BaseModel):
                 raise ValidationError(
                     f'Los jugadores juveniles deben usar números entre {category.min_number_youth_player} y {category.max_number_youth_player}'
                 )
-            # Verificar autorización para menores
-            if not self.minor_authorization:
-                raise ValidationError('La autorización de menor es obligatoria para jugadores juveniles')
+            # Verificar autorización para menores (solo para menores de 18)
+            if player_age and player_age < 18 and not self.minor_authorization:
+                raise ValidationError('La autorización de menor es obligatoria para jugadores menores de 18 años')
         else:
             if self.number < category.min_number_player or self.number > category.max_number_player:
                 raise ValidationError(
@@ -136,13 +134,14 @@ class Register(BaseModel):
         # Contar jugadores juveniles si aplica
         if is_youth:
             youth_players = 0
+            today = date.today()
             for reg in Register.objects.filter(season=self.season, club=self.club, status='APROBADO').exclude(pk=self.pk):
                 if reg.player.birth_date:
                     reg_age = today.year - reg.player.birth_date.year
                     if today.month < reg.player.birth_date.month or \
                        (today.month == reg.player.birth_date.month and today.day < reg.player.birth_date.day):
                         reg_age -= 1
-                    if reg_age < 18:
+                    if category.is_youth_player(reg_age):
                         youth_players += 1
             
             if youth_players >= category.max_youth_player:

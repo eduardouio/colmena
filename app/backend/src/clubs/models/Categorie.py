@@ -36,6 +36,21 @@ class Categorie(BaseModel):
         blank=True,
         help_text='Edad mínima para esta categoría (opcional)'
     )
+    
+    # Nuevos campos para definir el rango de edad juvenil
+    youth_min_age = models.PositiveIntegerField(
+        'edad mínima juvenil',
+        null=True,
+        blank=True,
+        help_text='Edad mínima para ser considerado juvenil en esta categoría'
+    )
+    youth_max_age = models.PositiveIntegerField(
+        'edad máxima juvenil',
+        null=True,
+        blank=True,
+        help_text='Edad máxima para ser considerado juvenil en esta categoría'
+    )
+    
     max_players = models.PositiveIntegerField(
         'maximo de jugadores',
         default=20,
@@ -74,3 +89,22 @@ class Categorie(BaseModel):
     
     def __str__(self):
         return self.name
+    
+    def is_youth_player(self, player_age):
+        """Determina si un jugador es juvenil según las reglas de la categoría."""
+        if player_age is None:
+            return False
+            
+        # Para SENIOR y FEMENINO: juvenil es menor de 18
+        if self.name in ['SENIOR', 'FEMENINO']:
+            return player_age < 18
+        
+        # Para MASTER: juvenil es entre 38-39 años
+        if self.name == 'MASTER':
+            return 38 <= player_age <= 39
+            
+        # Si hay rangos específicos definidos, usarlos
+        if self.youth_min_age is not None and self.youth_max_age is not None:
+            return self.youth_min_age <= player_age <= self.youth_max_age
+            
+        return False
