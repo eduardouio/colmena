@@ -179,6 +179,7 @@
                             <thead>
                                 <tr class="bg-lime-50">
                                     <th class="w-12">#</th>
+                                    <th class="w-16">Foto</th>
                                     <th>Camiseta</th>
                                     <th>F. Registro</th>
                                     <th>Nombres</th>
@@ -195,7 +196,24 @@
                                 {% for player in season_data.players %}
                                 <tr class="hover player-row" data-player-name="{{ player.full_name|lower }}" data-player-id="{{ player.national_id }}">
                                     <td>{{ forloop.counter }}</td>
-                                    <td class="text-end"><span class="border rounded-full p-1 border-lime-400">{{ player.jersey_number|default:"--" }}</span></td>
+                                    <td>
+                                        <div class="avatar">
+                                            <div class="w-10 h-10 rounded-full ring ring-lime-400 ring-offset-base-100 ring-offset-1 overflow-hidden">
+                                                {% if player.photo %}
+                                                    <img src="{{ player.photo }}" alt="{{ player.full_name }}" class="w-full h-full object-cover" loading="lazy" />
+                                                {% else %}
+                                                    <div class="bg-lime-100 text-lime-700 flex items-center justify-center w-full h-full">
+                                                        <i class="las la-user text-lg"></i>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="inline-flex items-center justify-center w-8 h-8 border-2 rounded-full border-lime-400 text-sm font-medium">
+                                            {{ player.jersey_number|default:"--" }}
+                                        </span>
+                                    </td>
                                     <td>
                                         {% if player.registration_date %}
                                             {{ player.registration_date|date:"d/m/Y" }}
@@ -253,7 +271,7 @@
                                 </tr>
                                 {% empty %}
                                 <tr>
-                                    <td colspan="11" class="text-center py-8">
+                                    <td colspan="12" class="text-center py-8">
                                         <i class="las la-users-slash text-4xl text-gray-400"></i>
                                         <p class="text-gray-500 mt-2">No hay jugadores registrados en esta temporada/categoría</p>
                                     </td>
@@ -383,10 +401,11 @@
             ['Fin:', '{{ season_data.season.end_date|date:"d/m/Y" }}'],
             ['Total Jugadores:', '{{ season_data.total_players }}'],
             [''],
-            ['N°', 'Camiseta', 'F. Registro', 'Nombres', 'Apellidos', 'Cédula', 'Fecha Nacimiento', 'Edad', 'Tipo', 'Estado'],
+            ['N°', 'Foto', 'Camiseta', 'F. Registro', 'Nombres', 'Apellidos', 'Cédula', 'Fecha Nacimiento', 'Edad', 'Tipo', 'Estado'],
             {% for player in season_data.players %}
             [
                 {{ forloop.counter }},
+                '{% if player.photo %}Sí{% else %}No{% endif %}',
                 '{{ player.jersey_number|default:"--" }}',
                 '{% if player.registration_date %}{{ player.registration_date|date:"d/m/Y" }}{% else %}--{% endif %}',
                 '{{ player.first_name }}',
@@ -414,6 +433,7 @@
         // Configurar anchos de columna
         ws['!cols'] = [
             { wch: 5 },  // N°
+            { wch: 8 },  // Foto
             { wch: 10 }, // Camiseta
             { wch: 12 }, // F. Registro
             { wch: 20 }, // Nombres
