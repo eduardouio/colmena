@@ -1,4 +1,6 @@
+from datetime import date
 from django.db import models
+from django.utils import timezone
 from .Club import Club
 from .Player import Player
 from .Categorie import Categorie
@@ -52,11 +54,9 @@ class Season(BaseModel):
         blank=True,
         related_name='scoring_achievements'
     )
+
     class Meta:
         unique_together = ('categorie', 'name')
         verbose_name = 'Temporada'
         verbose_name_plural = 'Temporadas'
         ordering = ['-start_date']
-
-    def __str__(self):
-        return self.name

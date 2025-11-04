@@ -80,6 +80,13 @@ class Club(BaseModel):
         except cls.DoesNotExist:
             return None
 
+    @classmethod
+    def get_by_user(cls, user):
+        try:
+            return cls.objects.get(users=user)
+        except cls.DoesNotExist:
+            return None
+
     class Meta:
         verbose_name = 'Club'
         verbose_name_plural = 'Clubs'
