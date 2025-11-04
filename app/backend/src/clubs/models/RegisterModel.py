@@ -3,21 +3,19 @@ from datetime import date
 from django.core.exceptions import ValidationError
 
 from common.BaseModel import BaseModel
-from players.models.PlayerModel import Player
-from clubs.models.ClubModel import Club
-from seasons.models.SeasonModel import Season
+from ..Player import Player
+from ..Club import Club
+from ..Season import Season
+
+CATEGORY_CHOICES = [
+    ('FEMENINO', 'FEMENINO'),
+    ('MASTER', 'MASTER'),
+    ('SENIOR', 'SENIOR'),
+]
 
 
 class Register(BaseModel):
     """Calificación inicial del aspirante previa a crear el jugador."""
-
-    CATEGORY_CHOICES = [
-        ('NIÑOS', 'NIÑOS'),
-        ('FEMENINO', 'FEMENINO'),
-        ('SENIOR', 'SENIOR'),
-        ('MASTER', 'MASTER'),
-    ]
-
     STATUS_CHOICES = [
         ('PENDIENTE', 'PENDIENTE'),
         ('APROBADO', 'APROBADO'),
