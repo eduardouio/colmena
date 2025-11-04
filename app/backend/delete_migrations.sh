@@ -4,13 +4,10 @@ BASE_DIR=$(pwd)
 
 echo "Buscando y eliminando archivos de migrations y base sqlite..."
 
-# Buscar y eliminar archivos .py (excluyendo __init__.py), listando lo eliminado
 mapfile -t deleted_py < <(find "$BASE_DIR" -type f -path "*/migrations/*.py" ! -name "__init__.py" -print -delete)
 
-# Buscar y eliminar archivos .pyc en migrations, listando lo eliminado
 mapfile -t deleted_pyc < <(find "$BASE_DIR" -type f -path "*/migrations/*.pyc" -print -delete)
 
-# Buscar y eliminar bases de datos sqlite llamadas db.sqlite3
 mapfile -t deleted_db < <(find "$BASE_DIR" -type f -name "db.sqlite3" -print -delete)
 
 total=$(( ${#deleted_py[@]} + ${#deleted_pyc[@]} + ${#deleted_db[@]} ))
