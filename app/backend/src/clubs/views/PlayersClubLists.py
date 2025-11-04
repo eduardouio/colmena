@@ -1,11 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
-from django.db.models import Count, Q, Prefetch
 from datetime import date
 from clubs.models.Club import Club
 from clubs.models.Season import Season
-from clubs.models.Player import Player
 from clubs.models.ClubCategorie import ClubCategorie
 from clubs.models.Register import Register
 
@@ -78,6 +76,7 @@ class PlayersClubListView(LoginRequiredMixin, ListView):
                         player.jersey_number = register.number
                         player.registration_status = register.status
                         player.is_requalification = register.is_requalification
+                        player.registration_date = register.created_at  # Fecha de registro
                         # Calcular y añadir la edad
                         player.age = self.calculate_age(player.birth_date)
                         players_data.append(player)

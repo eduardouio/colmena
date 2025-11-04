@@ -171,6 +171,7 @@
                                 <tr class="bg-lime-50">
                                     <th class="w-12">#</th>
                                     <th>Camiseta</th>
+                                    <th>F. Registro</th>
                                     <th>Nombres</th>
                                     <th>Apellidos</th>
                                     <th>Cédula</th>
@@ -186,6 +187,13 @@
                                 <tr class="hover player-row" data-player-name="{{ player.full_name|lower }}" data-player-id="{{ player.national_id }}">
                                     <td>{{ forloop.counter }}</td>
                                     <td class="text-end"><span class="border rounded-full p-1 border-lime-400">{{ player.jersey_number|default:"--" }}</span></td>
+                                    <td>
+                                        {% if player.registration_date %}
+                                            {{ player.registration_date|date:"d/m/Y" }}
+                                        {% else %}
+                                            --
+                                        {% endif %}
+                                    </td>
                                     <td class="font-medium">{{ player.first_name }}</td>
                                     <td class="font-medium">{{ player.last_name }}</td>
                                     <td>{{ player.national_id }}</td>
@@ -236,7 +244,7 @@
                                 </tr>
                                 {% empty %}
                                 <tr>
-                                    <td colspan="10" class="text-center py-8">
+                                    <td colspan="11" class="text-center py-8">
                                         <i class="las la-users-slash text-4xl text-gray-400"></i>
                                         <p class="text-gray-500 mt-2">No hay jugadores registrados en esta temporada/categoría</p>
                                     </td>
@@ -366,11 +374,12 @@
             ['Fin:', '{{ season_data.season.end_date|date:"d/m/Y" }}'],
             ['Total Jugadores:', '{{ season_data.total_players }}'],
             [''],
-            ['N°', 'Camiseta', 'Nombres', 'Apellidos', 'Cédula', 'Fecha Nacimiento', 'Edad', 'Tipo', 'Estado'],
+            ['N°', 'Camiseta', 'F. Registro', 'Nombres', 'Apellidos', 'Cédula', 'Fecha Nacimiento', 'Edad', 'Tipo', 'Estado'],
             {% for player in season_data.players %}
             [
                 {{ forloop.counter }},
                 '{{ player.jersey_number|default:"--" }}',
+                '{% if player.registration_date %}{{ player.registration_date|date:"d/m/Y" }}{% else %}--{% endif %}',
                 '{{ player.first_name }}',
                 '{{ player.last_name }}',
                 '{{ player.national_id }}',
@@ -396,7 +405,8 @@
         // Configurar anchos de columna
         ws['!cols'] = [
             { wch: 5 },  // N°
-            { wch: 10 }, // Número
+            { wch: 10 }, // Camiseta
+            { wch: 12 }, // F. Registro
             { wch: 20 }, // Nombres
             { wch: 20 }, // Apellidos
             { wch: 12 }, // Cédula
@@ -416,38 +426,38 @@
     // Función para exportar a PDF
     function exportToPDF() {
         const { jsPDF } = window.jspdf;
-        const doc = new jsPDF('portrait'); // Cambiado de 'landscape' a 'portrait'
+        const doc = new jsPDF('landscape');
 
         // Título
-        doc.setFontSize(16);
+        doc.setFontSize(18);
         doc.setTextColor(40, 40, 40);
         doc.text('LISTADO DE JUGADORES', 14, 15);
 
         // Información del club
-        doc.setFontSize(10);
+        doc.setFontSize(11);
         doc.text('Club: {{ club.name }}', 14, 23);
-        doc.text('Presidente: {{ club.president }}', 14, 28);
-        doc.text('Fecha: ' + new Date().toLocaleDateString('es-ES'), 14, 33);
+        doc.text('Presidente: {{ club.president }}', 14, 29);
+        doc.text('Fecha: ' + new Date().toLocaleDateString('es-ES'), 14, 35);
 
-        let yPosition = 40;
+        let yPosition = 45;
 
         {% for season_data in seasons_data %}
         // Verificar si necesitamos nueva página
-        if (yPosition > 250) {
+        if (yPosition > 170) {
             doc.addPage();
             yPosition = 20;
         }
 
         // Título de temporada
-        doc.setFontSize(12);
+        doc.setFontSize(14);
         doc.setTextColor(76, 175, 80);
         doc.text('{{ season_data.season.name }} - {{ season_data.categorie.name }}', 14, yPosition);
-        yPosition += 5;
+        yPosition += 6;
 
-        doc.setFontSize(8);
+        doc.setFontSize(9);
         doc.setTextColor(100, 100, 100);
         doc.text('Inicio: {{ season_data.season.start_date|date:"d/m/Y" }} | Fin: {{ season_data.season.end_date|date:"d/m/Y" }} | Total: {{ season_data.total_players }} jugadores', 14, yPosition);
-        yPosition += 6;
+        yPosition += 8;
 
         // Tabla de jugadores
         const tableData{{ forloop.counter }} = [
@@ -455,48 +465,50 @@
             [
                 '{{ forloop.counter }}',
                 '{{ player.jersey_number|default:"--" }}',
+                '{% if player.registration_date %}{{ player.registration_date|date:"d/m/Y" }}{% else %}--{% endif %}',
                 '{{ player.first_name }}',
                 '{{ player.last_name }}',
                 '{{ player.national_id }}',
                 '{% if player.birth_date %}{{ player.birth_date|date:"d/m/Y" }}{% else %}--{% endif %}',
                 '{% if player.age is not None %}{{ player.age }}{% else %}--{% endif %}',
-                '{% if player.is_requalification %}Recal.{% elif player.has_transfers %}C/Pases{% else %}S/Pases{% endif %}',
-                '{% if player.registration_status == "APROBADO" %}Apr.{% elif player.registration_status == "PENDIENTE" %}Pen.{% elif player.registration_status == "RECHAZADO" %}Rec.{% else %}--{% endif %}'
+                '{% if player.is_requalification %}Recalificación{% elif player.has_transfers %}Con pases{% else %}Sin pases{% endif %}',
+                '{% if player.registration_status == "APROBADO" %}Aprobado{% elif player.registration_status == "PENDIENTE" %}Pendiente{% elif player.registration_status == "RECHAZADO" %}Rechazado{% else %}--{% endif %}'
             ],
             {% endfor %}
         ];
 
         doc.autoTable({
             startY: yPosition,
-            head: [['N°', 'Núm', 'Nombres', 'Apellidos', 'Cédula', 'F.Nac', 'Edad', 'Tipo', 'Est.']],
+            head: [['N°', 'Cam.', 'F.Reg.', 'Nombres', 'Apellidos', 'Cédula', 'F.Nac', 'Edad', 'Tipo', 'Estado']],
             body: tableData{{ forloop.counter }},
             theme: 'striped',
             headStyles: { 
                 fillColor: [76, 175, 80], 
                 textColor: 255, 
-                fontSize: 8,
+                fontSize: 9,
                 fontStyle: 'bold'
             },
-            bodyStyles: { fontSize: 7 },
+            bodyStyles: { fontSize: 8 },
             columnStyles: {
-                0: { cellWidth: 8 },   // N°
-                1: { cellWidth: 12 },  // Número
-                2: { cellWidth: 35 },  // Nombres
-                3: { cellWidth: 35 },  // Apellidos
-                4: { cellWidth: 22 },  // Cédula
-                5: { cellWidth: 20 },  // F. Nac.
-                6: { cellWidth: 12 },  // Edad
-                7: { cellWidth: 20 },  // Tipo
-                8: { cellWidth: 14 }   // Estado
+                0: { cellWidth: 10 },  // N°
+                1: { cellWidth: 12 },  // Camiseta
+                2: { cellWidth: 20 },  // F. Registro
+                3: { cellWidth: 35 },  // Nombres
+                4: { cellWidth: 35 },  // Apellidos
+                5: { cellWidth: 24 },  // Cédula
+                6: { cellWidth: 20 },  // F. Nac.
+                7: { cellWidth: 12 },  // Edad
+                8: { cellWidth: 30 },  // Tipo
+                9: { cellWidth: 25 }   // Estado
             },
             margin: { left: 14, right: 14 },
             styles: {
                 overflow: 'linebreak',
-                cellPadding: 1.5
+                cellPadding: 2
             }
         });
 
-        yPosition = doc.lastAutoTable.finalY + 8;
+        yPosition = doc.lastAutoTable.finalY + 10;
         {% endfor %}
 
         // Pie de página
