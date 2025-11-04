@@ -21,35 +21,26 @@ class PlayersListView(LoginRequiredMixin, View):
         # Obtener todas las temporadas con sus registros de jugadores
         seasons_data = []
         seasons = Season.objects.filter(is_active=True).order_by('start_date')
-        
         for season in seasons:
-            registers = Register.objects.filter(
-                season=season, 
-                club=club
-            ).select_related('player', 'player__category')
+            registers = Register.objects.filter(season=season, club=club).select_related('player')
             
-            if not registers.exists():
-                continue
-            
-            # Agrupar registros por categoría de la temporada
-            categories_data = {}
-            category = season.categorie
-            
-            if category.id not in categories_data:
-                categories_data[category.id] = {
-                    'id': category.id,
-                    'name': category.name,
-                    'max_players': category.max_players,
-                    'min_age': category.min_age,
-                    'max_youth_player': category.max_youth_player,
-                    'min_number_player': category.min_number_player,
-                    'max_number_player': category.max_number_player,
-                    'min_number_youth_player': category.min_number_youth_player,
-                    'max_number_youth_player': category.max_number_youth_player,
-                    'players': [],
-                }
-            
+            # Agrupar registros por categoría
+            categorie_data = {}
             for register in registers:
+                category_id = register.player.category.id if register.player.category else None
+                if category_id not in categorie_data:
+                    categorie_data[category_id] = {
+                        'id': category_id,
+                        'name': register.player.category.name if register.player.category else 'Sin categoría',
+                        'max_players': register.player.category.max_players if register.player.category else 0,
+                        'min_age': register.player.category.min_age if register.player.category else 0,
+                        'max_youth_player': register.player.category.max_youth_player if register.player.category else 0,
+                        'min_number_player': register.player.category.min_number_player if register.player.category else 0,
+                        'max_number_player': register.player.category.max_number_player if register.player.category else 0,
+                        'players': [],
+                    }
+                
+                # Agregar datos del jugador
                 player_data = {
                     'full_name': register.player.full_name,
                     'first_name': register.player.first_name,
@@ -62,18 +53,17 @@ class PlayersListView(LoginRequiredMixin, View):
                     'registration_status': register.status,
                     'is_requalification': register.is_requalification,
                     'has_transfers': register.player.has_transfers,
-                    'photo': register.photo.url if register.photo else None,
+                    'photo': register.photo.url if register.photo else None,  # ← AGREGAR ESTA LÍNEA
                 }
-                categories_data[category.id]['players'].append(player_data)
+                categorie_data[category_id]['players'].append(player_data)
             
-            categories_list = list(categories_data.values())
+            # Convertir datos de categoría a lista
+            categories_list = list(categorie_data.values())
             
             seasons_data.append({
                 'season': season,
-                'categorie': category,
                 'total_players': registers.count(),
                 'categories': categories_list,
-                'players': categories_data[category.id]['players'],
             })
 
         context = {
