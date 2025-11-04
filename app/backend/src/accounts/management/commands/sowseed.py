@@ -11,10 +11,10 @@ from accounts.models.CustomUserModel import CustomUserModel
 from accounts.models.Licence import License
 
 clubs ="""BARCELONA T.L,barcelonatl@colmenaec.com
-DINAMO,dinamotl@colmenaec.com
-GENOVA,genovatl@colmenaec.com
+DINAMO,dinamo@colmenaec.com
+GENOVA,genova@colmenaec.com
 INDEPENDIENTE DE LAS CASAS,independientelascasas@colmenaec.com
-INDEPENDIENTE,independientetl@colmenaec.com
+INDEPENDIENTE,independiente@colmenaec.com
 J.L,jl@colmenaec.com
 NETHERLANDS,netherlands@colmenaec.com
 NEW GIRLS,newgirls@colmenaec.com
@@ -22,42 +22,63 @@ NEW KIDS,newkids@colmenaec.com
 NUEVA GENERACION,nuevageneracion@colmenaec.com
 MANCHESTER,manchester@colmenaec.com
 ROTTERDAM,rotterdam@colmenaec.com
-SAN CARLOS,sanCarlos@colmenaec.com
+SAN CARLOS,sancarlos@colmenaec.com
 VALLADOLID,valladolid@colmenaec.com
 VODARS,vodars@colmenaec.com
 ARSENAL,arsenal@colmenaec.com
-ATLETICO A,atlticoA@colmenaec.com
-ATLETICO MADRID,atlticoMadrid@colmenaec.com
-ATLETICO PHARMA,atlticoPharma@colmenaec.com
-BARON ROJO,baronRojo@colmenaec.com
-CATOLICA JUVENIL,catOlicajuvenil@colmenaec.com
+ATLETICO A,atleticoa@colmenaec.com
+ATLETICO MADRID,atleticomadrid@colmenaec.com
+ATLETICO PHARMA,atleticopharma@colmenaec.com
+BARON ROJO,baronrojo@colmenaec.com
+CATOLICA JUVENIL,catolicajuvenil@colmenaec.com
 CRUCEIRO,cruceiro@colmenaec.com
 CHAPECOENSE,chapecoense@colmenaec.com
 FIORENTINA,fiorentina@colmenaec.com
 GALAX,galax@colmenaec.com
-GOLDEN WARRIORS,goldenWarriors@colmenaec.com
+GOLDEN WARRIORS,goldenwarriors@colmenaec.com
 JUVENTUS,juventus@colmenaec.com
 LIVERPOOL,liverpool@colmenaec.com
-LIBERTAD F.C,libertadFC@colmenaec.com
-MAFICK F.C,mafickFC@colmenaec.com
+LIBERTAD F.C,libertadfc@colmenaec.com
+MAFICK F.C,mafickfc@colmenaec.com
 METALES,metales@colmenaec.com
 MEXICO,mexico@colmenaec.com
-MILAN,milAn@colmenaec.com
+MILAN,milan@colmenaec.com
 MINERVEN,minerven@colmenaec.com
-NUEVA ALIANZA,nuevaAlianza@colmenaec.com
-OLMEDO JR.,olmedoJR@colmenaec.com
-PELOTEROS,peloteros@colmenaec.com
+NUEVA ALIANZA,nuevaalianza@colmenaec.com
+OLMEDO JR.,olmedojr@colmenaec.com
+PELOTEROS,peloteros@colmenaec.com   
 PIBES,pibes@colmenaec.com
 P.S.G.,psg@colmenaec.com
 REDIMI 2,redimi2@colmenaec.com
-RIVER PLATE F7,riverPlateF7@colmenaec.com
-ROSARIO CENTRAL,rosarioCentral@colmenaec.com
-SPORTING C.G,sportingCG@colmenaec.com
-SOLO PANAS,soloPanas@colmenaec.com
+RIVER PLATE F7,riverplatef7@colmenaec.com
+ROSARIO CENTRAL,rosariocentral@colmenaec.com
+SPORTING C.G,sportingcg@colmenaec.com
+SOLO PANAS,solopanas@colmenaec.com
 LAZIO,lazio@colmenaec.com
 RACING,racing@colmenaec.com
-CERRO PORTEÑO,cerroPorteño@colmenaec.com
-TALLERES SAENZ,talleresSaenz@colmenaec.com
+CERRO PORTEÑO,cerroporteno@colmenaec.com
+TALLERES SAENZ,talleressaenz@colmenaec.com
+HURACAN,huracan@colmenaec.com
+ATLETICO MINEIROS,atleticomineiros@colmenaec.com
+SPORT BOYS FC,sportboysfc@colmenaec.com
+Q LEONES,qleones@colmenaec.com
+AUQUITAS,auquitas@colmenaec.com
+LA LEYENDA,laleyenda@colmenaec.com
+LIGA LDU,liga_ldu@colmenaec.com
+KOSMOS FUTBOL CLUB,kosmos_futbol_club@colmenaec.com
+BARCELONA T.L FEMENINO,barcelonatl_f@colmenaec.com
+DINAMO FEMENINO,dinamo_f@colmenaec.com
+NUEVA GENERACION FEMENINO,nuevageneracion_f@colmenaec.com
+SAN CARLOS FEMENINO,sancarlos_f@colmenaec.com
+VALLADOLID FEMENINO,valladolid_f@colmenaec.com
+VODARS FEMENINO,vodars_f@colmenaec.com
+ATLETICO A MASTER,atleticoa_m@colmenaec.com
+LIBERTAD F.C MASTER,libertadfc_m@colmenaec.com
+MINERVEN MASTER,minerven_m@colmenaec.com
+INDEPENDIENTE FEMENINO,independiente_f@colmenaec.com
+NEW KIDS FEMENINO,newkids_f@colmenaec.com
+INDEPENDIENTE MASTER,independiente_m@colmenaec.com
+NEW KIDS MASTER,newkids_m@colmenaec.com
 """
 
 user_admins = """EDUARDO,VILLOTA,eduardouio7@gmail.com
@@ -122,7 +143,7 @@ class Command(BaseCommand):
             user = CustomUserModel.objects.create_user(
                 first_name=name,
                 last_name='',
-                email=email.lower(),
+                email=email.strip().lower(),
                 password='Colmena2025*',
                 is_staff=False,
                 is_superuser=False
@@ -158,10 +179,15 @@ class Command(BaseCommand):
         for line in clubs.splitlines():
             if line.strip() == '':
                 continue
-            name, email = line.split(',')
+            name, email = [part.strip() for part in line.split(',')]
+            user = CustomUserModel.objects.filter(email=email.lower()).first()
+            if not user:
+                print(f'No se encontró usuario para el club en la línea: {line}')
+                raise Exception('Usuario no encontrado para club')
             club = Club(
                 name=name,
-                email=email
+                email=email,
+                users=user
             )
             club.save()
             print(f'Club {name} creado')
@@ -227,5 +253,4 @@ class Command(BaseCommand):
             if created:
                 season.save()
                 print(f'Temporada {season_name} creada')
-    
-    
+
