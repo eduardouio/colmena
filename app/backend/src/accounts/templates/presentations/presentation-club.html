@@ -194,6 +194,42 @@
         </div>
     </div>
 
+    <!-- Sección de Categorías -->
+    <div class="mt-16">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-lime-700 flex items-center">
+                <i class="las la-tags text-2xl mr-2"></i>
+                Nuestras Categorías
+            </h2>
+            <a href="#" class="btn btn-sm btn-outline">Ver todas</a>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for category in categories %}
+            <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
+                <div class="card-body">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="card-title text-xl text-lime-700">{{ category.name }}</h3>
+                        <div class="badge badge-secondary">{{ category.age_range }}</div>
+                    </div>
+                    <p class="text-gray-600 mb-4">{{ category.description }}</p>
+                    <div class="card-actions justify-end">
+                        <a href="#" class="btn btn-sm btn-outline">Ver equipos</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-full text-center py-8">
+                <div class="text-gray-500 mb-4">
+                    <i class="las la-tags text-5xl opacity-30"></i>
+                </div>
+                <p class="text-gray-600">No hay categorías registradas en este momento.</p>
+                <a href="#" class="btn btn-sm btn-outline mt-4">Agregar categoría</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
     <!-- Sección de Jugadores -->
     <div class="mt-16">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">

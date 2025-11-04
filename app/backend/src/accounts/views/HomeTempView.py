@@ -1,7 +1,10 @@
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from common.LoggerApp import log_info
-from clubs.models import Club
+from clubs.models.Club import Club
+from clubs.models.Player import Player
+from clubs.models.Season import Season
+from clubs.models.ClubCategorie import ClubCategorie
 from django.utils import timezone
 
 
@@ -35,6 +38,9 @@ class HomeTempView(LoginRequiredMixin, TemplateView):
         # Obtener jugadores del club (ajusta según tu modelo de relación)
         players = Player.objects.all()[:5]  # Limitar a 5 jugadores
         
+        # Obtener categorías del club
+        categories = ClubCategorie.objects.filter(club=club).select_related('categorie')[:5]  # Limitar a 5 categorías
+        
         # Agregar datos al contexto
         context.update({
             'title': f"Bienvenido a {club.name if club else 'tu club'}",
@@ -46,6 +52,12 @@ class HomeTempView(LoginRequiredMixin, TemplateView):
                 'end_date': champ.end_date,
                 'team_count': 8  # Valor de ejemplo, ajusta según tu modelo
             } for champ in championships],
+            'categories': [{
+                'id': cat.id,
+                'name': cat.categorie.name,
+                'description': cat.categorie.description or 'Sin descripción',
+                'age_range': f"{cat.categorie.min_age} - {cat.categorie.max_age} años"
+            } for cat in categories],
             'players': [{
                 'id': player.id,
                 'first_name': player.first_name,
