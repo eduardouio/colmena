@@ -58,7 +58,7 @@ class Categorie(BaseModel):
     )
     min_number_player = models.PositiveIntegerField(
         'Numero Minimo',
-        default=1,
+        default=5,
         help_text='minimo numero de camisena'
     )
     max_number_player = models.PositiveIntegerField(
@@ -71,7 +71,6 @@ class Categorie(BaseModel):
         verbose_name = 'Categoría'
         verbose_name_plural = 'Categorías'
         ordering = ['name']
-        db_table = 'categories'
     
     def __str__(self):
         return self.name
