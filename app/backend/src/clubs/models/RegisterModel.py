@@ -1,17 +1,9 @@
 from django.db import models
-from datetime import date
-from django.core.exceptions import ValidationError
-
 from common.BaseModel import BaseModel
-from ..Player import Player
-from ..Club import Club
-from ..Season import Season
+from .Season import Season
+from .Player import Player
+from .Club import Club
 
-CATEGORY_CHOICES = [
-    ('FEMENINO', 'FEMENINO'),
-    ('MASTER', 'MASTER'),
-    ('SENIOR', 'SENIOR'),
-]
 
 
 class Register(BaseModel):
@@ -21,19 +13,15 @@ class Register(BaseModel):
         ('APROBADO', 'APROBADO'),
         ('RECHAZADO', 'RECHAZADO'),
     ]
-
     season = models.ForeignKey(
         Season, 
         on_delete=models.PROTECT,
         related_name='registers'
     )
     club = models.ForeignKey(
-        Club, on_delete=models.PROTECT
-    )
-    category = models.CharField(
-        'categoría',
-        max_length=10,
-        choices=CATEGORY_CHOICES
+        Club,
+        on_delete=models.PROTECT,
+        related_name='registers'
     )
     player = models.ForeignKey(
         Player,
@@ -81,12 +69,8 @@ class Register(BaseModel):
         verbose_name = 'Registro aspirante'
         verbose_name_plural = 'Registros aspirantes'
         ordering = ['-created_at']
-        unique_together = ['season', 'club', 'category', 'player']
-        indexes = [
-            models.Index(fields=['season', 'club', 'category']),
-            models.Index(fields=['player']),
-        ]
+        unique_together = ['club_categorie', 'player']
+        
 
-    def __str__(self):  # pragma: no cover
-        return f"Register {self.pk} - {self.player.full_name if hasattr(self.player, 'full_name') else self.player_id}"
-
+    def __str__(self):
+        return f"{self.player.full_name} - {self.club_categorie.club.name} ({self.club_categorie.categorie.name})"

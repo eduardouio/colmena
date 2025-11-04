@@ -48,12 +48,12 @@ class Categorie(BaseModel):
     )
     min_number_youth_player = models.PositiveIntegerField(
         'Numero Minimo Juvenil',
-        default=12,
+        default=50,
         help_text='minimo numero de camisena juvenil'
     )
     max_number_youth_player = models.PositiveIntegerField(
         'Numero Maximo Juvenil',
-        default=12,
+        default=100,
         help_text='maximo numero de camisena juvenil'
     )
     min_number_player = models.PositiveIntegerField(
