@@ -10,7 +10,7 @@ class CustomUserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'picture', 'notes']
+        fields = ['first_name', 'last_name', 'picture', 'notes']
         widgets = {
             'first_name': forms.TextInput(attrs={
                 'class': 'input input-bordered w-full',
@@ -20,49 +20,33 @@ class CustomUserForm(forms.ModelForm):
                 'class': 'input input-bordered w-full',
                 'placeholder': 'Ingrese su apellido'
             }),
-            'email': forms.EmailInput(attrs={
-                'class': 'input input-bordered w-full',
-                'placeholder': 'Ingrese su correo electrónico'
-            }),
             'picture': forms.FileInput(attrs={
                 'class': 'file-input file-input-bordered w-full',
                 'accept': 'image/*'
             }),
             'notes': forms.Textarea(attrs={
-                'class': 'textarea textarea-bordered w-full',
+                'class': 'textarea textarea-bordered w-full bg-base-200 cursor-not-allowed',
                 'placeholder': 'Notas adicionales (opcional)',
-                'rows': 4
+                'rows': 4,
+                'readonly': True,
+                'disabled': True
             }),
         }
         labels = {
             'first_name': 'Nombre',
             'last_name': 'Apellido',
-            'email': 'Correo Electrónico',
             'picture': 'Foto de Perfil',
             'notes': 'Notas',
         }
         help_texts = {
-            'email': 'Este correo será usado para iniciar sesión.',
             'picture': 'Formatos soportados: JPG, PNG, GIF. Tamaño máximo: 5MB.',
-            'notes': 'Información adicional sobre el usuario.',
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Hacer que el email sea obligatorio
-        self.fields['email'].required = True
-
-    def clean_email(self):
-        """Validar que el email no esté siendo usado por otro usuario"""
-        email = self.cleaned_data.get('email')
-        if email:
-            # Verificar si otro usuario ya tiene este email
-            existing_user = User.objects.filter(
-                email=email).exclude(pk=self.instance.pk).first()
-            if existing_user:
-                raise ValidationError(
-                    'Este correo electrónico ya está siendo utilizado por otro usuario.')
-        return email
+        # Hacer que notes sea de solo lectura
+        self.fields['notes'].disabled = True
+        self.fields['notes'].required = False
 
     def clean_picture(self):
         """Validar el archivo de imagen"""
