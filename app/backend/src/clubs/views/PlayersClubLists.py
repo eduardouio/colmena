@@ -68,27 +68,29 @@ class PlayersClubListView(LoginRequiredMixin, ListView):
                     club=self.club
                 ).select_related('player').order_by('player__last_name', 'player__first_name')
                 
-                # Crear lista de jugadores con información adicional del registro
-                players_data = []
-                for register in registers:
-                    player = register.player
-                    # Añadir información del registro al jugador
-                    player.jersey_number = register.number
-                    player.registration_status = register.status
-                    player.is_requalification = register.is_requalification
-                    # Calcular y añadir la edad
-                    player.age = self.calculate_age(player.birth_date)
-                    players_data.append(player)
-                
-                season_data = {
-                    'season': season,
-                    'categorie': season.categorie,
-                    'club_categorie': club_categorie,
-                    'players': players_data,
-                    'total_players': len(players_data)
-                }
-                
-                seasons_data.append(season_data)
+                # Solo agregar la temporada si tiene jugadores registrados
+                if registers.exists():
+                    # Crear lista de jugadores con información adicional del registro
+                    players_data = []
+                    for register in registers:
+                        player = register.player
+                        # Añadir información del registro al jugador
+                        player.jersey_number = register.number
+                        player.registration_status = register.status
+                        player.is_requalification = register.is_requalification
+                        # Calcular y añadir la edad
+                        player.age = self.calculate_age(player.birth_date)
+                        players_data.append(player)
+                    
+                    season_data = {
+                        'season': season,
+                        'categorie': season.categorie,
+                        'club_categorie': club_categorie,
+                        'players': players_data,
+                        'total_players': len(players_data)
+                    }
+                    
+                    seasons_data.append(season_data)
         
         return seasons_data
     
