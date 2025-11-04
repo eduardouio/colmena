@@ -437,14 +437,18 @@
                         </button>
                         {% endif %}
                         
-                        <a href="#" class="btn btn-outline btn-primary btn-block justify-start">
-                            <i class="las la-edit text-xl mr-2"></i>
-                            Editar Registro
-                        </a>
-                        
-                        <a href="#" class="btn btn-outline btn-secondary btn-block justify-start">
+                        <a href="{% url 'clubs:player_sheet' register_id=register.id %}" 
+                           target="_blank"
+                           class="btn btn-outline btn-secondary btn-block justify-start">
                             <i class="las la-print text-xl mr-2"></i>
                             Imprimir Ficha
+                        </a>
+                        
+                        <a href="{% url 'clubs:player_id_card' register_id=register.id %}" 
+                           target="_blank"
+                           class="btn btn-outline btn-info btn-block justify-start">
+                            <i class="las la-id-card text-xl mr-2"></i>
+                            Ver Carnet
                         </a>
                         
                         <a href="{% url 'clubs:players_list' club_id=club.id %}" class="btn btn-outline btn-accent btn-block justify-start">

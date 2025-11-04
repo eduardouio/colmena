@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carnet de Jugador - {{ registro.nombres }} {{ registro.apellidos }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        margin: 0;
+        padding: 0;
+      }
+      .no-print { 
+        display: none !important; 
+      }
+      .print-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .carnet-wrapper {
+        page-break-inside: avoid;
+      }
+    }
+    
+    .carnet-container {
+        width: 100mm;
+        height: 150mm;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    
+    .text-with-outline {
+      text-shadow: 
+        -1px -1px 0 white,
+        1px -1px 0 white,
+        -1px 1px 0 white,
+        1px 1px 0 white,
+        0 0 3px rgba(255,255,255,0.8);
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <!-- Botones de acción (no se imprimen) -->
+  <div class="no-print text-center p-6 bg-white shadow-md mb-6">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Carnet de Jugador - Temporada {{ temporada }}</h1>
+    <div class="space-x-4">
+      <button onclick="window.print()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded">
+        🖨️ Imprimir Carnet
+      </button>
+      <button onclick="window.close()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded">
+        ❌ Cerrar
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenedor principal -->
+  <div class="print-container flex justify-center items-center p-6">
+    <div class="carnet-wrapper flex gap-4">
+      <!-- Cara frontal del carnet -->
+      <div class="carnet-container relative rounded-lg overflow-hidden shadow-xl border border-gray-300" 
+           {% if registro.categoria|lower == "femenino" %}
+           style="background-image: url('{% static 'img/background_femenino.jpg' %}');"
+           {% elif registro.categoria|lower == "master" %}
+           style="background-image: url('{% static 'img/background_master.jpg' %}');"
+           {% else %}
+           style="background-image: url('{% static 'img/background_hombres.jpg' %}');"
+           {% endif %}>
+        
+        <!-- Encabezado -->
+        <div class="h-24 bg-gradient-to-b from-blue-700/80 to-blue-600/60 p-3 flex justify-center items-center backdrop-blur-sm">
+          <div class="text-white text-center">
+            <span class="block text-xl font-bold text-with-outline">LIGA INDEPENDIENTE</span>
+            <span class="block text-2xl font-bold text-with-outline">SANTA CLARA DE SAN MILLAN</span>
+          </div>
+        </div>
+        
+        <!-- Contenido principal -->
+        <div class="relative p-4 bg-white/70 backdrop-blur-sm h-full">
+          <!-- Foto del jugador -->
+          <div class="absolute -top-12 left-1/2 transform -translate-x-1/2">
+            <img src="{{ foto_url }}" 
+                 alt="Foto {{ registro.nombres }}" 
+                 class="w-32 h-32 rounded-full border-4 border-white bg-white object-cover shadow-xl">
+          </div>
+          
+          <!-- Información del jugador -->
+          <div class="mt-24 text-center space-y-2">
+            <!-- Número grande -->
+            <h1 class="text-5xl font-black text-gray-800 text-with-outline">#{{ registro.numero_jugador }}</h1>
+            
+            <!-- Nombre completo -->
+            <h2 class="text-xl font-bold uppercase text-gray-800 text-with-outline">
+              {{ registro.nombres }}<br>{{ registro.apellidos }}
+            </h2>
+            
+            <!-- Club -->
+            <p class="text-lg text-blue-700 font-bold uppercase text-with-outline">
+              Club {{ registro.club.nombre }}
+            </p>
+            
+            <!-- Cédula -->
+            <p class="text-lg text-gray-800 text-with-outline">
+              <span class="font-semibold">CI: {{ registro.cedula }}</span>
+            </p>
+            
+            <!-- Edad -->
+            <p class="text-lg text-gray-700 text-with-outline">
+              <span class="font-semibold">{{ edad }} años</span>
+            </p>
+            
+            <!-- Categoría -->
+            <div class="mt-3 pt-3 border-t-2 border-gray-400">
+              <span class="inline-block px-4 py-2 bg-blue-600/80 text-white rounded-full font-bold text-lg">
+                CATEGORÍA {{ registro.categoria|upper }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Cara posterior del carnet -->
+      <div class="carnet-container relative rounded-lg overflow-hidden shadow-xl border border-gray-300" 
+           {% if registro.categoria|lower == "femenino" %}
+           style="background-image: url('{% static 'img/background_femenino.jpg' %}');"
+           {% elif registro.categoria|lower == "master" %}
+           style="background-image: url('{% static 'img/background_master.jpg' %}');"
+           {% else %}
+           style="background-image: url('{% static 'img/background_hombres.jpg' %}');"
+           {% endif %}>
+        
+        <!-- Encabezado posterior -->
+        <div class="h-24 bg-gradient-to-b from-blue-700/80 to-blue-600/60 p-3 flex justify-center items-center backdrop-blur-sm">
+          <div class="text-white text-center">
+            <span class="block text-xl font-bold text-with-outline">CAMPEONATO</span>
+            <span class="block text-3xl font-bold text-with-outline">{{ season_year }}</span>
+          </div>
+        </div>
+        
+        <!-- Contenido posterior -->
+        <div class="relative p-4 bg-white/70 backdrop-blur-sm h-full flex flex-col justify-between">
+          <!-- Logo de la liga -->
+          <div class="flex justify-center mt-4">
+            <img src="{{ logo_url }}" 
+                 alt="Logo Liga" 
+                 class="w-32 h-32 bg-white rounded-lg p-2 shadow-lg">
+          </div>
+          
+          <!-- Información adicional -->
+          <div class="text-center space-y-3 mt-6">
+            <div class="bg-white/90 rounded-lg p-3">
+              <h3 class="text-lg font-bold text-gray-800 mb-2">CATEGORÍA</h3>
+              <p class="text-2xl font-black text-blue-700">{{ registro.categoria|upper }}</p>
+            </div>
+            
+            <div class="border-t-2 border-gray-400 pt-3">
+              <p class="text-sm text-gray-700 font-semibold">Fundada el 08 de Enero de 1997</p>
+            </div>
+          </div>
+          
+          <!-- Pie de página -->
+          <div class="text-center mt-auto pb-4">
+            <p class="text-lg font-bold text-gray-800 text-with-outline">COMISIÓN DE CALIFICACIONES</p>
+            <p class="text-xs text-gray-600 mt-1">Documento válido para la temporada {{ temporada }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

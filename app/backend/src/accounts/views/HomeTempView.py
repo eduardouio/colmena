@@ -23,8 +23,9 @@ class HomeTempView(LoginRequiredMixin, TemplateView):
             raise Http404("Club no encontrado")
         
         # Clean club name (remove MASTER and FEMENINO)
-        club.display_name = club.name.replace('MASTER', '').replace('FEMENINO', '').strip()
+        club_display_name = club.name.replace('MASTER', '').replace('FEMENINO', '').strip()
         context['club'] = club
+        context['club_display_name'] = club_display_name
         
         # Get all club categories with related data
         club_categories = ClubCategorie.objects.filter(club=club).select_related('categorie')
