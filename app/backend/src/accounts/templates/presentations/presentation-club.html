@@ -6,231 +6,317 @@
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
-    <!-- Header with Club Name -->
-    <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold text-lime-700 mb-4">Bienvenido a {{ club.name }}</h1>
-        <p class="text-gray-600 text-lg">Gestión integral de tu club deportivo</p>
-        <div class="divider w-1/3 mx-auto"></div>
-    </div>
 
     <!-- Main Content -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Left Column - Club Info -->
-        <div class="md:col-span-2 bg-base-100 rounded-box shadow-lg p-6">
-            <h2 class="text-2xl font-semibold text-lime-700 mb-4">Información del Club</h2>
+        <div class="lg:col-span-2 bg-base-100 rounded-box shadow-lg p-6">
+            <h2 class="text-2xl font-semibold text-lime-700 mb-6 flex items-center">
+                <i class="las la-info-circle text-3xl mr-2"></i>
+                Club Deportivo {{ club.display_name }}
+            </h2>
             
-            <div class="space-y-4">
-                <div class="flex items-start">
-                    <i class="las la-user-tie text-2xl text-lime-600 mt-1 mr-3"></i>
-                    <div>
-                        <h3 class="font-semibold">Presidente</h3>
-                        <p class="text-gray-700">{{ club.president }}</p>
-                    </div>
-                </div>
-                
-                {% if club.email %}
-                <div class="flex items-start">
-                    <i class="las la-envelope text-2xl text-lime-600 mt-1 mr-3"></i>
-                    <div>
-                        <h3 class="font-semibold">Correo Electrónico</h3>
-                        <a href="mailto:{{ club.email }}" class="text-primary hover:underline">{{ club.email }}</a>
-                    </div>
-                </div>
-                {% endif %}
-                
-                {% if club.phone %}
-                <div class="flex items-start">
-                    <i class="las la-phone text-2xl text-lime-600 mt-1 mr-3"></i>
-                    <div>
-                        <h3 class="font-semibold">Teléfono</h3>
-                        <a href="tel:{{ club.phone }}" class="text-primary hover:underline">{{ club.phone }}</a>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-        
-        <!-- Right Column - Board Members -->
-        <div class="space-y-6">
-            <!-- President -->
-            <div class="card bg-base-100 shadow-lg">
-                <div class="card-body">
-                    <div class="flex items-center space-x-4">
-                        <div class="avatar placeholder">
-                            <div class="bg-lime-100 text-lime-700 rounded-full w-16">
-                                <span class="text-2xl">{{ club.president|slice:":1"|upper }}</span>
-                            </div>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Información General -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-lime-600 border-b pb-2">Información General</h3>
+                    
+                    <div class="flex items-start">
+                        <i class="las la-id-card text-2xl text-lime-600 mt-1 mr-3"></i>
                         <div>
-                            <h3 class="card-title text-lg">Presidente</h3>
+                            <h4 class="font-semibold text-sm text-gray-500">ID del Club</h4>
+                            <p class="text-gray-700">{{ club.id }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <i class="las la-futbol text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold text-sm text-gray-500">Nombre del Club</h4>
+                            <p class="text-gray-700 font-medium">{{ club.name }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <i class="las la-toggle-{{ club.is_active|yesno:'on,off' }} text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold text-sm text-gray-500">Estado</h4>
+                            <span class="badge badge-sm {{ club.is_active|yesno:'badge-success,badge-error' }}">
+                                {{ club.is_active|yesno:'Activo,Inactivo' }}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    {% if club.notes %}
+                    <div class="flex items-start">
+                        <i class="las la-sticky-note text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold text-sm text-gray-500">Notas</h4>
+                            <p class="text-gray-700 text-sm">{{ club.notes }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Directiva -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-lime-600 border-b pb-2">Directiva</h3>
+                    
+                    {% if club.president %}
+                    <div class="flex items-start">
+                        <i class="las la-user-tie text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold text-sm text-gray-500">Presidente</h4>
                             <p class="text-gray-700">{{ club.president }}</p>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Vocal A -->
-            <div class="card bg-base-100 shadow-lg">
-                <div class="card-body">
-                    <div class="flex items-center space-x-4">
-                        <div class="avatar placeholder">
-                            <div class="bg-lime-100 text-lime-700 rounded-full w-16">
-                                <span class="text-2xl">{{ club.vocal_a|slice:":1"|upper }}</span>
-                            </div>
-                        </div>
+                    {% endif %}
+                    
+                    {% if club.vocal_a %}
+                    <div class="flex items-start">
+                        <i class="las la-user text-2xl text-lime-600 mt-1 mr-3"></i>
                         <div>
-                            <h3 class="card-title text-lg">Vocal A</h3>
+                            <h4 class="font-semibold text-sm text-gray-500">Vocal A</h4>
                             <p class="text-gray-700">{{ club.vocal_a }}</p>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Vocal B -->
-            <div class="card bg-base-100 shadow-lg">
-                <div class="card-body">
-                    <div class="flex items-center space-x-4">
-                        <div class="avatar placeholder">
-                            <div class="bg-lime-100 text-lime-700 rounded-full w-16">
-                                <span class="text-2xl">{{ club.vocal_b|slice:":1"|upper }}</span>
-                            </div>
-                        </div>
+                    {% endif %}
+                    
+                    {% if club.vocal_b %}
+                    <div class="flex items-start">
+                        <i class="las la-user text-2xl text-lime-600 mt-1 mr-3"></i>
                         <div>
-                            <h3 class="card-title text-lg">Vocal B</h3>
+                            <h4 class="font-semibold text-sm text-gray-500">Vocal B</h4>
                             <p class="text-gray-700">{{ club.vocal_b }}</p>
                         </div>
                     </div>
+                    {% endif %}
+                    
+                    <h3 class="text-lg font-semibold text-lime-600 border-b pb-2 mt-6">Contacto</h3>
+                    
+                    {% if club.email %}
+                    <div class="flex items-start">
+                        <i class="las la-envelope text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold text-sm text-gray-500">Correo Electrónico</h4>
+                            <a href="mailto:{{ club.email }}" class="text-primary hover:underline break-all">{{ club.email }}</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if club.phone %}
+                    <div class="flex items-start">
+                        <i class="las la-phone text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold text-sm text-gray-500">Teléfono</h4>
+                            <a href="tel:{{ club.phone }}" class="text-primary hover:underline">{{ club.phone }}</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Aprobación y Auditoría -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-lime-600 border-b pb-2">Estado de Aprobación</h3>
+                    
+                    {% if club.reviewed_by %}
+                    <div class="flex items-start">
+                        <i class="las la-user-check text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold text-sm text-gray-500">Revisado por</h4>
+                            <p class="text-gray-700">{{ club.reviewed_by }}</p>
+                            {% if club.date_review %}
+                            <p class="text-xs text-gray-500">{{ club.date_review|date:"d/m/Y" }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if club.aproved_by %}
+                    <div class="flex items-start">
+                        <i class="las la-check-circle text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold text-sm text-gray-500">Aprobado por</h4>
+                            <p class="text-gray-700">{{ club.aproved_by }}</p>
+                            {% if club.date_approval %}
+                            <p class="text-xs text-gray-500">{{ club.date_approval|date:"d/m/Y" }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <h3 class="text-lg font-semibold text-lime-600 border-b pb-2 mt-6">Información de Auditoría</h3>
+                    
+                    <div class="flex items-start">
+                        <i class="las la-calendar-plus text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold text-sm text-gray-500">Fecha de Creación</h4>
+                            <p class="text-gray-700 text-sm">{{ club.created_at|date:"d/m/Y H:i" }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <i class="las la-calendar-check text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold text-sm text-gray-500">Última Actualización</h4>
+                            <p class="text-gray-700 text-sm">{{ club.updated_at|date:"d/m/Y H:i" }}</p>
+                        </div>
+                    </div>
+                    
+                    {% if club.id_user_created %}
+                    <div class="flex items-start">
+                        <i class="las la-user-plus text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold text-sm text-gray-500">Creado por Usuario ID</h4>
+                            <p class="text-gray-700 text-sm">{{ club.id_user_created }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if club.id_user_updated %}
+                    <div class="flex items-start">
+                        <i class="las la-user-edit text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold text-sm text-gray-500">Actualizado por Usuario ID</h4>
+                            <p class="text-gray-700 text-sm">{{ club.id_user_updated }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Additional Information -->
-    <div class="mt-12 bg-base-100 rounded-box shadow-lg p-6">
-        <h2 class="text-2xl font-semibold text-lime-700 mb-6">Información Adicional</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {% if club.aproved_by %}
-            <div class="flex items-start">
-                <i class="las la-check-circle text-2xl text-lime-600 mt-1 mr-3"></i>
-                <div>
-                    <h3 class="font-semibold">Aprobado por</h3>
-                    <p class="text-gray-700">{{ club.aproved_by }}</p>
-                </div>
-            </div>
-            {% endif %}
-            
-            {% if club.reviewed_by %}
-            <div class="flex items-start">
-                <i class="las la-user-check text-2xl text-lime-600 mt-1 mr-3"></i>
-                <div>
-                    <h3 class="font-semibold">Revisado por</h3>
-                    <p class="text-gray-700">{{ club.reviewed_by }}</p>
-                </div>
-            </div>
-            {% endif %}
-            
-            {% if club.date_review %}
-            <div class="flex items-start">
-                <i class="las la-calendar-check text-2xl text-lime-600 mt-1 mr-3"></i>
-                <div>
-                    <h3 class="font-semibold">Fecha de Revisión</h3>
-                    <p class="text-gray-700">{{ club.date_review|date:"d/m/Y" }}</p>
-                </div>
-            </div>
-            {% endif %}
-            
-            {% if club.date_approval %}
-            <div class="flex items-start">
-                <i class="las la-calendar-check text-2xl text-lime-600 mt-1 mr-3"></i>
-                <div>
-                    <h3 class="font-semibold">Fecha de Aprobación</h3>
-                    <p class="text-gray-700">{{ club.date_approval|date:"d/m/Y" }}</p>
-                </div>
-            </div>
-            {% endif %}
-        </div>
-    </div>
-    
-    <!-- Sección de Campeonatos -->
-    <div class="mt-16">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-lime-700 flex items-center">
-                <i class="las la-trophy text-2xl mr-2"></i>
-                Campeonatos Activos
-            </h2>
-            <a href="#" class="btn btn-sm btn-outline">Ver todos</a>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {% for championship in championships %}
-            <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
+        <!-- Right Column - Statistics -->
+        <div class="space-y-6">
+            <!-- Club Stats Card -->
+            <div class="card bg-gradient-to-br from-lime-50 to-lime-100 shadow-lg">
                 <div class="card-body">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="card-title text-xl text-lime-700">{{ championship.name }}</h3>
-                        <div class="badge badge-primary">Activo</div>
+                    <h3 class="card-title text-lime-700 mb-4">
+                        <i class="las la-chart-bar text-2xl"></i>
+                        Resumen del Club
+                    </h3>
+                    
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-white rounded-lg">
+                            <div class="flex items-center">
+                                <i class="las la-calendar text-2xl text-lime-600 mr-2"></i>
+                                <span class="text-sm font-medium">Temporadas</span>
+                            </div>
+                            <span class="badge badge-lg badge-primary">{{ seasons|length }}</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center p-3 bg-white rounded-lg">
+                            <div class="flex items-center">
+                                <i class="las la-layer-group text-2xl text-lime-600 mr-2"></i>
+                                <span class="text-sm font-medium">Categorías</span>
+                            </div>
+                            <span class="badge badge-lg badge-secondary">{{ total_categories }}</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center p-3 bg-white rounded-lg">
+                            <div class="flex items-center">
+                                <i class="las la-users text-2xl text-lime-600 mr-2"></i>
+                                <span class="text-sm font-medium">Jugadores Activos</span>
+                            </div>
+                            <span class="badge badge-lg badge-accent">{{ total_players }}</span>
+                        </div>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="card bg-base-100 shadow-lg">
+                <div class="card-body">
+                    <h3 class="card-title text-lime-700 mb-4">
+                        <i class="las la-bolt text-2xl"></i>
+                        Acciones Rápidas
+                    </h3>
+                    
                     <div class="space-y-2">
-                        <div class="flex items-center">
-                            <i class="las la-calendar-alt text-lime-600 mr-2"></i>
-                            <span>{{ championship.start_date|date:"d/m/Y" }} - {{ championship.end_date|date:"d/m/Y" }}</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="las la-users text-lime-600 mr-2"></i>
-                            <span>{{ championship.team_count }} equipos participantes</span>
-                        </div>
-                    </div>
-                    <div class="card-actions justify-end mt-4">
-                        <a href="#" class="btn btn-sm btn-outline btn-primary">Ver detalles</a>
+                        <a href="#" class="btn btn-outline btn-primary btn-block justify-start">
+                            <i class="las la-user-plus text-xl mr-2"></i>
+                            Inscribir Jugador
+                        </a>
+                        <a href="#" class="btn btn-outline btn-secondary btn-block justify-start">
+                            <i class="las la-list text-xl mr-2"></i>
+                            Ver Jugadores
+                        </a>
+                        <a href="#" class="btn btn-outline btn-accent btn-block justify-start">
+                            <i class="las la-file-alt text-xl mr-2"></i>
+                            Reportes
+                        </a>
                     </div>
                 </div>
             </div>
-            {% empty %}
-            <div class="col-span-full text-center py-8">
-                <div class="text-gray-500 mb-4">
-                    <i class="las la-trophy text-5xl opacity-30"></i>
-                </div>
-                <p class="text-gray-600">No hay campeonatos activos en este momento.</p>
-                <a href="#" class="btn btn-sm btn-outline mt-4">Ver todos los campeonatos</a>
-            </div>
-            {% endfor %}
         </div>
     </div>
 
-    <!-- Sección de Categorías -->
+    <!-- Sección de Temporadas y Categorías -->
     <div class="mt-16">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-lime-700 flex items-center">
-                <i class="las la-tags text-2xl mr-2"></i>
-                Nuestras Categorías
-            </h2>
-            <a href="#" class="btn btn-sm btn-outline">Ver todas</a>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {% for category in categories %}
-            <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-                <div class="card-body">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="card-title text-xl text-lime-700">{{ category.name }}</h3>
-                        <div class="badge badge-secondary">{{ category.age_range }}</div>
+        <h2 class="text-2xl font-bold text-lime-700 flex items-center mb-6">
+            <i class="las la-calendar-alt text-2xl mr-2"></i>
+            Temporadas del Club
+        </h2>
+        {% if seasons %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for season in seasons %}
+                    {% for category in season.categories %}
+                    <div class="card bg-base-100 shadow hover:shadow-md transition-shadow">
+                        <div class="card-body p-4">
+                            <!-- Nombre de la temporada -->
+                            <div class="badge badge-outline badge-sm mb-2">{{ season.name }}</div>
+                            
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="card-title text-lg">{{ category.name }}</h4>
+                                <span class="badge badge-sm">{{ category.age_range }}</span>
+                            </div>
+                            
+                            {% if category.description %}
+                            <p class="text-sm text-gray-600 mb-3">{{ category.description }}</p>
+                            {% endif %}
+                            
+                            <div class="space-y-1.5 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Jugadores:</span>
+                                    <span class="font-medium">{{ category.registered_players }}</span>
+                                </div>
+                                
+                                {% if category.max_players is not none %}
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Cupos:</span>
+                                    <span class="font-medium {% if category.is_full %}text-error{% else %}text-success{% endif %}">
+                                        {{ category.available_slots }} / {{ category.max_players }}
+                                    </span>
+                                </div>
+                                {% else %}
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Cupos:</span>
+                                    <span class="font-medium text-success">Ilimitados</span>
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mt-3 pt-2 border-t border-gray-100">
+                                <div class="flex justify-between items-center">
+                                    <a href="#" class="btn btn-xs btn-ghost">Ver jugadores</a>
+                                    {% if not category.is_full %}
+                                    <a href="#" class="btn btn-xs btn-primary">Inscribir</a>
+                                    {% else %}
+                                    <span class="text-xs text-error">Cupo lleno</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p class="text-gray-600 mb-4">{{ category.description }}</p>
-                    <div class="card-actions justify-end">
-                        <a href="#" class="btn btn-sm btn-outline">Ver equipos</a>
-                    </div>
-                </div>
+                    {% endfor %}
+                {% endfor %}
             </div>
-            {% empty %}
-            <div class="col-span-full text-center py-8">
-                <div class="text-gray-500 mb-4">
-                    <i class="las la-tags text-5xl opacity-30"></i>
-                </div>
-                <p class="text-gray-600">No hay categorías registradas en este momento.</p>
-                <a href="#" class="btn btn-sm btn-outline mt-4">Agregar categoría</a>
+        {% else %}
+            <div class="text-center py-8 bg-base-200 rounded-lg">
+                <i class="las la-calendar-times text-4xl text-gray-400 mb-3"></i>
+                <p class="text-gray-600">No hay temporadas registradas para este club.</p>
             </div>
-            {% endfor %}
-        </div>
+        {% endif %}
     </div>
 
 </div>
