@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'common.LicenseValidationMiddleware.LicenseValidationMiddleware',
+    #'common.LicenseValidationMiddleware.LicenseValidationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'common.LoggingMiddleware.LoggingMiddleware',  # Sistema de logs automático
