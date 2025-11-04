@@ -4,7 +4,7 @@ from common.LoggerApp import log_info
 
 
 class HomeTempView(LoginRequiredMixin, TemplateView):
-    template_name = "pages/home.html"
+    template_name = "presentations/presentation-club.html"
 
     def get_context_data(self, **kwargs):
         log_info(
