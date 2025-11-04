@@ -8,6 +8,6 @@ pip install -r requeriments.txt
 
 ./manage.py makemigrations accounts clubs
 ./manage.py migrate
-./manage.py createsuperuser --email eduardouio7@gmail.com
+./manage.py sowseed
 ./manage.py runserver
 ```
