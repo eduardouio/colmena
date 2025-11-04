@@ -149,8 +149,6 @@ app/backend/src/config/secrets.py
 src/**/migrations/*
 app/backend/src/accounts/migrations/0001_initial.py
 app/backend/src/clubs/migrations/0001_initial.py
-app/backend/src/players/migrations/0001_initial.py
-app/backend/src/register/migrations/0001_initial.py
-app/backend/src/seasons/migrations/0001_initial.py
 
 */migrations/*
+app/backend/src/clubs/migrations/
