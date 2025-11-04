@@ -29,6 +29,23 @@
                     </div>
                 {% endif %}
 
+                <!-- DEBUG: Mostrar todos los errores del formulario -->
+                {% if form.errors %}
+                    <div class="alert alert-warning">
+                        <i class="las la-exclamation-triangle"></i>
+                        <div>
+                            <p class="font-bold">Errores detectados:</p>
+                            <ul class="list-disc list-inside mt-2">
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li>{{ field }}: {{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+
                 <!-- Información Personal -->
                 <div class="space-y-4">
                     <h3 class="text-lg font-semibold flex items-center gap-2">
@@ -72,20 +89,15 @@
                     <div class="form-control">
                         <label for="{{ form.email.id_for_label }}" class="label">
                             <span class="label-text font-medium">{{ form.email.label }} *</span>
+                            <span class="label-text-alt text-warning">
+                                <i class="las la-lock"></i>
+                                No modificable
+                            </span>
                         </label>
-                        {{ form.email }}
-                        {% if form.email.help_text %}
-                            <label class="label">
-                                <span class="label-text-alt">{{ form.email.help_text }}</span>
-                            </label>
-                        {% endif %}
-                        {% if form.email.errors %}
-                            <label class="label">
-                                <span class="label-text-alt text-error">
-                                    {% for error in form.email.errors %}{{ error }}{% endfor %}
-                                </span>
-                            </label>
-                        {% endif %}
+                        <input type="email" value="{{ user.email }}" class="input input-bordered bg-base-200 cursor-not-allowed" disabled readonly />
+                        <label class="label">
+                            <span class="label-text-alt">El correo electrónico es tu cuenta de usuario y no se puede modificar</span>
+                        </label>
                     </div>
                 </div>
 
@@ -116,12 +128,16 @@
                         <label for="{{ form.picture.id_for_label }}" class="label">
                             <span class="label-text font-medium">{{ form.picture.label }}</span>
                         </label>
-                        {{ form.picture }}
-                        {% if form.picture.help_text %}
-                            <label class="label">
-                                <span class="label-text-alt">{{ form.picture.help_text }}</span>
-                            </label>
-                        {% endif %}
+                        <input 
+                            type="file" 
+                            name="picture" 
+                            id="{{ form.picture.id_for_label }}"
+                            accept="image/jpeg,image/png,image/gif"
+                            class="file-input file-input-bordered w-full"
+                        />
+                        <label class="label">
+                            <span class="label-text-alt">Formatos soportados: JPG, PNG, GIF. Tamaño máximo: 5MB.</span>
+                        </label>
                         {% if form.picture.errors %}
                             <label class="label">
                                 <span class="label-text-alt text-error">
@@ -180,9 +196,25 @@
 {{ block.super }}
 <script>
     // Preview de imagen antes de subir
-    document.getElementById('{{ form.picture.id_for_label }}').addEventListener('change', function(e) {
+    const pictureInput = document.getElementById('{{ form.picture.id_for_label }}');
+    
+    pictureInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
+            // Validar tamaño (5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('La imagen es demasiado grande. Máximo 5MB.');
+                this.value = '';
+                return;
+            }
+            
+            // Validar tipo
+            if (!file.type.match('image/(jpeg|png|gif)')) {
+                alert('Solo se permiten imágenes JPG, PNG o GIF.');
+                this.value = '';
+                return;
+            }
+            
             const reader = new FileReader();
             reader.onload = function(e) {
                 // Buscar si ya existe un preview
@@ -191,21 +223,24 @@
                     // Crear el preview
                     preview = document.createElement('div');
                     preview.id = 'image-preview';
-                    preview.className = 'mt-4 flex items-center gap-4';
-                    preview.innerHTML = `
+                    preview.className = 'mt-4 p-4 bg-base-200 rounded-lg';
+                    pictureInput.parentElement.appendChild(preview);
+                }
+                
+                preview.innerHTML = `
+                    <div class="flex items-center gap-4">
                         <div class="avatar">
                             <div class="w-20 h-20 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                <img id="preview-img" alt="Vista previa" class="rounded-full" />
+                                <img src="${e.target.result}" alt="Vista previa" />
                             </div>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-primary">Vista previa</p>
                             <p class="text-xs opacity-60">Así se verá tu nueva foto</p>
+                            <p class="text-xs opacity-60 mt-1">${file.name} (${(file.size / 1024).toFixed(2)} KB)</p>
                         </div>
-                    `;
-                    e.target.parentNode.appendChild(preview);
-                }
-                document.getElementById('preview-img').src = e.target.result;
+                    </div>
+                `;
             };
             reader.readAsDataURL(file);
         } else {
@@ -214,6 +249,15 @@
             if (preview) {
                 preview.remove();
             }
+        }
+    });
+
+    // DEBUG: Mostrar datos del formulario antes de enviar
+    document.querySelector('form').addEventListener('submit', function(e) {
+        console.log('=== DATOS DEL FORMULARIO ===');
+        const formData = new FormData(this);
+        for (let [key, value] of formData.entries()) {
+            console.log(key, ':', value);
         }
     });
 </script>
