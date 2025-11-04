@@ -9,5 +9,6 @@ pip install -r requeriments.txt
 ./manage.py makemigrations accounts clubs
 ./manage.py migrate
 ./manage.py sowseed
+./manage.py loadPlayers
 ./manage.py runserver
 ```
