@@ -68,6 +68,7 @@ class LicenseValidationMiddleware:
                   False si las licencias son inválidas
         """
         # Excluir URLs específicas
+
         if self._should_exclude_url(request.path):
             return True
 
