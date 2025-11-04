@@ -237,7 +237,8 @@
                             <i class="las la-user-plus text-xl mr-2"></i>
                             Inscribir Jugador
                         </a>
-                        <a href="#" class="btn btn-outline btn-secondary btn-block justify-start">
+                        <!-- Usar onclick para redirigir manualmente -->
+                        <a href="#" onclick="window.location.href='/clubs/club/{{ club.id }}/players/'; return false;" class="btn btn-outline btn-secondary btn-block justify-start">
                             <i class="las la-list text-xl mr-2"></i>
                             Ver Jugadores
                         </a>
@@ -324,9 +325,16 @@
 
 {% block extra_js %}
 <script>
-    // Add any custom JavaScript here if needed
     document.addEventListener('DOMContentLoaded', function() {
-        // Initialize any components or add event listeners
+        // Alternativa: usar JavaScript para manejar el clic del botón
+        const viewPlayersBtn = document.querySelector('[data-club-id]');
+        if (viewPlayersBtn) {
+            viewPlayersBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const clubId = this.dataset.clubId;
+                window.location.href = `/clubs/club/${clubId}/players/`;
+            });
+        }
     });
 </script>
 {% endblock %}

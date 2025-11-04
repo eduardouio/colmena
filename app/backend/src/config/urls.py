@@ -23,7 +23,10 @@ from accounts.views.HomeTempView import HomeTempView
 
 urlpatterns = [
     path('', HomeTempView.as_view(), name='home'),
-    path('', include('accounts.urls')),
-    path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls', namespace='accounts')),
+    path('clubs/', include('clubs.urls', namespace='clubs')),  # Agregar esta línea
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

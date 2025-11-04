@@ -1,0 +1,333 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Jugadores - {{ club.name }}{% endblock %}
+
+{% block body_extra %}data-theme="winter"{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    
+    <!-- Header con información del club -->
+    <div class="mb-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-lime-700 flex items-center">
+                    <i class="las la-users text-4xl mr-2"></i>
+                    Jugadores del Club {{ club.display_name }}
+                </h1>
+                <p class="text-gray-600 mt-2">Lista completa de jugadores organizados por temporada y categoría</p>
+            </div>
+            <div class="flex gap-2">
+                <!-- Usar onclick para volver al club o usar la URL del home por ahora -->
+                <a href="{% url 'home' %}" class="btn btn-outline btn-primary">
+                    <i class="las la-arrow-left"></i> Volver al Club
+                </a>
+                <button class="btn btn-primary">
+                    <i class="las la-user-plus"></i> Inscribir Jugador
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estadísticas generales -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div class="stats shadow bg-base-100">
+            <div class="stat">
+                <div class="stat-figure text-primary">
+                    <i class="las la-users text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Jugadores</div>
+                <div class="stat-value text-primary">{{ total_players }}</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-base-100">
+            <div class="stat">
+                <div class="stat-figure text-secondary">
+                    <i class="las la-calendar text-3xl"></i>
+                </div>
+                <div class="stat-title">Temporadas</div>
+                <div class="stat-value text-secondary">{{ total_seasons }}</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-base-100">
+            <div class="stat">
+                <div class="stat-figure text-accent">
+                    <i class="las la-layer-group text-3xl"></i>
+                </div>
+                <div class="stat-title">Categorías</div>
+                <div class="stat-value text-accent">{{ club_categories.count }}</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-base-100">
+            <div class="stat">
+                <div class="stat-figure text-success">
+                    <i class="las la-check-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Estado del Club</div>
+                <div class="stat-value text-sm">
+                    <span class="badge badge-lg {{ club.is_active|yesno:'badge-success,badge-error' }}">
+                        {{ club.is_active|yesno:'Activo,Inactivo' }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="card bg-base-100 shadow-lg mb-6">
+        <div class="card-body">
+            <div class="flex flex-wrap gap-4">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Buscar jugador</span>
+                    </label>
+                    <div class="input-group">
+                        <input type="text" id="searchPlayer" placeholder="Nombre o cédula..." class="input input-bordered" />
+                        <button class="btn btn-square">
+                            <i class="las la-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Temporada</span>
+                    </label>
+                    <select class="select select-bordered" id="seasonFilter">
+                        <option value="">Todas las temporadas</option>
+                        {% for season_data in seasons_data %}
+                        <option value="{{ season_data.season.id }}">{{ season_data.season.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Categoría</span>
+                    </label>
+                    <select class="select select-bordered" id="categoryFilter">
+                        <option value="">Todas las categorías</option>
+                        {% for club_cat in club_categories %}
+                        <option value="{{ club_cat.categorie.id }}">{{ club_cat.categorie.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de jugadores por temporada y categoría -->
+    {% if seasons_data %}
+        {% for season_data in seasons_data %}
+        <div class="mb-8 season-section" data-season="{{ season_data.season.id }}">
+            <!-- Header de temporada -->
+            <div class="flex items-center justify-between mb-4 pb-2 border-b-2 border-lime-500">
+                <div>
+                    <h2 class="text-2xl font-semibold text-lime-700 flex items-center">
+                        <i class="las la-calendar-alt text-3xl mr-2"></i>
+                        {{ season_data.season.name }}
+                    </h2>
+                    <div class="flex gap-4 mt-2 text-sm text-gray-600">
+                        <span><i class="las la-calendar-check"></i> Inicio: {{ season_data.season.start_date|date:"d/m/Y" }}</span>
+                        <span><i class="las la-calendar-times"></i> Fin: {{ season_data.season.end_date|date:"d/m/Y" }}</span>
+                        <span class="badge badge-outline badge-primary">{{ season_data.categorie.name }}</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-sm text-gray-500">Total jugadores</span>
+                    <div class="text-2xl font-bold text-lime-600">{{ season_data.total_players }}</div>
+                </div>
+            </div>
+
+            <!-- Información de la categoría -->
+            <div class="alert alert-info shadow-sm mb-4">
+                <i class="las la-info-circle text-2xl"></i>
+                <div>
+                    <h3 class="font-bold">Categoría {{ season_data.categorie.name }}</h3>
+                    <div class="text-xs grid grid-cols-2 md:grid-cols-4 gap-2 mt-2">
+                        <span>Máx. jugadores: {{ season_data.categorie.max_players }}</span>
+                        <span>Máx. juveniles: {{ season_data.categorie.max_youth_player }}</span>
+                        <span>Números: {{ season_data.categorie.min_number_player }}-{{ season_data.categorie.max_number_player }}</span>
+                        <span>Números juveniles: {{ season_data.categorie.min_number_youth_player }}-{{ season_data.categorie.max_number_youth_player }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de jugadores -->
+            <div class="card bg-base-100 shadow-xl overflow-hidden category-section" data-category="{{ season_data.categorie.id }}">
+                <div class="card-body p-0">
+                    <div class="overflow-x-auto">
+                        <table class="table table-zebra">
+                            <thead>
+                                <tr class="bg-lime-50">
+                                    <th class="w-12">#</th>
+                                    <th>Número</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Cédula</th>
+                                    <th>Fecha Nacimiento</th>
+                                    <th>Edad</th>
+                                    <th>Tipo</th>
+                                    <th>Estado</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for player in season_data.players %}
+                                <tr class="hover player-row" data-player-name="{{ player.full_name|lower }}" data-player-id="{{ player.national_id }}">
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>
+                                        <span class="badge badge-outline badge-lg">--</span>
+                                    </td>
+                                    <td class="font-medium">{{ player.first_name }}</td>
+                                    <td class="font-medium">{{ player.last_name }}</td>
+                                    <td>
+                                        <span class="font-mono">{{ player.national_id }}</span>
+                                    </td>
+                                    <td>
+                                        {% if player.birth_date %}
+                                            {{ player.birth_date|date:"d/m/Y" }}
+                                        {% else %}
+                                            <span class="text-gray-400">--</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if player.birth_date %}
+                                            <span class="badge badge-sm">-- años</span>
+                                        {% else %}
+                                            <span class="text-gray-400">--</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if player.has_transfers %}
+                                            <span class="badge badge-warning badge-sm">Con pases</span>
+                                        {% else %}
+                                            <span class="badge badge-success badge-sm">Sin pases</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-success badge-sm">Activo</span>
+                                    </td>
+                                    <td>
+                                        <div class="flex justify-center gap-1">
+                                            <button class="btn btn-ghost btn-xs" title="Ver detalles">
+                                                <i class="las la-eye text-lg"></i>
+                                            </button>
+                                            <button class="btn btn-ghost btn-xs" title="Editar">
+                                                <i class="las la-edit text-lg"></i>
+                                            </button>
+                                            <button class="btn btn-ghost btn-xs text-error" title="Eliminar">
+                                                <i class="las la-trash text-lg"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="10" class="text-center py-8">
+                                        <i class="las la-users-slash text-4xl text-gray-400"></i>
+                                        <p class="text-gray-500 mt-2">No hay jugadores registrados en esta temporada/categoría</p>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="text-center py-12 bg-base-200 rounded-lg">
+            <i class="las la-calendar-times text-6xl text-gray-400 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-600 mb-2">No hay temporadas registradas</h3>
+            <p class="text-gray-500">Este club aún no tiene temporadas con jugadores registrados.</p>
+        </div>
+    {% endif %}
+
+</div>
+
+<!-- Modal para acciones rápidas -->
+<dialog id="playerModal" class="modal">
+    <div class="modal-box">
+        <h3 class="font-bold text-lg">Detalles del Jugador</h3>
+        <div class="py-4">
+            <!-- Contenido dinámico del modal -->
+        </div>
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn">Cerrar</button>
+            </form>
+        </div>
+    </div>
+</dialog>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Búsqueda de jugadores
+        const searchInput = document.getElementById('searchPlayer');
+        const seasonFilter = document.getElementById('seasonFilter');
+        const categoryFilter = document.getElementById('categoryFilter');
+
+        function filterPlayers() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedSeason = seasonFilter.value;
+            const selectedCategory = categoryFilter.value;
+
+            // Mostrar/ocultar secciones de temporada
+            document.querySelectorAll('.season-section').forEach(section => {
+                if (!selectedSeason || section.dataset.season === selectedSeason) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+
+            // Mostrar/ocultar secciones de categoría
+            document.querySelectorAll('.category-section').forEach(section => {
+                if (!selectedCategory || section.dataset.category === selectedCategory) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+
+            // Filtrar filas de jugadores
+            document.querySelectorAll('.player-row').forEach(row => {
+                const playerName = row.dataset.playerName;
+                const playerId = row.dataset.playerId;
+                
+                if (searchTerm && !playerName.includes(searchTerm) && !playerId.includes(searchTerm)) {
+                    row.style.display = 'none';
+                } else {
+                    row.style.display = '';
+                }
+            });
+        }
+
+        searchInput?.addEventListener('input', filterPlayers);
+        seasonFilter?.addEventListener('change', filterPlayers);
+        categoryFilter?.addEventListener('change', filterPlayers);
+
+        // Calcular edad basándose en fecha de nacimiento
+        function calculateAge(birthDate) {
+            const today = new Date();
+            const birth = new Date(birthDate);
+            let age = today.getFullYear() - birth.getFullYear();
+            const monthDiff = today.getMonth() - birth.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+                age--;
+            }
+            
+            return age;
+        }
+    });
+</script>
+{% endblock %}
