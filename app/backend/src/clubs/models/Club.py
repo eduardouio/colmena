@@ -33,11 +33,15 @@ class Club(BaseModel):
     )
     vocal_a = models.CharField(
         'Vocal A',
-        max_length=100
+        max_length=100,
+        blank=True,
+        null=True
     )
     vocal_b = models.CharField(
         'Vocal B',
         max_length=100,
+        blank=True,
+        null=True
     )
     aproved_by = models.CharField(
         'aprobado por',

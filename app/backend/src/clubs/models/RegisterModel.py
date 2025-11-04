@@ -69,8 +69,8 @@ class Register(BaseModel):
         verbose_name = 'Registro aspirante'
         verbose_name_plural = 'Registros aspirantes'
         ordering = ['-created_at']
-        unique_together = ['club_categorie', 'player']
+        unique_together = ['club', 'player', 'season']
         
 
     def __str__(self):
-        return f"{self.player.full_name} - {self.club_categorie.club.name} ({self.club_categorie.categorie.name})"
+        return f"{self.player.full_name} - {self.club.name} (Temporada: {self.season.name})"

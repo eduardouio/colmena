@@ -25,7 +25,8 @@ class Player(BaseModel):
     email = models.EmailField(
         'Correo electrónico',
         max_length=100,
-        unique=True
+        blank=True,
+        null=True
     )
     birth_date = models.DateField(
         'Fecha de nacimiento',
