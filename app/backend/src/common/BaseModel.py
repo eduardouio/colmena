@@ -10,22 +10,13 @@
         is_active (Boolean): Estado del registro.
         is_deleted (Boolean): Estado de eliminación del registro.
 
-    Methods:
-        save: Guarda el registro en la base de datos, 
-              incluye el usuario creador y actualizador.
-        get_user: Obtiene el usuario creador o actualizador del registro.
-
 """
 
 
 from django.db import models
 from simple_history.models import HistoricalRecords
 from django.core.exceptions import ObjectDoesNotExist
-
-# django-crum
 from crum import get_current_user
-
-# Modelo de usuario Peronalizado
 from accounts.models.CustomUserModel import CustomUserModel
 
 
