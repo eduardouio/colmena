@@ -1,50 +1,12 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="id-player-season">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carnet de Jugador - {{ registro.nombres }} {{ registro.apellidos }}</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @media print {
-      body {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-        margin: 0;
-        padding: 0;
-      }
-      .no-print { 
-        display: none !important; 
-      }
-      .print-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-      }
-      .carnet-wrapper {
-        page-break-inside: avoid;
-      }
-    }
-    
-    .carnet-container {
-        width: 100mm;
-        height: 150mm;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-    
-    .text-with-outline {
-      text-shadow: 
-        -1px -1px 0 white,
-        1px -1px 0 white,
-        -1px 1px 0 white,
-        1px 1px 0 white,
-        0 0 3px rgba(255,255,255,0.8);
-    }
-  </style>
+  <link rel="stylesheet" href="{% static 'css/responsive-small-screens.css' %}">
 </head>
 <body class="bg-gray-100">
   <!-- Botones de acción (no se imprimen) -->
