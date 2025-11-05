@@ -105,14 +105,6 @@ class BaseModel(models.Model):
 
     @classmethod
     def get_by_id(cls, id):
-        '''Obtiene un registro por ID, omite los eliminados e inactivos.
-
-        Args:
-            id: ID del registro a buscar
-
-        Returns:
-            Instancia del modelo o False si no existe
-        '''
         try:
             return cls.objects.get(pk=id, is_active=True, is_deleted=False)
         except ObjectDoesNotExist:
@@ -120,24 +112,10 @@ class BaseModel(models.Model):
 
     @classmethod
     def get_all(cls):
-        '''Obtiene todos los registros activos y no eliminados.
-
-        Returns:
-            QuerySet con todos los registros activos
-        '''
         return cls.objects.filter(is_active=True, is_deleted=False)
 
     @classmethod
     def get_by_field(cls, field_name, value):
-        '''Obtiene registros filtrados por un campo específico.
-
-        Args:
-            field_name: Nombre del campo por el que filtrar
-            value: Valor a buscar
-
-        Returns:
-            QuerySet con los registros que coinciden
-        '''
         filter_kwargs = {
             field_name: value,
             'is_active': True,
@@ -147,58 +125,23 @@ class BaseModel(models.Model):
 
     @classmethod
     def get_deleted(cls):
-        '''Obtiene todos los registros marcados como eliminados.
-
-        Returns:
-            QuerySet con los registros eliminados
-        '''
         return cls.objects.filter(is_deleted=True)
 
     @classmethod
     def get_not_active(cls):
-        '''Obtiene todos los registros marcados como inactivos.
-
-        Returns:
-            QuerySet con los registros inactivos
-        '''
         return cls.objects.filter(is_active=False)
 
     def disable(self):
-        '''Marca el registro como inactivo.
-
-        Returns:
-            bool: True si se guardó correctamente
-        '''
         self.is_active = False
         self.save()
         return True
 
     def enable(self):
-        '''Marca el registro como activo.
-
-        Returns:
-            bool: True si se guardó correctamente
-        '''
         self.is_active = True
         self.save()
         return True
 
-    def delete(self, *args, **kwargs):
-        '''Marca el registro como eliminado (soft delete).
-
-        Returns:
-            bool: True si se guardó correctamente
-        '''
-        self.is_deleted = True
-        self.save()
-        return True
-
     def recover(self):
-        '''Marca el registro como no eliminado (recupera el registro).
-
-        Returns:
-            bool: True si se guardó correctamente
-        '''
         self.is_deleted = False
         self.save()
         return True
