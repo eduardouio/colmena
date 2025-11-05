@@ -1,8 +1,8 @@
 Instalación rápida Colmena:
 ```bash
 
-sudo systemctl daemon-reload &&
-sudo systemctl restart colmena.service &&
+sudo systemctl daemon-reload
+sudo systemctl restart colmena.service
 sudo systemctl status colmena.service 
 sudo systemctl restart nginx.service
 
@@ -14,12 +14,12 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install --upgrade pip
 pip install -r requeriments.txt
 
-./manage.py makemigrations accounts clubs &&
-./manage.py migrate &&
-./manage.py sowseed &&
-./manage.py loadPlayers &&
-./manage.py loadFemaleCategory &&
-./manage.py loadMaleCategory &&
+./manage.py makemigrations accounts clubs
+./manage.py migrate
+./manage.py sowseed
+./manage.py loadPlayers
+./manage.py loadFemaleCategory
+./manage.py loadMaleCategory
 ./manage.py runserver
 
 
