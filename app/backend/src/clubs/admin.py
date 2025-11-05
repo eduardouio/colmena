@@ -64,7 +64,7 @@ class ClubAdmin(BaseModelAdmin):
     
     fieldsets = (
         ('Información del Club', {
-            'fields': ('name', 'president', 'email', 'phone', 'address')
+            'fields': ('name', 'president', 'email', 'phone',)
         }),
         ('Vocales y Aprobación', {
             'fields': ('vocal_a', 'vocal_b', 'reviewed_by', 'date_review', 
