@@ -36,17 +36,20 @@ class Register(BaseModel):
     minor_authorization = models.FileField(
         'autorización menor',
         upload_to='autorizaciones/',
+        max_length=255,
         null=True, blank=True
     )
     photo = models.FileField(
         'foto fondo claro',
         upload_to='fotos_registro/',
+        max_length=255,
         blank=True,
         null=True
     )
     id_document = models.FileField(
         'foto cédula',
         upload_to='cedulas/',
+        max_length=255,
         blank=True,
         null=True
     )
