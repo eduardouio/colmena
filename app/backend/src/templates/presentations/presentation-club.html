@@ -233,6 +233,10 @@
                     </h3>
                     
                     <div class="space-y-2">
+                        <a href="{% url 'accounts:club_edit' %}" class="btn btn-outline btn-warning btn-block justify-start">
+                            <i class="las la-edit text-xl mr-2"></i>
+                            Editar Club
+                        </a>
                         <a href="{% url 'clubs:player_create' club_id=club.id %}" class="btn btn-outline btn-primary btn-block justify-start">
                             <i class="las la-user-plus text-xl mr-2"></i>
                             Inscribir Jugador

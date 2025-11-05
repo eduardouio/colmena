@@ -1,0 +1,145 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Editar Club - {{ club.name }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto max-w-2xl">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-lime-700 flex items-center">
+            <i class="las la-futbol text-4xl mr-3"></i>
+            Editar Club
+        </h1>
+        <p class="text-gray-600 mt-2">{{ club.name }}</p>
+    </div>
+
+    <!-- Formulario de Edición -->
+    <form method="post" class="card bg-base-100 shadow-lg">
+        {% csrf_token %}
+        <div class="card-body">
+            <!-- Presidente -->
+            <div class="form-control w-full">
+                <label class="label" for="{{ form.president.id_for_label }}">
+                    <span class="label-text font-semibold flex items-center">
+                        <i class="las la-user-tie text-lime-600 mr-2"></i>
+                        Presidente
+                    </span>
+                </label>
+                {{ form.president }}
+                {% if form.president.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            <i class="las la-exclamation-circle"></i>
+                            {% for error in form.president.errors %}{{ error }}{% endfor %}
+                        </span>
+                    </label>
+                {% endif %}
+                <label class="label">
+                    <span class="label-text-alt text-gray-500">Nombre del presidente del club</span>
+                </label>
+            </div>
+
+            <!-- Email -->
+            <div class="form-control w-full">
+                <label class="label" for="{{ form.email.id_for_label }}">
+                    <span class="label-text font-semibold flex items-center">
+                        <i class="las la-envelope text-lime-600 mr-2"></i>
+                        Email
+                    </span>
+                </label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            <i class="las la-exclamation-circle"></i>
+                            {% for error in form.email.errors %}{{ error }}{% endfor %}
+                        </span>
+                    </label>
+                {% endif %}
+                <label class="label">
+                    <span class="label-text-alt text-gray-500">Email de contacto del club</span>
+                </label>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="form-control w-full">
+                <label class="label" for="{{ form.phone.id_for_label }}">
+                    <span class="label-text font-semibold flex items-center">
+                        <i class="las la-phone text-lime-600 mr-2"></i>
+                        Teléfono
+                    </span>
+                </label>
+                {{ form.phone }}
+                {% if form.phone.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            <i class="las la-exclamation-circle"></i>
+                            {% for error in form.phone.errors %}{{ error }}{% endfor %}
+                        </span>
+                    </label>
+                {% endif %}
+                <label class="label">
+                    <span class="label-text-alt text-gray-500">Teléfono de contacto</span>
+                </label>
+            </div>
+
+            <!-- Vocal A -->
+            <div class="form-control w-full">
+                <label class="label" for="{{ form.vocal_a.id_for_label }}">
+                    <span class="label-text font-semibold flex items-center">
+                        <i class="las la-user text-lime-600 mr-2"></i>
+                        Vocal A
+                    </span>
+                </label>
+                {{ form.vocal_a }}
+                {% if form.vocal_a.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            <i class="las la-exclamation-circle"></i>
+                            {% for error in form.vocal_a.errors %}{{ error }}{% endfor %}
+                        </span>
+                    </label>
+                {% endif %}
+                <label class="label">
+                    <span class="label-text-alt text-gray-500">Nombre del Vocal A de la directiva</span>
+                </label>
+            </div>
+
+            <!-- Vocal B -->
+            <div class="form-control w-full">
+                <label class="label" for="{{ form.vocal_b.id_for_label }}">
+                    <span class="label-text font-semibold flex items-center">
+                        <i class="las la-user text-lime-600 mr-2"></i>
+                        Vocal B
+                    </span>
+                </label>
+                {{ form.vocal_b }}
+                {% if form.vocal_b.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">
+                            <i class="las la-exclamation-circle"></i>
+                            {% for error in form.vocal_b.errors %}{{ error }}{% endfor %}
+                        </span>
+                    </label>
+                {% endif %}
+                <label class="label">
+                    <span class="label-text-alt text-gray-500">Nombre del Vocal B de la directiva</span>
+                </label>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="card-actions justify-between mt-8">
+                <a href="{% url 'home' %}" class="btn btn-outline gap-2">
+                    <i class="las la-times"></i>
+                    Cancelar
+                </a>
+                <button type="submit" class="btn btn-primary gap-2">
+                    <i class="las la-save"></i>
+                    Guardar Cambios
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
