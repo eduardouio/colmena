@@ -190,10 +190,30 @@
 	</main>
 
 	{% block footer %}
-	<!-- Pie de página -->
-	<footer class="footer footer-center p-6 mt-8 bg-base-200 text-base-content/70">
-		<p class="text-sm">&copy;colmenaec soluciones@dev-7.com<span id="year"></span>
-			</p>
+	<!-- Pie de página mejorado -->
+	<footer class="footer footer-center p-4 md:p-6 mt-12 bg-gradient-to-r from-base-300 via-base-300 to-base-300 border-t border-lime-400/50 backdrop-blur-sm">
+		<div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 w-full">
+			<!-- Logo Dev-7 -->
+			<div class="flex-shrink-0 pr-4 md:pr-6 border-r border-base-content/20">
+				<a href="https://dev-7.com" target="_blank" class="hover:opacity-80 transition-opacity">
+					<img src="{% static 'img/logo.png' %}" alt="Dev-7" class="h-10 w-auto object-contain">
+				</a>
+			</div>
+			
+			<!-- Información -->
+			<div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+				<div class="flex flex-col text-left text-xs md:text-sm leading-relaxed">
+					<span class="font-semibold">&copy;dev-7.com</span>
+					<span class="opacity-70">Derechos Reservados <span id="year"></span></span>
+				</div>
+				
+				<!-- Contacto -->
+				<a href="mailto:soluciones@dev-7.com" class="text-cyan-600 hover:text-cyan-400 transition-colors text-xs md:text-sm font-medium flex items-center gap-1">
+					<i class="las la-envelope text-sm"></i>
+					soluciones@dev-7.com
+				</a>
+			</div>
+		</div>
 	</footer>
 	{% endblock footer %}
 

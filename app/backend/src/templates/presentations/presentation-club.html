@@ -10,19 +10,19 @@
     <!-- Main Content -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Left Column - Club Info -->
-        <div class="lg:col-span-2 bg-base-100 rounded-box shadow-lg p-6">
-            <h2 class="text-2xl font-semibold text-lime-700 mb-6 flex items-center">
+        <div class="lg:col-span-2 bg-base-100 rounded-box shadow-lg border p-4">
+            <h6 class=" font-semibold text-lime-700 mb-6 flex items-center">
                 <i class="las la-info-circle text-3xl mr-2"></i>
                 Club Deportivo {{ club.display_name }}
-            </h2>
+            </h6>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Información General -->
                 <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-lime-600 border-b pb-2">Información General</h3>
+                    <h3 class="font-semibold text-lime-600 border-b pb-2">Información General</h3>
                     
                     <div class="flex items-start">
-                        <i class="las la-id-card text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-id-card text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">ID del Club</h4>
                             <p class="text-gray-700">{{ club.id }}</p>
@@ -30,7 +30,7 @@
                     </div>
                     
                     <div class="flex items-start">
-                        <i class="las la-futbol text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-futbol text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">Nombre del Club</h4>
                             <p class="text-gray-700 font-medium">{{ club.name }}</p>
@@ -38,7 +38,7 @@
                     </div>
                     
                     <div class="flex items-start">
-                        <i class="las la-toggle-{{ club.is_active|yesno:'on,off' }} text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-toggle-{{ club.is_active|yesno:'on,off' }} text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">Estado</h4>
                             <span class="badge badge-sm {{ club.is_active|yesno:'badge-success,badge-error' }}">
@@ -49,7 +49,7 @@
                     
                     {% if club.notes %}
                     <div class="flex items-start">
-                        <i class="las la-sticky-note text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-sticky-note text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">Notas</h4>
                             <p class="text-gray-700 text-sm">{{ club.notes }}</p>
@@ -60,13 +60,13 @@
                 
                 <!-- Directiva -->
                 <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-lime-600 border-b pb-2">Directiva</h3>
+                    <h3 class="font-semibold text-lime-600 border-b pb-2">Directiva</h3>
                     
                     {% if club.president %}
                     <div class="flex items-start">
-                        <i class="las la-user-tie text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-user-tie text-lime-600 mt-1 mr-3"></i>
                         <div>
-                            <h4 class="font-semibold text-sm text-gray-500">Presidente</h4>
+                            <h6 class="font-semibold text-sm text-gray-500">Presidente</h6>
                             <p class="text-gray-700">{{ club.president }}</p>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                     
                     {% if club.vocal_a %}
                     <div class="flex items-start">
-                        <i class="las la-user text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-user text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">Vocal A</h4>
                             <p class="text-gray-700">{{ club.vocal_a }}</p>
@@ -84,7 +84,7 @@
                     
                     {% if club.vocal_b %}
                     <div class="flex items-start">
-                        <i class="las la-user text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-user text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">Vocal B</h4>
                             <p class="text-gray-700">{{ club.vocal_b }}</p>
@@ -92,11 +92,11 @@
                     </div>
                     {% endif %}
                     
-                    <h3 class="text-lg font-semibold text-lime-600 border-b pb-2 mt-6">Contacto</h3>
+                    <h3 class="font-semibold text-lime-600 border-b pb-2 mt-6">Contacto</h3>
                     
                     {% if club.email %}
                     <div class="flex items-start">
-                        <i class="las la-envelope text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-envelope text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">Correo Electrónico</h4>
                             <a href="mailto:{{ club.email }}" class="text-primary hover:underline break-all">{{ club.email }}</a>
@@ -106,7 +106,7 @@
                     
                     {% if club.phone %}
                     <div class="flex items-start">
-                        <i class="las la-phone text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-phone text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">Teléfono</h4>
                             <a href="tel:{{ club.phone }}" class="text-primary hover:underline">{{ club.phone }}</a>
@@ -117,11 +117,11 @@
                 
                 <!-- Aprobación y Auditoría -->
                 <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-lime-600 border-b pb-2">Estado de Aprobación</h3>
+                    <h3 class=" font-semibold text-lime-600 border-b pb-2">Estado de Aprobación</h3>
                     
                     {% if club.reviewed_by %}
                     <div class="flex items-start">
-                        <i class="las la-user-check text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-user-check text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">Revisado por</h4>
                             <p class="text-gray-700">{{ club.reviewed_by }}</p>
@@ -134,7 +134,7 @@
                     
                     {% if club.aproved_by %}
                     <div class="flex items-start">
-                        <i class="las la-check-circle text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-check-circle text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">Aprobado por</h4>
                             <p class="text-gray-700">{{ club.aproved_by }}</p>
@@ -145,10 +145,10 @@
                     </div>
                     {% endif %}
                     
-                    <h3 class="text-lg font-semibold text-lime-600 border-b pb-2 mt-6">Información de Auditoría</h3>
+                    <h3 class=" font-semibold text-lime-600 border-b pb-2 mt-6">Información de Auditoría</h3>
                     
                     <div class="flex items-start">
-                        <i class="las la-calendar-plus text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-calendar-plus text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">Fecha de Creación</h4>
                             <p class="text-gray-700 text-sm">{{ club.created_at|date:"d/m/Y H:i" }}</p>
@@ -156,7 +156,7 @@
                     </div>
                     
                     <div class="flex items-start">
-                        <i class="las la-calendar-check text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-calendar-check text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">Última Actualización</h4>
                             <p class="text-gray-700 text-sm">{{ club.updated_at|date:"d/m/Y H:i" }}</p>
@@ -165,7 +165,7 @@
                     
                     {% if club.id_user_created %}
                     <div class="flex items-start">
-                        <i class="las la-user-plus text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-user-plus text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">Creado por Usuario ID</h4>
                             <p class="text-gray-700 text-sm">{{ club.id_user_created }}</p>
@@ -175,7 +175,7 @@
                     
                     {% if club.id_user_updated %}
                     <div class="flex items-start">
-                        <i class="las la-user-edit text-2xl text-lime-600 mt-1 mr-3"></i>
+                        <i class="las la-user-edit text-lime-600 mt-1 mr-3"></i>
                         <div>
                             <h4 class="font-semibold text-sm text-gray-500">Actualizado por Usuario ID</h4>
                             <p class="text-gray-700 text-sm">{{ club.id_user_updated }}</p>
@@ -189,33 +189,33 @@
         <!-- Right Column - Statistics -->
         <div class="space-y-6">
             <!-- Club Stats Card -->
-            <div class="card bg-gradient-to-br from-lime-50 to-lime-100 shadow-lg">
-                <div class="card-body">
-                    <h3 class="card-title text-lime-700 mb-4">
-                        <i class="las la-chart-bar text-2xl"></i>
+            <div class="card bg-gradient-to-br from-lime-50 to-lime-100 shadow-lg border">
+                <div class="card-body p-4">
+                    <span class="card-title text-lime-700 mb-2">
+                        <i class="las la-chart-bar text-xl"></i>
                         Resumen del Club
-                    </h3>
+                    </span>
                     
                     <div class="space-y-3">
-                        <div class="flex justify-between items-center p-3 bg-white rounded-lg">
+                        <div class="flex justify-between items-center p-2 bg-white rounded-lg">
                             <div class="flex items-center">
-                                <i class="las la-calendar text-2xl text-lime-600 mr-2"></i>
+                                <i class="las la-calendar text-lime-600 mr-2"></i>
                                 <span class="text-sm font-medium">Temporadas</span>
                             </div>
                             <span class="badge badge-lg badge-primary">{{ seasons|length }}</span>
                         </div>
                         
-                        <div class="flex justify-between items-center p-3 bg-white rounded-lg">
+                        <div class="flex justify-between items-center p-2 bg-white rounded-lg">
                             <div class="flex items-center">
-                                <i class="las la-layer-group text-2xl text-lime-600 mr-2"></i>
+                                <i class="las la-layer-group text-lime-600 mr-2"></i>
                                 <span class="text-sm font-medium">Categorías</span>
                             </div>
                             <span class="badge badge-lg badge-secondary">{{ total_categories }}</span>
                         </div>
                         
-                        <div class="flex justify-between items-center p-3 bg-white rounded-lg">
+                        <div class="flex justify-between items-center p-2 bg-white rounded-lg">
                             <div class="flex items-center">
-                                <i class="las la-users text-2xl text-lime-600 mr-2"></i>
+                                <i class="las la-users text-lime-600 mr-2"></i>
                                 <span class="text-sm font-medium">Jugadores Activos</span>
                             </div>
                             <span class="badge badge-lg badge-accent">{{ total_players }}</span>
@@ -225,29 +225,25 @@
             </div>
             
             <!-- Quick Actions -->
-            <div class="card bg-base-100 shadow-lg">
-                <div class="card-body">
+            <div class="card bg-base-100 shadow-lg border">
+                <div class="card-body p-4">
                     <h3 class="card-title text-lime-700 mb-4">
-                        <i class="las la-bolt text-2xl"></i>
+                        <i class="las la-bolt"></i>
                         Acciones Rápidas
                     </h3>
                     
                     <div class="space-y-2">
-                        <a href="{% url 'accounts:club_edit' %}" class="btn btn-outline btn-warning btn-block justify-start">
+                        <a href="{% url 'accounts:club_edit' %}" class="btn btn-outline btn-primary btn-block justify-start bg-cyan-100">
                             <i class="las la-edit text-xl mr-2"></i>
                             Editar Club
                         </a>
-                        <a href="{% url 'clubs:player_create' club_id=club.id %}" class="btn btn-outline btn-primary btn-block justify-start">
+                        <a href="{% url 'clubs:player_create' club_id=club.id %}" class="btn btn-outline btn-primary btn-block justify-start bg-blue-100">
                             <i class="las la-user-plus text-xl mr-2"></i>
                             Inscribir Jugador
                         </a>
-                        <a href="{% url 'clubs:players_list' club_id=club.id %}" class="btn btn-outline btn-secondary btn-block justify-start">
+                        <a href="{% url 'clubs:players_list' club_id=club.id %}" class="btn btn-outline btn-secondary btn-block justify-start bg-purple-100">
                             <i class="las la-list text-xl mr-2"></i>
                             Ver Jugadores
-                        </a>
-                        <a href="#" class="btn btn-outline btn-accent btn-block justify-start">
-                            <i class="las la-file-alt text-xl mr-2"></i>
-                            Reportes
                         </a>
                     </div>
                 </div>
@@ -257,21 +253,21 @@
 
     <!-- Sección de Temporadas y Categorías -->
     <div class="mt-16">
-        <h2 class="text-2xl font-bold text-lime-700 flex items-center mb-6">
-            <i class="las la-calendar-alt text-2xl mr-2"></i>
+        <h2 class= font-bold text-lime-700 flex items-center mb-6">
+            <i class="las la-calendar-alt mr-2"></i>
             Temporadas del Club
         </h2>
         {% if seasons %}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {% for season in seasons %}
                     {% for category in season.categories %}
-                    <div class="card bg-base-100 shadow hover:shadow-md transition-shadow">
+                    <div class="card bg-base-100 shadow hover:shadow-md transition-shadow border">
                         <div class="card-body p-4">
                             <!-- Nombre de la temporada -->
-                            <div class="badge badge-outline badge-sm mb-2">{{ season.name }}</div>
+                            <div class="mb-2 text-lime-600">{{ season.name }}</div>
                             
                             <div class="flex items-center justify-between mb-2">
-                                <h4 class="card-title text-lg">{{ category.name }}</h4>
+                                <h4 class="card-title ">{{ category.name }}</h4>
                                 <span class="badge badge-sm">{{ category.age_range }}</span>
                             </div>
                             
@@ -300,7 +296,7 @@
                                 {% endif %}
                             </div>
                             
-                            <div class="mt-3 pt-2 border-t border-gray-100">
+                            <div class="mt-3 pt-2 border-t border-lime-200">
                                 <div class="flex justify-between items-center">
                                     <a href="{% url 'clubs:players_list' club_id=club.id %}?season={{ season.id }}&category={{ category.id }}" class="btn btn-xs btn-ghost">Ver jugadores</a>
                                     {% if not category.is_full %}
