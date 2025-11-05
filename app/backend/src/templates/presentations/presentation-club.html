@@ -7,6 +7,16 @@
 {% block content %}
 <div class="container mx-auto px-4 py-8">
 
+    <!-- Mensaje si no hay club registrado -->
+    {% if no_club_registered %}
+    <div class="container mt-5">
+        <h1 class="text-2xl font-bold text-center text-gray-800">No tiene un club registrado</h1>
+        <p class="text-center text-gray-600 mt-2">
+            Por favor, comuníquese con soporte en: 
+            <strong class="text-blue-600">{{ support_email }}</strong>
+        </p>
+    </div>
+    {% else %}
     <!-- Main Content -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Left Column - Club Info -->
@@ -319,5 +329,6 @@
         {% endif %}
     </div>
 
+    {% endif %}
 </div>
 {% endblock %}

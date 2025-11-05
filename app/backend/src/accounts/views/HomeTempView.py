@@ -19,13 +19,26 @@ class HomeTempView(LoginRequiredMixin, TemplateView):
         user = self.request.user
         
         club = Club.get_by_user(user)
+        
         if not club:
-            raise Http404("Club no encontrado")
+            context['club'] = None
+            context['no_club_registered'] = True
+            context['support_email'] = 'soporte@dev-7.com'
+            
+            log_info(
+                user=user,
+                url=self.request.path,
+                file_name='HomeTempView.py',
+                message="Usuario accedió a la página de inicio pero no tiene club registrado"
+            )
+            
+            return context
         
         # Clean club name (remove MASTER and FEMENINO)
         club_display_name = club.name.replace('MASTER', '').replace('FEMENINO', '').strip()
         context['club'] = club
         context['club_display_name'] = club_display_name
+        context['no_club_registered'] = False
         
         # Get all club categories with related data
         club_categories = ClubCategorie.objects.filter(club=club).select_related('categorie')
