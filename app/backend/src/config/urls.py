@@ -20,9 +20,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from accounts.views.HomeTempView import HomeTempView
+from accounts.views.LoginTempView import LoginTempView
+from accounts.views.LoguoutRedView import LogoutRedView
 
 urlpatterns = [
     path('', HomeTempView.as_view(), name='home'),
+    path('login/', LoginTempView.as_view(), name='login'),
+    path('logout/', LogoutRedView.as_view(), name='logout'),
     path('grappelli/', include('grappelli.urls')),  # grappelli URLS - debe ir ANTES del admin
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls', namespace='accounts')),
