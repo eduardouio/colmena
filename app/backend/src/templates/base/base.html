@@ -57,6 +57,41 @@
 		.logout-btn:hover {
 			background-color: hsl(var(--b2));
 		}
+
+		/* ===== RESPONSIVE DESIGN PARA PANTALLAS PEQUEÑAS ===== */
+		/* Tablets y pantallas medianas (768px) */
+		@media (max-width: 1024px) {
+			html {
+				font-size: 15px;
+			}
+		}
+
+		/* Pantallas HD 720p y debajo */
+		@media (max-width: 768px) {
+			html {
+				font-size: 14px;
+			}
+		}
+
+		/* Pantallas móviles (480px y menos) */
+		@media (max-width: 480px) {
+			html {
+				font-size: 13px;
+			}
+		}
+
+		/* Ocultar background en móviles para mejor performance */
+		@media (max-width: 768px) {
+			body {
+				background-attachment: scroll;
+			}
+		}
+
+		@media (max-width: 480px) {
+			body {
+				background-image: none;
+			}
+		}
 	</style>
 
 	{% block head_extra %}{% endblock %}
