@@ -16,7 +16,7 @@ from clubs.models.Categorie import Categorie
 class PlayerCreateView(LoginRequiredMixin, View):
     """Vista para crear/registrar un jugador en una temporada."""
     
-    def get(self, request, club_id):
+    def get(self, request, club_id):    
         """Muestra el formulario de registro de jugador."""
         club = get_object_or_404(Club, id=club_id)
         
@@ -90,7 +90,8 @@ class PlayerCreateView(LoginRequiredMixin, View):
                 national_id = request.POST.get('national_id', '').strip()
                 first_name = request.POST.get('first_name', '').strip()
                 last_name = request.POST.get('last_name', '').strip()
-                email = request.POST.get('email', '').strip() or None
+                # Usar el email del club en lugar del formulario
+                email = club.email if hasattr(club, 'email') and club.email else None
                 birth_date_str = request.POST.get('birth_date') or None
                 season_id = request.POST.get('season_id')
                 number = request.POST.get('number')
@@ -119,16 +120,6 @@ class PlayerCreateView(LoginRequiredMixin, View):
                 except (ValueError, TypeError):
                     raise ValidationError("El número de jugador debe ser un valor numérico válido")
                 
-                # Verificar número único en temporada/club
-                number_exists = Register.objects.filter(
-                    season=season,
-                    club=club,
-                    number=number
-                ).exists()
-                
-                if number_exists:
-                    raise ValidationError(f"El número {number} ya está asignado a otro jugador en esta temporada")
-                
                 # Verificar si el jugador ya existe
                 player = Player.get_by_national_id(national_id)
                 
@@ -141,13 +132,44 @@ class PlayerCreateView(LoginRequiredMixin, View):
                     ).first()
                     
                     if existing_register:
-                        messages.warning(request, f"El jugador {player.full_name} ya está registrado en esta temporada.")
+                        messages.warning(request, f"El jugador {player.full_name} ya está registrado en esta temporada con este club.")
                         return redirect('clubs:players_list', club_id=club.id)
+                    
+                    # NUEVA VALIDACIÓN: Verificar si ya está registrado en la misma categoría/temporada en otro club
+                    existing_category_register = Register.objects.filter(
+                        player=player,
+                        season__categorie=season.categorie,
+                        season=season,
+                        status__in=['PENDIENTE', 'APROBADO']
+                    ).exclude(club=club).first()
+                    
+                    if existing_category_register:
+                        messages.error(
+                            request, 
+                            f"El jugador {player.full_name} ya está registrado en la categoría "
+                            f"{season.categorie.name} de la temporada {season.name} "
+                            f"con el club {existing_category_register.club.name}. "
+                            f"No se puede registrar en la misma categoría y temporada en otro club."
+                        )
+                        # Mostrar el formulario con los datos para que el usuario vea el error
+                        seasons = Season.objects.filter(
+                            is_active=True
+                        ).select_related('categorie').order_by('categorie__name', 'name')
+                        
+                        context = {
+                            'club': club,
+                            'seasons': seasons,
+                            'form_data': request.POST,
+                            'error_message': f"Jugador ya registrado en {existing_category_register.club.name}"
+                        }
+                        
+                        return render(request, 'forms/player_create.html', context)
                     
                     # Actualizar información del jugador si es necesario
                     player.first_name = first_name
                     player.last_name = last_name
-                    if email:
+                    # Actualizar email solo si el jugador no tiene uno o si el del club es diferente
+                    if email and (not player.email or player.email != email):
                         player.email = email
                     if birth_date:
                         player.birth_date = birth_date
@@ -155,7 +177,7 @@ class PlayerCreateView(LoginRequiredMixin, View):
                     
                     player_status = "existente actualizado y"
                 else:
-                    # Crear nuevo jugador
+                    # Crear nuevo jugador con el email del club
                     player = Player.objects.create(
                         first_name=first_name,
                         last_name=last_name,

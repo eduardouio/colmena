@@ -19,9 +19,10 @@ class CheckPlayerExistView(View):
     
     def get(self, request):
         """
-        GET /api/check-player/?national_id=1234567890
+        GET /api/check-player/?national_id=1234567890&season_id=123
         """
         national_id = request.GET.get('national_id', '').strip()
+        season_id = request.GET.get('season_id')
         
         if not national_id:
             return JsonResponse({
@@ -39,12 +40,6 @@ class CheckPlayerExistView(View):
                 'message': 'Jugador no encontrado'
             })
         
-        # Buscar el registro más reciente del jugador en temporadas activas
-        current_register = Register.objects.filter(
-            player=player,
-            season__is_active=True
-        ).select_related('club', 'season', 'season__categorie').first()
-        
         response_data = {
             'success': True,
             'exists': True,
@@ -59,6 +54,31 @@ class CheckPlayerExistView(View):
                 'has_transfers': player.has_transfers
             }
         }
+        
+        # Buscar todos los registros activos del jugador
+        active_registers = Register.objects.filter(
+            player=player,
+            season__is_active=True,
+            status__in=['PENDIENTE', 'APROBADO']
+        ).select_related('club', 'season', 'season__categorie')
+        
+        # Lista de categorías ocupadas
+        occupied_categories = []
+        for register in active_registers:
+            occupied_categories.append({
+                'category': register.season.categorie.name,
+                'season_id': register.season.id,
+                'season_name': register.season.name,
+                'club_id': register.club.id,
+                'club_name': register.club.name,
+                'status': register.status
+            })
+        
+        if occupied_categories:
+            response_data['occupied_categories'] = occupied_categories
+        
+        # Buscar el registro más reciente del jugador en temporadas activas
+        current_register = active_registers.first()
         
         if current_register:
             response_data['current_registration'] = {
@@ -77,8 +97,43 @@ class CheckPlayerExistView(View):
                 'have_pass': current_register.have_pass,
                 'before_club': current_register.before_club
             }
-        else:
-            # Buscar el último registro histórico
+        
+        # Si se proporciona season_id, verificar si ya está registrado en esa categoría/temporada
+        if season_id:
+            try:
+                season = Season.objects.select_related('categorie').get(id=season_id)
+                category_register = Register.objects.filter(
+                    player=player,
+                    season__categorie=season.categorie,
+                    season=season,
+                    status__in=['PENDIENTE', 'APROBADO']
+                ).select_related('club', 'season').first()
+                
+                if category_register:
+                    response_data['category_conflict'] = {
+                        'exists': True,
+                        'club': {
+                            'id': category_register.club.id,
+                            'name': category_register.club.name
+                        },
+                        'season': {
+                            'id': category_register.season.id,
+                            'name': category_register.season.name,
+                            'category': category_register.season.categorie.name
+                        },
+                        'status': category_register.status,
+                        'message': f'Ya registrado en {category_register.season.categorie.name} con {category_register.club.name}'
+                    }
+                else:
+                    response_data['category_conflict'] = {
+                        'exists': False,
+                        'message': 'Puede registrarse en esta categoría'
+                    }
+            except Season.DoesNotExist:
+                pass
+        
+        # Buscar último registro histórico si no tiene registro actual
+        if not current_register:
             last_register = Register.objects.filter(
                 player=player
             ).select_related('club', 'season', 'season__categorie').order_by('-created_at').first()
@@ -97,9 +152,6 @@ class CheckPlayerExistView(View):
                     'status': last_register.status,
                     'registered_at': last_register.created_at.isoformat()
                 }
-            else:
-                response_data['current_registration'] = None
-                response_data['message'] = 'Jugador existe pero no tiene registros en ninguna temporada'
         
         return JsonResponse(response_data)
     

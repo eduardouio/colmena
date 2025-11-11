@@ -83,9 +83,32 @@ class Register(BaseModel):
     def clean(self):
         """Validación personalizada del registro."""
         super().clean()
+        self.validate_no_duplicate_category_season()
         self.validate_category_rules()
         self.validate_unique_number()
     
+    def validate_no_duplicate_category_season(self):
+        """Valida que el jugador no esté registrado en la misma categoría y temporada en otro club."""
+        if not self.player or not self.season or not self.season.categorie:
+            return
+            
+        # Buscar registros existentes del mismo jugador en la misma categoría y temporada
+        existing_registers = Register.objects.filter(
+            player=self.player,
+            season__categorie=self.season.categorie,
+            season=self.season,
+            status__in=['PENDIENTE', 'APROBADO']
+        ).exclude(pk=self.pk)
+        
+        if existing_registers.exists():
+            existing_register = existing_registers.first()
+            raise ValidationError(
+                f'El jugador {self.player.full_name} ya está registrado en la categoría '
+                f'{self.season.categorie.name} de la temporada {self.season.name} '
+                f'con el club {existing_register.club.name}. '
+                f'No se puede registrar en la misma categoría y temporada en otro club.'
+            )
+
     def validate_category_rules(self):
         """Valida las reglas específicas de la categoría."""
         if not self.season or not self.season.categorie:

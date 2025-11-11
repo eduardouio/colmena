@@ -51,15 +51,29 @@
                         </div>
 
                         <div class="form-control">
-                            <label class="label" for="email">   
-                                <span class="label-text">Correo Electrónico</span>
+                            <label class="label" for="season_id">
+                                <span class="label-text">Temporada / Categoría <span class="text-error">*</span></span>
                             </label>
-                            <input type="email" 
-                                   id="email" 
-                                   name="email" 
-                                   class="input input-bordered" 
-                                   placeholder="jugador@email.com"
-                                   value="{{ form_data.email|default:'' }}">
+                            <select id="season_id" 
+                                    name="season_id" 
+                                    class="select select-bordered" 
+                                    required>
+                                <option value="">Seleccione una temporada</option>
+                                {% for season in seasons %}
+                                <option value="{{ season.id }}" 
+                                        data-category="{{ season.categorie.name }}"
+                                        data-min-age="{{ season.categorie.min_age|default:'' }}"
+                                        data-max-players="{{ season.categorie.max_players }}"
+                                        data-max-youth="{{ season.categorie.max_youth_player }}"
+                                        data-min-youth-num="{{ season.categorie.min_number_youth_player }}"
+                                        data-max-youth-num="{{ season.categorie.max_number_youth_player }}"
+                                        data-min-adult-num="{{ season.categorie.min_number_player }}"
+                                        data-max-adult-num="{{ season.categorie.max_number_player }}"
+                                        {% if form_data.season_id == season.id|stringformat:"i" %}selected{% endif %}>
+                                    {{ season.categorie.name }} - {{ season.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
                         </div>
 
                         <div class="form-control">
@@ -122,32 +136,6 @@
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="form-control">
-                            <label class="label" for="season_id">
-                                <span class="label-text">Temporada / Categoría <span class="text-error">*</span></span>
-                            </label>
-                            <select id="season_id" 
-                                    name="season_id" 
-                                    class="select select-bordered" 
-                                    required>
-                                <option value="">Seleccione una temporada</option>
-                                {% for season in seasons %}
-                                <option value="{{ season.id }}" 
-                                        data-category="{{ season.categorie.name }}"
-                                        data-min-age="{{ season.categorie.min_age|default:'' }}"
-                                        data-max-players="{{ season.categorie.max_players }}"
-                                        data-max-youth="{{ season.categorie.max_youth_player }}"
-                                        data-min-youth-num="{{ season.categorie.min_number_youth_player }}"
-                                        data-max-youth-num="{{ season.categorie.max_number_youth_player }}"
-                                        data-min-adult-num="{{ season.categorie.min_number_player }}"
-                                        data-max-adult-num="{{ season.categorie.max_number_player }}"
-                                        {% if form_data.season_id == season.id|stringformat:"i" %}selected{% endif %}>
-                                    {{ season.categorie.name }} - {{ season.name }}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </div>
-
                         <div class="form-control">
                             <label class="label" for="number">
                                 <span class="label-text">Número de Jugador <span class="text-error">*</span></span>
@@ -285,11 +273,23 @@
         if (!nationalId || nationalId.length < 10) {
             document.getElementById('player-check-message').textContent = 'Se verificará si el jugador ya existe';
             document.getElementById('player-check-message').className = 'label-text-alt text-info';
+            resetPlayerValidation();
+            enableAllSeasons(); // Habilitar todas las temporadas
             return;
         }
 
         try {
-            const response = await fetch(`{% url 'clubs:api_check_player' %}?national_id=${nationalId}`);
+            // Mostrar mensaje de carga
+            displayPlayerInfo('🔍 Verificando jugador...');
+            
+            // Incluir season_id en la consulta si hay una temporada seleccionada
+            const seasonSelect = document.getElementById('season_id');
+            const seasonId = seasonSelect ? seasonSelect.value : '';
+            const url = seasonId ? 
+                `{% url 'clubs:api_check_player' %}?national_id=${nationalId}&season_id=${seasonId}` :
+                `{% url 'clubs:api_check_player' %}?national_id=${nationalId}`;
+                
+            const response = await fetch(url);
             const data = await response.json();
             
             if (data.success && data.exists) {
@@ -297,37 +297,248 @@
                 playerData = data;
                 
                 // Actualizar campos del formulario con datos existentes
-                document.getElementById('first_name').value = data.player.first_name;
-                document.getElementById('last_name').value = data.player.last_name;
-                if (data.player.email) {
-                    document.getElementById('email').value = data.player.email;
-                }
-                if (data.player.birth_date) {
-                    document.getElementById('birth_date').value = data.player.birth_date;
-                }
+                updateFormWithPlayerData(data.player);
                 
-                // Mostrar información del club actual
-                let message = `Jugador existente: ${data.player.full_name}`;
-                if (data.current_registration) {
-                    message += ` (Club actual: ${data.current_registration.club.name})`;
-                    document.getElementById('player-check-message').className = 'label-text text-lg font-semibold text-red-800';
-                } else if (data.last_registration) {
-                    message += ` (Último club: ${data.last_registration.club.name})`;
-                    document.getElementById('player-check-message').className = 'label-text text-base font-medium text-info';
-                }
+                // Deshabilitar temporadas donde ya está registrado
+                disableOccupiedSeasons(data);
                 
-                document.getElementById('player-check-message').textContent = message;
+                // Verificar diferentes tipos de conflicto
+                const validationResult = validatePlayerRegistration(data, seasonId);
+                
+                if (!validationResult.canRegister) {
+                    displayPlayerError(validationResult.message);
+                    disableFormSubmission();
+                    return;
+                } else {
+                    if (validationResult.severity === 'info') {
+                        displayPlayerInfo(validationResult.message);
+                    } else {
+                        displayPlayerSuccess(validationResult.message);
+                    }
+                    enableFormSubmission();
+                }
                 
             } else {
                 playerExists = false;
                 playerData = null;
-                document.getElementById('player-check-message').textContent = 'Jugador nuevo - se creará un registro';
-                document.getElementById('player-check-message').className = 'label-text text-base font-medium text-success';
+                displayPlayerSuccess('✅ Jugador nuevo - se creará un registro');
+                enableAllSeasons(); // Habilitar todas las temporadas
+                enableFormSubmission();
             }
         } catch (error) {
             console.error('Error checking player:', error);
-            document.getElementById('player-check-message').textContent = 'ERROR: No se pudo verificar el jugador. Revise su conexión.';
-            document.getElementById('player-check-message').className = 'label-text text-lg font-bold text-error bg-error bg-opacity-10 p-2 rounded';
+            displayPlayerError('❌ ERROR: No se pudo verificar el jugador. Revise su conexión.');
+            disableFormSubmission();
+        }
+        
+        // Validar formulario después de verificar jugador
+        validateForm();
+    }
+
+    // Nueva función para deshabilitar temporadas donde el jugador ya está registrado
+    function disableOccupiedSeasons(data) {
+        const seasonSelect = document.getElementById('season_id');
+        const options = seasonSelect.querySelectorAll('option');
+        
+        // Primero habilitar todas las opciones
+        options.forEach(option => {
+            if (option.value) { // No tocar la opción vacía
+                option.disabled = false;
+                option.classList.remove('text-error', 'line-through');
+            }
+        });
+        
+        // Si hay registro actual, deshabilitar esa temporada/categoría
+        if (data.current_registration) {
+            const currentSeasonId = data.current_registration.season.id.toString();
+            const currentCategory = data.current_registration.season.category;
+            
+            options.forEach(option => {
+                if (option.value) {
+                    const optionSeasonId = option.value;
+                    const optionCategory = option.dataset.category;
+                    
+                    // Deshabilitar si es la misma temporada y categoría
+                    if (optionSeasonId === currentSeasonId || optionCategory === currentCategory) {
+                        option.disabled = true;
+                        option.classList.add('text-error', 'line-through');
+                        const clubName = data.current_registration.club.name;
+                        option.textContent = `${option.textContent.split(' - ')[0]} - (Ya registrado en ${clubName})`;
+                    }
+                }
+            });
+        }
+        
+        // Verificar si hay conflicto de categoría y deshabilitar
+        if (data.category_conflict && data.category_conflict.exists) {
+            const conflictCategory = data.category_conflict.season.category;
+            
+            options.forEach(option => {
+                if (option.value && option.dataset.category === conflictCategory) {
+                    option.disabled = true;
+                    option.classList.add('text-error', 'line-through');
+                    if (!option.textContent.includes('Ya registrado')) {
+                        const clubName = data.category_conflict.club.name;
+                        option.textContent = `${option.textContent.split(' - ')[0]} - (Ya registrado en ${clubName})`;
+                    }
+                }
+            });
+        }
+    }
+
+    // Nueva función para habilitar todas las temporadas
+    function enableAllSeasons() {
+        const seasonSelect = document.getElementById('season_id');
+        const options = seasonSelect.querySelectorAll('option');
+        
+        options.forEach(option => {
+            if (option.value) {
+                option.disabled = false;
+                option.classList.remove('text-error', 'line-through');
+                // Restaurar texto original
+                const parts = option.textContent.split(' - ');
+                if (parts.length > 2 || option.textContent.includes('Ya registrado')) {
+                    // Restaurar desde el dataset o reconstruir
+                    const category = option.dataset.category;
+                    const seasonName = parts[parts.length - 1].replace(/\s*\(Ya registrado.*\)/, '').trim();
+                    option.textContent = `${category} - ${seasonName}`;
+                }
+            }
+        });
+    }
+
+    // Nueva función para actualizar formulario with datos del jugador
+    function updateFormWithPlayerData(player) {
+        document.getElementById('first_name').value = player.first_name || '';
+        document.getElementById('last_name').value = player.last_name || '';
+        if (player.birth_date) {
+            document.getElementById('birth_date').value = player.birth_date;
+            // Actualizar la edad mostrada
+            displayAge();
+        }
+    }
+
+    // Nueva función para validar el estado del registro del jugador
+    function validatePlayerRegistration(data, currentSeasonId) {
+        const player = data.player;
+        const currentRegistration = data.current_registration;
+        const categoryConflict = data.category_conflict;
+        const lastRegistration = data.last_registration;
+
+        // 1. Verificar conflicto directo de categoría/temporada
+        if (categoryConflict && categoryConflict.exists) {
+            return {
+                canRegister: false,
+                message: `⚠️ CONFLICTO: ${player.full_name} ya está registrado en ${categoryConflict.season.category} con ${categoryConflict.club.name}`,
+                severity: 'error'
+            };
+        }
+
+        // 2. Verificar si tiene registro activo en la temporada actual
+        if (currentRegistration && currentSeasonId && 
+            currentRegistration.season.id.toString() === currentSeasonId) {
+            
+            const clubId = {{ club.id }};
+            
+            // Si está registrado en el mismo club y temporada
+            if (currentRegistration.club.id === clubId) {
+                return {
+                    canRegister: false,
+                    message: `❌ El jugador ${player.full_name} ya está registrado en esta temporada con este club (Estado: ${currentRegistration.status})`,
+                    severity: 'error'
+                };
+            } else {
+                // Registrado en otra temporada de la misma categoría con otro club
+                return {
+                    canRegister: false,
+                    message: `⚠️ CONFLICTO: ${player.full_name} ya está registrado en ${currentRegistration.season.category} con ${currentRegistration.club.name} (Estado: ${currentRegistration.status})`,
+                    severity: 'error'
+                };
+            }
+        }
+
+        // 3. Si tiene registro activo pero en otra temporada/categoría
+        if (currentRegistration) {
+            return {
+                canRegister: true,
+                message: `ℹ️ Jugador activo en ${currentRegistration.season.category} con ${currentRegistration.club.name} - Puede registrarse en nueva categoría`,
+                severity: 'info'
+            };
+        }
+
+        // 4. Si no tiene registro activo pero tiene historial
+        if (lastRegistration) {
+            return {
+                canRegister: true,
+                message: `✅ Jugador existente (Último club: ${lastRegistration.club.name}) - Puede registrarse`,
+                severity: 'success'
+            };
+        }
+
+        // 5. Jugador existe pero nunca se ha registrado
+        return {
+            canRegister: true,
+            message: `✅ Jugador existente sin registros previos - Puede registrarse`,
+            severity: 'success'
+        };
+    }
+
+    // Funciones mejoradas para mostrar diferentes tipos de mensajes usando solo Tailwind y DaisyUI
+    function displayPlayerError(message) {
+        const element = document.getElementById('player-check-message');
+        element.innerHTML = message;
+        element.className = 'alert alert-error text-sm py-2 px-3 rounded-lg';
+    }
+
+    function displayPlayerSuccess(message) {
+        const element = document.getElementById('player-check-message');
+        element.innerHTML = message;
+        element.className = 'alert alert-success text-sm py-2 px-3 rounded-lg';
+    }
+
+    function displayPlayerInfo(message) {
+        const element = document.getElementById('player-check-message');
+        element.innerHTML = message;
+        element.className = 'alert alert-info text-sm py-2 px-3 rounded-lg';
+    }
+
+    function displayPlayerWarning(message) {
+        const element = document.getElementById('player-check-message');
+        element.innerHTML = message;
+        element.className = 'alert alert-warning text-sm py-2 px-3 rounded-lg';
+    }
+
+    function resetPlayerValidation() {
+        const element = document.getElementById('player-check-message');
+        element.textContent = 'Se verificará si el jugador ya existe';
+        element.className = 'label-text-alt text-info';
+        enableFormSubmission();
+    }
+
+    function disableFormSubmission() {
+        const saveBtn = document.getElementById('save-btn');
+        const saveAndNewBtn = document.getElementById('save-and-new-btn');
+        
+        if (saveBtn && saveAndNewBtn) {
+            saveBtn.disabled = true;
+            saveAndNewBtn.disabled = true;
+            saveBtn.classList.add('btn-disabled');
+            saveAndNewBtn.classList.add('btn-disabled');
+        }
+        
+        formIsValid = false;
+    }
+
+    function enableFormSubmission() {
+        const saveBtn = document.getElementById('save-btn');
+        const saveAndNewBtn = document.getElementById('save-and-new-btn');
+        
+        // Solo habilitar si no hay otros errores de validación
+        if (formIsValid !== false && saveBtn && saveAndNewBtn) {
+            saveBtn.disabled = false;
+            saveAndNewBtn.disabled = false;
+            saveBtn.classList.remove('btn-disabled');
+            saveAndNewBtn.classList.remove('btn-disabled');
         }
     }
 
@@ -363,7 +574,7 @@
         if (!birthDate) {
             ageDisplay.textContent = '';
             ageCategoryHint.textContent = '';
-            validateForm(); // Validar formulario
+            validateForm();
             return;
         }
         
@@ -375,23 +586,30 @@
             
             // Determinar si es juvenil o adulto según la categoría seleccionada
             if (categoryRules) {
+                // Determinar si es juvenil usando las reglas específicas de cada categoría
+                let isYouth = false;
+                let youthLabel = '';
+                
                 if (categoryRules.name === 'SENIOR' || categoryRules.name === 'FEMENINO') {
-                    if (age < 18) {
-                        ageCategoryHint.textContent = '👶 Jugador Juvenil (menor de 18 años)';
-                        ageCategoryHint.className = 'label-text-alt text-info font-medium';
-                    } else {
-                        ageCategoryHint.textContent = '👤 Jugador Adulto';
-                        ageCategoryHint.className = 'label-text-alt text-success font-medium';
-                    }
+                    isYouth = age < 18;
+                    youthLabel = 'menor de 18 años';
+                } else if (categoryRules.name === 'MASTER') {
+                    isYouth = age >= 38 && age <= 39;
+                    youthLabel = 'entre 38-39 años';
+                }
+                
+                if (isYouth) {
+                    ageCategoryHint.textContent = `👶 Jugador Juvenil (${youthLabel})`;
+                    ageCategoryHint.className = 'label-text-alt text-info font-medium';
                 } else {
-                    // Para otras categorías, verificar edad mínima
-                    if (categoryRules.minAge && age < categoryRules.minAge) {
-                        ageCategoryHint.textContent = `⚠️ Edad insuficiente (mínimo ${categoryRules.minAge} años) - NO PUEDE CONTINUAR`;
-                        ageCategoryHint.className = 'label-text-alt text-error font-bold text-base';
-                    } else {
-                        ageCategoryHint.textContent = '✓ Edad válida para la categoría';
-                        ageCategoryHint.className = 'label-text-alt text-success font-medium';
-                    }
+                    ageCategoryHint.textContent = '👤 Jugador Adulto';
+                    ageCategoryHint.className = 'label-text-alt text-success font-medium';
+                }
+                
+                // Verificar edad mínima para otras categorías
+                if (categoryRules.minAge && age < categoryRules.minAge) {
+                    ageCategoryHint.textContent = `⚠️ Edad insuficiente (mínimo ${categoryRules.minAge} años) - NO PUEDE CONTINUAR`;
+                    ageCategoryHint.className = 'label-text-alt text-error font-bold text-base';
                 }
             } else {
                 // Si no hay categoría seleccionada, solo mostrar si es menor o mayor de edad
@@ -403,8 +621,7 @@
                     ageCategoryHint.className = 'label-text-alt text-base';
                 }
             }
-            
-            // Cambiar color de la edad según rango
+
             if (age < 18) {
                 ageDisplay.className = 'label-text-alt text-info font-semibold';
             } else if (age >= 35) {
@@ -438,8 +655,16 @@
         if (!selectedOption || !selectedOption.value) {
             categoryInfo.style.display = 'none';
             numberRangeHint.textContent = '';
-            categoryRules = null; // Limpiar reglas
-            displayAge(); // Actualizar display de edad
+            categoryRules = null;
+            displayAge();
+            return;
+        }
+        
+        // Verificar si la opción está deshabilitada
+        if (selectedOption.disabled) {
+            displayPlayerError('⚠️ No puede seleccionar esta temporada. El jugador ya está registrado en esta categoría.');
+            categoryInfo.style.display = 'none';
+            disableFormSubmission();
             return;
         }
         
@@ -473,6 +698,12 @@
         
         // Actualizar rango de números según edad
         updateNumberRange();
+        
+        // Re-verificar jugador con nueva temporada si hay cédula
+        const nationalIdInput = document.getElementById('national_id');
+        if (nationalIdInput.value && nationalIdInput.value.length >= 10) {
+            checkPlayerExists(nationalIdInput.value);
+        }
     }
     
     // Función para actualizar el rango de números permitidos
@@ -488,9 +719,11 @@
         const age = calculateAge(birthDate);
         let isYouth = false;
         
-        // Determinar si es juvenil para SENIOR y FEMENINO
+        // Determinar si es juvenil según las reglas específicas de cada categoría
         if (categoryRules.name === 'SENIOR' || categoryRules.name === 'FEMENINO') {
             isYouth = age !== null && age < 18;
+        } else if (categoryRules.name === 'MASTER') {
+            isYouth = age !== null && age >= 38 && age <= 39;
         }
         
         if (isYouth) {
@@ -499,10 +732,16 @@
             numberRangeHint.textContent = `(${categoryRules.minYouthNum} - ${categoryRules.maxYouthNum})`;
             numberRangeHint.className = 'label-text-alt text-info';
             
-            // Hacer obligatoria la autorización
-            minorRequired.style.display = 'inline';
-            minorHint.textContent = 'Obligatorio para menores de 18 años';
-            minorHint.className = 'label-text-alt text-warning';
+            // Hacer obligatoria la autorización solo para menores de 18 años
+            if (age !== null && age < 18) {
+                minorRequired.style.display = 'inline';
+                minorHint.textContent = 'Obligatorio para menores de 18 años';
+                minorHint.className = 'label-text-alt text-warning';
+            } else {
+                minorRequired.style.display = 'none';
+                minorHint.textContent = 'JPG, PNG, PDF (Max: 5MB)';
+                minorHint.className = 'label-text-alt';
+            }
         } else {
             numberInput.min = categoryRules.minAdultNum;
             numberInput.max = categoryRules.maxAdultNum;
@@ -519,7 +758,7 @@
         validateNumber();
     }
     
-    // Nueva función para validar todo el formulario
+    // Función para validar todo el formulario
     function validateForm() {
         const saveBtn = document.getElementById('save-btn');
         const saveAndNewBtn = document.getElementById('save-and-new-btn');
@@ -527,10 +766,17 @@
         const seasonId = document.getElementById('season_id').value;
         const numberInput = document.getElementById('number');
         const number = parseInt(numberInput.value);
+        const nationalId = document.getElementById('national_id').value;
         
         let isValid = true;
         let errorMessages = [];
-        
+
+        // Validar campos obligatorios
+        if (!nationalId || nationalId.length < 10) {
+            isValid = false;
+            errorMessages.push('Cédula debe tener 10 dígitos');
+        }
+
         // Validar que haya temporada seleccionada
         if (!seasonId || !categoryRules) {
             isValid = false;
@@ -545,11 +791,34 @@
                 errorMessages.push(`El jugador debe tener al menos ${categoryRules.minAge} años`);
             }
         }
+
+        // Validar si el jugador tiene conflictos de registro
+        if (playerExists && playerData) {
+            // Si el endpoint devolvió un conflicto de categoría, bloquear
+            if (playerData.category_conflict && playerData.category_conflict.exists) {
+                isValid = false;
+                errorMessages.push('Jugador ya registrado en esta categoría');
+            }
+            
+            // Si está registrado en la misma temporada
+            if (playerData.current_registration && 
+                playerData.current_registration.season.id.toString() === seasonId) {
+                isValid = false;
+                errorMessages.push('Jugador ya registrado en esta temporada');
+            }
+        }
         
         // Validar número
         if (categoryRules && number) {
             const age = calculateAge(birthDate);
-            let isYouth = (categoryRules.name === 'SENIOR' || categoryRules.name === 'FEMENINO') && age !== null && age < 18;
+            
+            // Determinar si es juvenil según las reglas específicas de cada categoría
+            let isYouth = false;
+            if (categoryRules.name === 'SENIOR' || categoryRules.name === 'FEMENINO') {
+                isYouth = age !== null && age < 18;
+            } else if (categoryRules.name === 'MASTER') {
+                isYouth = age !== null && age >= 38 && age <= 39;
+            }
             
             if (isYouth) {
                 if (number < categoryRules.minYouthNum || number > categoryRules.maxYouthNum) {
@@ -586,8 +855,9 @@
             
             // Mostrar tooltip con errores
             if (errorMessages.length > 0) {
-                saveBtn.title = 'Errores:\n' + errorMessages.join('\n');
-                saveAndNewBtn.title = 'Errores:\n' + errorMessages.join('\n');
+                const errorText = 'Errores:\n' + errorMessages.join('\n');
+                saveBtn.title = errorText;
+                saveAndNewBtn.title = errorText;
             }
         }
         
@@ -604,14 +874,21 @@
         
         if (!number || !seasonId || !categoryRules) {
             validationMsg.textContent = '';
-            validateForm(); // Validar formulario completo
+            validateForm();
             return;
         }
         
         // Verificar rango local primero
         const birthDate = document.getElementById('birth_date').value;
         const age = calculateAge(birthDate);
-        let isYouth = (categoryRules.name === 'SENIOR' || categoryRules.name === 'FEMENINO') && age !== null && age < 18;
+        
+        // Determinar si es juvenil según las reglas específicas de cada categoría
+        let isYouth = false;
+        if (categoryRules.name === 'SENIOR' || categoryRules.name === 'FEMENINO') {
+            isYouth = age !== null && age < 18;
+        } else if (categoryRules.name === 'MASTER') {
+            isYouth = age !== null && age >= 38 && age <= 39;
+        }
         
         let validRange = true;
         if (isYouth) {
@@ -621,7 +898,7 @@
                 validationMsg.className = 'label-text-alt text-error font-bold';
                 numberInput.classList.add('input-error');
                 numberInput.classList.remove('input-success');
-                validateForm(); // Validar formulario completo
+                validateForm();
                 return;
             }
         } else {
@@ -631,7 +908,7 @@
                 validationMsg.className = 'label-text-alt text-error font-bold';
                 numberInput.classList.add('input-error');
                 numberInput.classList.remove('input-success');
-                validateForm(); // Validar formulario completo
+                validateForm();
                 return;
             }
         }
@@ -754,14 +1031,35 @@
             form.addEventListener('submit', function(e) {
                 if (!formIsValid) {
                     e.preventDefault();
-                    alert('Por favor, corrija los errores antes de continuar:\n\n' + 
-                          (categoryRules && categoryRules.minAge && calculateAge(document.getElementById('birth_date').value) < categoryRules.minAge 
-                           ? `- El jugador debe tener al menos ${categoryRules.minAge} años\n` 
-                           : '') +
-                          (document.getElementById('number').classList.contains('input-error') 
-                           ? '- El número seleccionado no está disponible o está fuera del rango permitido\n' 
-                           : '')
-                    );
+                    
+                    let alertMessage = 'Por favor, corrija los errores antes de continuar:\n\n';
+                    
+                    // Verificar tipos específicos de error
+                    if (playerExists && playerData) {
+                        if (playerData.category_conflict && playerData.category_conflict.exists) {
+                            alertMessage += '- El jugador ya está registrado en esta categoría con otro club\n';
+                        }
+                        if (playerData.current_registration) {
+                            const currentReg = playerData.current_registration;
+                            const seasonId = document.getElementById('season_id').value;
+                            if (currentReg.season.id.toString() === seasonId) {
+                                alertMessage += `- El jugador ya está registrado en esta temporada (${currentReg.status})\n`;
+                            }
+                        }
+                    }
+                    
+                    if (categoryRules && categoryRules.minAge) {
+                        const age = calculateAge(document.getElementById('birth_date').value);
+                        if (age !== null && age < categoryRules.minAge) {
+                            alertMessage += `- El jugador debe tener al menos ${categoryRules.minAge} años\n`;
+                        }
+                    }
+                    
+                    if (document.getElementById('number').classList.contains('input-error')) {
+                        alertMessage += '- El número seleccionado no está disponible o está fuera del rango permitido\n';
+                    }
+                    
+                    alert(alertMessage);
                     return false;
                 }
             });
