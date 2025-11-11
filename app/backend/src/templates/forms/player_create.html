@@ -135,7 +135,7 @@
                         </div>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="form-control">
                             <label class="label" for="number">
                                 <span class="label-text">Número de Jugador <span class="text-error">*</span></span>
@@ -156,28 +156,31 @@
                         </div>
 
                         <div class="form-control">
-                            <label class="label cursor-pointer justify-start gap-3" for="is_requalification">
-                                <input type="checkbox" 
-                                       id="is_requalification"
-                                       name="is_requalification" 
-                                       class="checkbox checkbox-sm checkbox-primary"
-                                       {% if form_data.is_requalification == 'on' %}checked{% endif %}>
-                                <span class="label-text">¿Es recalificación?</span>
+                            <label class="label">
+                                <span class="label-text">Opciones de Registro</span>
                             </label>
+                            <div class="flex flex-col gap-2">
+                                <label class="cursor-pointer flex items-center gap-2" for="is_requalification">
+                                    <input type="checkbox" 
+                                           id="is_requalification"
+                                           name="is_requalification" 
+                                           class="checkbox checkbox-primary checkbox-sm"
+                                           {% if form_data.is_requalification == 'on' %}checked{% endif %}>
+                                    <span class="label-text">¿Es recalificación?</span>
+                                </label>
+                                
+                                <label class="cursor-pointer flex items-center gap-2" for="have_pass">
+                                    <input type="checkbox" 
+                                           id="have_pass"
+                                           name="have_pass" 
+                                           class="checkbox checkbox-primary checkbox-sm"
+                                           {% if form_data.have_pass == 'on' %}checked{% endif %}>
+                                    <span class="label-text">¿Tiene pase?</span>
+                                </label>
+                            </div>
                         </div>
 
-                        <div class="form-control">
-                            <label class="label cursor-pointer justify-start gap-3" for="have_pass">
-                                <input type="checkbox" 
-                                       id="have_pass"
-                                       name="have_pass" 
-                                       class="checkbox checkbox-sm checkbox-primary"
-                                       {% if form_data.have_pass == 'on' %}checked{% endif %}>
-                                <span class="label-text">¿Tiene pase?</span>
-                            </label>
-                        </div>
-
-                        <div class="form-control md:col-span-2" id="before_club_container" style="display: none;">
+                        <div class="form-control md:col-span-3" id="before_club_container" style="display: none;">
                             <label class="label" for="before_club">
                                 <span class="label-text">Club Anterior</span>
                             </label>
