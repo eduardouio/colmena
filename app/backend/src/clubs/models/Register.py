@@ -7,7 +7,6 @@ from .Player import Player
 from .Club import Club
 
 
-
 class Register(BaseModel):
     """Calificación inicial del aspirante previa a crear el jugador."""
     STATUS_CHOICES = [
