@@ -17,7 +17,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('api/', include('api.urls', namespace='api')),
-    path('clubs/', include('clubs.urls', namespace='clubs')),  # Agregar esta línea
+    path('clubs/', include('clubs.urls', namespace='clubs')),
+    path('reports/', include('reports.urls', namespace='reports')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
