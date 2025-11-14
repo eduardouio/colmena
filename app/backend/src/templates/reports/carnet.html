@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carnet de Jugador - Liga Santa Clara</title>
+  <script src="{% static 'js/tailwind.js' %}"></script>
+  <style>
+    /* Define el tamaño físico del carnet si es necesario para imprimir */
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact; /* For Chrome, Safari */
+        print-color-adjust: exact; /* Standard */
+      }
+      .carnet-container {
+        /* Ajustar tamaño de impresión si es necesario, manteniendo proporción */
+        width: 107mm; /* 85.6mm * 1.25 */
+        height: 67.475mm; /* 53.98mm * 1.25 */
+        /* O usar las dimensiones en pantalla aumentadas */
+        /* width: 100mm; */
+        /* height: 150mm; */
+        page-break-inside: avoid;
+        overflow: hidden;
+      }
+    }
+    /* Ajusta el tamaño en pantalla, aumentado un 25% */
+    .carnet-container {
+        width: 100mm; /* 80mm * 1.25 */
+        height: 150mm; /* 120mm * 1.25 */
+        /* La imagen de fondo se aplicará dinámicamente */
+        background-size: cover; /* Cubrir todo el contenedor */
+        background-position: center; /* Centrar la imagen */
+        background-repeat: no-repeat; /* No repetir la imagen */
+    }
+    
+    /* Clase para texto con borde blanco */
+     .text-with-outline  {
+      text-shadow: 
+        -1px -1px 0 white,
+        1px -1px 0 white,
+        -1px 1px 0 white,
+        1px 1px 0 white;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex">
+  <div class="">
+    <!-- Se quita bg-white para que se vea el fondo -->
+    <div class="carnet-container relative rounded-lg overflow-hidden shadow-lg border border-gray-200" 
+         {% if registro.categoria|lower == "femenino" %}
+         style="background-image: url('{% static 'img/background_femenino.jpg' %}');"
+         {% elif registro.categoria|lower == "niños" or registro.categoria|lower == "ninos" or registro.categoria|lower == "niños" %}
+         style="background-image: url('{% static 'img/background_infantil.jpg' %}');"
+         {% else %}
+         style="background-image: url('{% static 'img/background_hombres.jpg' %}');"
+         {% endif %}>
+      <!-- Encabezado con fondo azul, texto y logo -->
+      <!-- Cambiado justify-end a justify-between y items-start a items-center para mejor alineación vertical -->
+      <div class="h-24 bg-blue-600/50 p-3 flex justify-between items-center backdrop-blur-xs">
+          <!-- Contenedor para el texto -->
+          <div class="text-blue-800 text-center">
+              <span class="block text-xl font-bold text-with-outline">LIGA INDEPENDIENTE</span> <!-- Agregado text-with-outline -->
+              <span class="block text-2xl font-bold text-with-outline">SANTA CLARA DE SAN MILLAN</span> <!-- Agregado text-with-outline -->
+          </div>
+      </div>
+  
+      <!-- Contenedor principal del contenido -->
+      <!-- Se puede añadir un fondo blanco semi-transparente a esta sección para mejorar legibilidad -->
+      <div class="relative p-4 bg-white/50 rounded-b-lg"> <!-- Ejemplo: bg-white/50 -->
+          <!-- Foto del jugador (posicionada parcialmente sobre el encabezado) -->
+          <!-- Cambiado -top-20 a -top-16 para bajar la imagen -->
+          <div class="absolute -top-1 left-1/2 transform -translate-x-1/2">
+              <img src="{{ foto_url }}" alt="Foto Jugador" class="w-48 h-48 rounded-full border-4 border-gray-400 bg-gray-200 object-cover shadow-md"> <!-- Duplicado tamaño de foto (w/h-24 a w/h-48) -->
+          </div>
+  
+          <!-- Información del jugador (debajo de la foto) -->
+          <!-- Ajustado mt-32 a mt-36 para compensar la bajada de la foto -->
+          <div class="mt-40 text-center space-y-1">
+              <!-- Corregido: Usar nombres y apellidos del modelo CalificacionAspirante -->
+              <h1 class="text-[60px] font-bold text-gray-800 text-with-outline">{{ registro.numero_jugador }}</h1>
+              <h1 class="text-2xl font-bold uppercase text-gray-800 text-with-outline">{{ registro.nombres }} {{ registro.apellidos }}</h1>
+              <!-- Corregido: Usar club.nombre del modelo CalificacionAspirante -->
+              <p class="text-lg text-blue-700 font-semibold uppercase text-with-outline">Club Deportivo {{ registro.club.nombre|default:"Equipo" }}</p> <!-- Ajustado color para contraste -->
+              <!-- Corregido: Usar cedula del modelo CalificacionAspirante -->
+              <p class="mt-2 text-xl text-gray-800 text-with-outline"><span class="font-semibold">{{ registro.cedula|default:"0000000000" }}</span></p> <!-- Ajustado color para contraste -->
+              <!-- Campos existentes (correctos según VistaCarnet) -->
+              <p class="text-lg text-gray-700 text-with-outline"><span class="font-semibold">{{ edad }} Años</span></p> <!-- Ajustado color para contraste -->
+              <p class="text-lg text-gray-700 text-with-outline"><span class="font-semibold">Categoría - {{ registro.categoria|title|default:"Categoría" }}</span></p> <!-- Ajustado color para contraste -->
+          </div>
+      </div>
+  
+      <!-- Pie de página opcional (si necesitas añadir algo más) -->
+      <!-- <div class="absolute bottom-0 left-0 w-full h-4 bg-blue-600"></div> -->
+    </div>
+  
+  </div>
+  <div class="">
+    <!-- Se quita bg-white para que se vea el fondo -->
+    <div class="carnet-container relative rounded-lg overflow-hidden shadow-lg border border-gray-200" 
+         {% if registro.categoria|lower == "femenino" %}
+         style="background-image: url('{% static 'img/background_femenino.jpg' %}');"
+         {% elif registro.categoria|lower == "niños" or registro.categoria|lower == "ninos" or registro.categoria|lower == "niños" %}
+         style="background-image: url('{% static 'img/background_infantil.jpg' %}');"
+         {% else %}
+         style="background-image: url('{% static 'img/background_hombres.jpg' %}');"
+         {% endif %}>
+      <!-- Encabezado con fondo azul, texto y logo -->
+      <!-- Cambiado justify-end a justify-between y items-start a items-center para mejor alineación vertical -->
+      <div class="h-24 bg-blue-600/50 p-3 flex align-items-center">
+          <!-- Contenedor para el texto -->
+          <div class="text-blue-800 text-center">
+              <span class="block text-xl text-with-outline font-bold text-center">CAMPEONATO</span> <!-- Agregado text-with-outline -->
+              <span class="block text-2xl font-bold text-with-outline">2025-2026</span> <!-- Agregado text-with-outline -->
+          </div>
+      </div>
+  
+      <!-- Contenedor principal del contenido -->
+      <!-- Se puede añadir un fondo blanco semi-transparente a esta sección para mejorar legibilidad -->
+      <div class="relative p-4 bg-white/50 rounded-b-lg"> <!-- Ejemplo: bg-white/50 -->
+          <!-- Foto del jugador (posicionada parcialmente sobre el encabezado) -->
+          <!-- Cambiado -top-20 a -top-16 para bajar la imagen -->
+          <div class="absolute -top-5 left-1/2 transform -translate-x-1/2">
+              <img src="{{ logo_url }}" alt="Foto Jugador" class="w-48 h-48 rounded border-4 border-gray-400 bg-gray-200 object-cover shadow-md"> <!-- Duplicado tamaño de foto (w/h-24 a w/h-48) -->
+          </div>
+  
+          <!-- Información del jugador (debajo de la foto) -->
+          <!-- Ajustado mt-32 a mt-36 para compensar la bajada de la foto -->
+          <div class="mt-40 text-center space-y-2">
+              <!-- Corregido: Usar nombres y apellidos del modelo CalificacionAspirante -->
+              <h1 class="text-2xl font-bold uppercase text-gray-800 text-with-outline pt-10 pb-10">Categoría - {{ registro.categoria|title|default:"Categoría" }}</h1>
+              <h1 class="pb-8"></h1>
+              <!-- Corregido: Usar club.nombre del modelo CalificacionAspirante -->
+              <h1 class="text-2xl font-bold uppercase text-gray-800 text-with-outline pt-10">COMISIÓN DE CALIFICACIONES</h1>
+          </div>
+      </div>
+  
+      <!-- Pie de página opcional (si necesitas añadir algo más) -->
+      <!-- <div class="absolute bottom-0 left-0 w-full h-4 bg-blue-600"></div> -->
+    </div>
+  
+  </div>
+  </div>
+</body>
+</html>
