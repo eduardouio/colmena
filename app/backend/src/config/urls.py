@@ -18,6 +18,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('api/', include('api.urls', namespace='api')),
     path('clubs/', include('clubs.urls', namespace='clubs')),
+    path('administradores/', include('managers.urls', namespace='managers')),
     path('reports/', include('reports.urls', namespace='reports')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

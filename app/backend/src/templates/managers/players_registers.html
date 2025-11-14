@@ -1,0 +1,67 @@
+{% load static %}
+<!-- ...existing code... -->
+<div class="p-6 space-y-6">
+  <h1 class="text-2xl font-bold">Registros de Jugadores (Pendientes y Aprobados)</h1>
+
+  <div class="flex gap-3">
+    {% for b in categoria_botones %}
+      <a href="{{ b.pdf_url }}" class="px-4 py-2 rounded bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700" target="_blank">
+        PDF Carnets {{ b.nombre }}
+      </a>
+    {% endfor %}
+  </div>
+
+  {% for season_block in seasons_data %}
+    <div class="mt-8">
+      <h2 class="text-xl font-semibold">Temporada: {{ season_block.season.name }}</h2>
+      {% for cat_block in season_block.categorias %}
+        <div class="mt-4">
+          <h3 class="text-lg font-medium">Categoría: {{ cat_block.categoria.name }}</h3>
+          <div class="overflow-auto border rounded">
+            <table class="min-w-full text-sm">
+              <thead class="bg-gray-100">
+                <tr>
+                  <th class="px-3 py-2 text-left">#</th>
+                  <th class="px-3 py-2 text-left">Jugador</th>
+                  <th class="px-3 py-2 text-left">Cédula</th>
+                  <th class="px-3 py-2 text-left">Edad</th>
+                  <th class="px-3 py-2 text-left">Club</th>
+                  <th class="px-3 py-2 text-left">Estado</th>
+                  <th class="px-3 py-2 text-left">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in cat_block.registros %}
+                  <tr class="border-t">
+                    <td class="px-3 py-2 font-semibold">{{ item.registro.number }}</td>
+                    <td class="px-3 py-2">{{ item.registro.player.full_name }}</td>
+                    <td class="px-3 py-2">{{ item.registro.player.national_id }}</td>
+                    <td class="px-3 py-2">
+                      {% if item.edad %}{{ item.edad }}{% else %}-{% endif %}
+                    </td>
+                    <td class="px-3 py-2">{{ item.registro.club.display_name }}</td>
+                    <td class="px-3 py-2">
+                      <span class="px-2 py-1 rounded text-xs
+                        {% if item.registro.status == 'APROBADO' %}bg-green-100 text-green-700
+                        {% elif item.registro.status == 'PENDIENTE' %}bg-yellow-100 text-yellow-700
+                        {% else %}bg-red-100 text-red-700{% endif %}">
+                        {{ item.registro.status }}
+                      </span>
+                    </td>
+                    <td class="px-3 py-2 space-x-2">
+                      <a href="{{ item.carnet_url }}" target="_blank" class="text-blue-600 hover:underline">Ver Carnet</a>
+                      <a href="{{ item.pdf_carnet_url }}" target="_blank" class="text-indigo-600 hover:underline">PDF</a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% empty %}
+    <p class="text-gray-600">No hay registros disponibles.</p>
+  {% endfor %}
+</div>
+<!-- ...existing code... -->
