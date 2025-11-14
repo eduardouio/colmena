@@ -6,5 +6,5 @@ app_name = 'reports'
 
 urlpatterns = [
     path('carnet/<int:pk>/', CarnetReport.as_view(), name='carnet'),
-    path('carnets/', AllCarnetsReport.as_view(), name='all_carnets'),
+    path('carnets/categoria/<int:categoria_id>/', AllCarnetsReport.as_view(), name='carnets_categoria'),
 ]
