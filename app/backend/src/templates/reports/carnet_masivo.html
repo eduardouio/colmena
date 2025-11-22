@@ -11,6 +11,7 @@
             body {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
+                margin-top: 2cm;
             }
             .no-print {
                 display: none;
@@ -19,7 +20,7 @@
                 page-break-after: always;
             }
             .carnet-wrapper {
-                transform: scale(0.70);
+                transform: scale(0.60);
                 transform-origin: top center;
             }
         }
@@ -31,9 +32,9 @@
             background-repeat: no-repeat;
         }
         .carnet-wrapper {
-            transform: scale(0.70);
+            transform: scale(0.60);
             transform-origin: top center;
-            margin-bottom: -100px; /* Ajustar el espacio negativo para compensar el scale */
+            margin-bottom: -120px; /* Ajustar el espacio negativo para compensar el scale */
         }
         .text-with-outline {
             text-shadow: 
@@ -147,7 +148,7 @@
         {% endif %}
         
         <!-- Salto de página cada 3 carnets para impresión (ajustado por el nuevo tamaño) -->
-        {% if forloop.counter|divisibleby:3 and not forloop.last %}
+        {% if forloop.counter|divisibleby:2 and not forloop.last %}
         <div class="page-break"></div>
         {% endif %}
         {% endfor %}
