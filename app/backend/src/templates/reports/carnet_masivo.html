@@ -62,7 +62,7 @@
         {% for carnet_data in carnets %}
         <div class="carnet-wrapper">
             <div class="flex justify-center mb-8">
-                <div class="flex gap-4">
+                <div class="flex gap-0">
                     <!-- Carnet Frontal -->
                     <div class="carnet-container relative rounded overflow-hidden shadow-lg border border-gray-200"
                     {% if carnet_data.categoria == "FEMENINO" %}
@@ -144,7 +144,7 @@
         
         <!-- Espacio de 100px después de cada dos carnets -->
         {% if forloop.counter|divisibleby:2 %}
-        <div style="height: 130px;"></div>
+        <div style="height: 110px;"></div>
         {% endif %}
         
         <!-- Salto de página cada 3 carnets para impresión (ajustado por el nuevo tamaño) -->
