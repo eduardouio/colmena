@@ -44,7 +44,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="">
     <!-- Cabecera de información (no se imprime) -->
     <div class="no-print bg-white shadow-md p-4 mb-4">
         <div class="container mx-auto">
@@ -71,8 +71,8 @@
                     {% else %}
                     style="background-image: url('{% static 'img/background_hombres.jpg' %}');"
                     {% endif %}>
-                        <div class="h-24 bg-sky-600/80 p-3 flex justify-center items-center backdrop-blur-xs">
-                            <div class="text-blue-800 text-center">
+                        <div class="h-24 bg-sky-500/80 p-3 flex justify-center items-center backdrop-blur-xs">
+                            <div class="text-blue-900 text-center">
                                 <span class="block text-xl font-bold text-with-outline">LIGA INDEPENDIENTE</span>
                                 <span class="block text-xl font-bold text-with-outline">SANTA CLARA DE SAN MILLAN</span>
                             </div>
@@ -140,6 +140,11 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Espacio de 100px después de cada dos carnets -->
+        {% if forloop.counter|divisibleby:2 %}
+        <div style="height: 100px;"></div>
+        {% endif %}
         
         <!-- Salto de página cada 3 carnets para impresión (ajustado por el nuevo tamaño) -->
         {% if forloop.counter|divisibleby:3 and not forloop.last %}
