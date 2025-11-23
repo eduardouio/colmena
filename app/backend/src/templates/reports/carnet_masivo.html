@@ -3,72 +3,31 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.65">
     <title>Carnets Masivos - {{ categoria }} - Liga Santa Clara</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        @media print {
-            body {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .no-print {
-                display: none;
-            }
-            .page-break {
-                page-break-after: always;
-            }
-        }
-        .carnet-container {
-            width: 100mm;
-            height: 150mm;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .carnet-wrapper-even {
-            transform: scale(0.60);
-            transform-origin: top right;
-            margin-bottom: -220px;
-        }
-        .carnet-wrapper-odd {
-            transform: scale(0.60);
-            transform-origin: top left;
-            margin-bottom: -220px;
-        }
-        .text-with-outline {
-            text-shadow: 
-                -1px -1px 0 white,
-                1px -1px 0 white,
-                -1px 1px 0 white,
-                1px 1px 0 white;
+        body {
+            zoom: 62.5%;
         }
     </style>
 </head>
 <body class="">
     <!-- Cabecera de información (no se imprime) -->
-    <div class="no-print bg-white shadow-md p-1 mb-2">
-        <div class="container mx-auto">
-            <h1 class="text-2xl font-bold">Carnets de Categoría: {{ categoria|title }}</h1>
-            <p class="text-gray-600">Total de carnets: {{ total_carnets }}</p>
-            <button onclick="window.print()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                Imprimir Carnets
-            </button>
-        </div>
-    </div>
 
     <!-- Contenedor de carnets -->
-    <div class="container mx-auto">
+    <div class="container-fluid mx-auto p-4">
         {% for carnet_data in carnets %}
         {% if forloop.counter0|divisibleby:2 %}
-        <div class="flex justify-end gap-2">
+        <div class="flex justify-center gap-8 mb-8">
         {% endif %}
         
-        <!-- Columna individual -->
-        <div class="carnet-wrapper-{% if forloop.counter0|divisibleby:2 %}even{% else %}odd{% endif %}">
-            <div class="flex gap-0">
+        <!-- Columna individual con carnet -->
+        <div class="{% if forloop.counter0|divisibleby:2 %}origin-top-right{% else %}origin-top-left{% endif %}">
+            <p class="pt-5">----------</p>
+            <div class="flex {% if forloop.counter0|divisibleby:2 %}justify-end{% else %}justify-start{% endif %} gap-1">
                 <!-- Carnet Frontal -->
-                <div class="carnet-container relative rounded overflow-hidden shadow-lg border border-gray-200"
+                <div class="w-[100mm] h-[150mm] relative rounded-lg overflow-hidden shadow-xl border border-gray-300 bg-cover bg-center"
                 {% if carnet_data.categoria == "FEMENINO" %}
                 style="background-image: url('{% static 'img/background_femenino.jpg' %}');"
                 {% elif carnet_data.categoria == "MASTER" %}
@@ -76,40 +35,40 @@
                 {% else %}
                 style="background-image: url('{% static 'img/background_hombres.jpg' %}');"
                 {% endif %}>
-                    <div class="h-24 bg-sky-600/80 p-3 flex justify-center items-center backdrop-blur-xs">
-                        <div class="text-blue-900 text-center">
+                    <div class="h-24 bg-sky-600/80 backdrop-blur-sm p-3 flex justify-center items-center">
+                        <div class="text-center">
                             <span class="block text-xl font-bold text-white">LIGA INDEPENDIENTE</span>
                             <span class="block text-xl font-bold text-white">SANTA CLARA DE SAN MILLAN</span>
                         </div>
                     </div>
-                    <div class="relative p-4 bg-white/50 rounded-b-lg">
+                    <div class="relative p-4 bg-white/50 h-[calc(100%-96px)]">
                         <div class="absolute -top-1 left-1/2 transform -translate-x-1/2">
                             <img src="{{ carnet_data.foto_url }}" alt="Foto Jugador"
-                                class="w-48 h-48 rounded-md border-1 border-gray-400 bg-gray-200 object-cover shadow-md">
+                                class="w-48 h-48 rounded-md border border-gray-400 bg-gray-200 object-cover shadow-md">
                         </div>
                         <div class="mt-40 text-center space-y-1">
-                            <h1 class="text-[60px] font-bold text-gray-800 text-with-outline">{{ carnet_data.registro.number }}</h1>
-                            <h1 class="text-2xl font-bold uppercase text-gray-800 text-with-outline">
+                            <h1 class="text-6xl font-bold text-gray-800 drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)] pt-3">{{ carnet_data.registro.number }}</h1>
+                            <h1 class="text-2xl font-bold uppercase text-gray-800 drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]">
                                 {{ carnet_data.registro.player.first_name }} {{ carnet_data.registro.player.last_name }}
                             </h1>
-                            <p class="text-lg text-blue-700 font-semibold uppercase text-with-outline">
+                            <p class="text-lg text-blue-700 font-semibold uppercase drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]">
                                 Club Deportivo {{ carnet_data.registro.club.display_name }}
                             </p>
-                            <p class="mt-2 text-xl text-gray-800 text-with-outline">
-                                <span class="font-semibold">C.I: {{ carnet_data.registro.player.national_id }}</span>
+                            <p class="mt-1 text-xl text-gray-800 font-semibold drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]">
+                                C.I: {{ carnet_data.registro.player.national_id }}
                             </p>
-                            <p class="text-lg text-gray-700 text-with-outline">
-                                <span class="font-semibold">{{ carnet_data.edad }} Años</span>
+                            <p class="text-lg text-gray-700 font-semibold drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]">
+                                {{ carnet_data.edad }} Años
                             </p>
-                            <p class="text-lg text-gray-700 text-with-outline">
-                                <span class="font-semibold">Categoría - {{ carnet_data.categoria|title }}</span>
+                            <p class="text-lg text-gray-700 font-semibold drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]">
+                                Categoría - {{ carnet_data.categoria|title }}
                             </p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Carnet Posterior -->
-                <div class="carnet-container relative rounded overflow-hidden shadow-lg border border-gray-200"
+                <div class="w-[100mm] h-[150mm] relative rounded-lg overflow-hidden shadow-xl border border-gray-300 bg-cover bg-center"
                 {% if carnet_data.categoria == "FEMENINO" %}
                 style="background-image: url('{% static 'img/background_femenino.jpg' %}');"
                 {% elif carnet_data.categoria == "MASTER" %}
@@ -117,25 +76,25 @@
                 {% else %}
                 style="background-image: url('{% static 'img/background_hombres.jpg' %}');"
                 {% endif %}>
-                    <div class="h-24 bg-sky-600/80 p-3 flex justify-center items-center">
-                        <div class="text-blue-800 text-center w-full">
+                    <div class="h-24 bg-sky-600/80 backdrop-blur-sm p-3 flex justify-center items-center">
+                        <div class="text-center w-full">
                             <span class="block text-xl font-bold text-white">CAMPEONATO</span>
                             <span class="block text-2xl font-bold text-white">2025-2026</span>
                         </div>
                     </div>
-                    <div class="relative p-4 bg-white/50 rounded-b-lg">
+                    <div class="relative p-4 bg-white/50 h-[calc(100%-96px)]">
                         <div class="absolute -top-5 left-1/2 transform -translate-x-1/2">
                             <img src="{% static 'img/logo-liga.jpeg' %}" alt="Logo Liga"
-                                class="w-40 h-40 rounded border-1 border-gray-400 bg-gray-200 shadow-md">
+                                class="w-40 h-40 rounded border border-gray-400 bg-gray-200 shadow-md">
                         </div>
                         <div class="mt-32 text-center space-y-2">
-                            <h1 class="text-2xl font-bold uppercase text-gray-800 text-with-outline pt-10 pb-10">
+                            <h1 class="text-2xl font-bold uppercase text-gray-800 pt-10 pb-10 drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]">
                                 Categoría - {{ carnet_data.categoria|title }}
                             </h1>
-                            <h1 class="pb-8"></h1>
-                            <h1 class="text-2xl font-bold uppercase text-gray-800 text-with-outline pt-10">
+                            <div class="pb-8"></div>
+                            <h1 class="text-2xl font-bold uppercase text-gray-800 pt-10 drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]">
                                 COMISIÓN DE CALIFICACIONES
-                                <p class="text-xs text-gray-600 text-with-outline lowercase">colmenaec.com</p>
+                                <p class="text-xs text-gray-600 lowercase drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)]">colmenaec.com</p>
                             </h1>
                         </div>
                     </div>
@@ -144,6 +103,15 @@
         </div>
         
         {% if forloop.counter|divisibleby:2 or forloop.last %}
+        </div>
+        {% endif %}
+        
+        <!-- Salto de página cada 4 carnets -->
+        {% if forloop.counter|divisibleby:4 and not forloop.last %}
+        <div class="mt-20">
+            <p class="mt-10"></p>
+            <p class="mt-10"></p>
+            <p class="mt-10">&nbsp;</p>
         </div>
         {% endif %}
         {% endfor %}
