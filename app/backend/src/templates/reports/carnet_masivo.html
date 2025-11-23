@@ -18,10 +18,6 @@
             .page-break {
                 page-break-after: always;
             }
-            .carnet-wrapper {
-                transform: scale(0.60);
-                transform-origin: top center;
-            }
         }
         .carnet-container {
             width: 100mm;
@@ -30,10 +26,15 @@
             background-position: center;
             background-repeat: no-repeat;
         }
-        .carnet-wrapper {
+        .carnet-wrapper-even {
             transform: scale(0.60);
-            transform-origin: top center;
-            margin-bottom: -120px; /* Ajustar el espacio negativo para compensar el scale */
+            transform-origin: top right;
+            margin-bottom: -220px;
+        }
+        .carnet-wrapper-odd {
+            transform: scale(0.60);
+            transform-origin: top left;
+            margin-bottom: -220px;
         }
         .text-with-outline {
             text-shadow: 
@@ -46,7 +47,7 @@
 </head>
 <body class="">
     <!-- Cabecera de información (no se imprime) -->
-    <div class="no-print bg-white shadow-md p-4 mb-4">
+    <div class="no-print bg-white shadow-md p-1 mb-2">
         <div class="container mx-auto">
             <h1 class="text-2xl font-bold">Carnets de Categoría: {{ categoria|title }}</h1>
             <p class="text-gray-600">Total de carnets: {{ total_carnets }}</p>
@@ -59,94 +60,91 @@
     <!-- Contenedor de carnets -->
     <div class="container mx-auto">
         {% for carnet_data in carnets %}
-        <div class="carnet-wrapper">
-            <div class="flex justify-center mb-8 mt-5">
-                <div class="flex gap-0">
-                    <!-- Carnet Frontal -->
-                    <div class="carnet-container relative rounded overflow-hidden shadow-lg border border-gray-200"
-                    {% if carnet_data.categoria == "FEMENINO" %}
-                    style="background-image: url('{% static 'img/background_femenino.jpg' %}');"
-                    {% elif carnet_data.categoria == "MASTER" %}
-                    style="background-image: url('{% static 'img/background_master.jpg' %}');"
-                    {% else %}
-                    style="background-image: url('{% static 'img/background_hombres.jpg' %}');"
-                    {% endif %}>
-                        <div class="h-24 bg-sky-600/80 p-3 flex justify-center items-center backdrop-blur-xs">
-                            <div class="text-blue-900 text-center">
-                                <span class="block text-xl font-bold text-white">LIGA INDEPENDIENTE</span>
-                                <span class="block text-xl font-bold text-white">SANTA CLARA DE SAN MILLAN</span>
-                            </div>
-                        </div>
-                        <div class="relative p-4 bg-white/50 rounded-b-lg">
-                            <div class="absolute -top-1 left-1/2 transform -translate-x-1/2">
-                                <img src="{{ carnet_data.foto_url }}" alt="Foto Jugador"
-                                    class="w-48 h-48 rounded-md border-1 border-gray-400 bg-gray-200 object-cover shadow-md">
-                            </div>
-                            <div class="mt-40 text-center space-y-1">
-                                <h1 class="text-[60px] font-bold text-gray-800 text-with-outline">{{ carnet_data.registro.number }}</h1>
-                                <h1 class="text-2xl font-bold uppercase text-gray-800 text-with-outline">
-                                    {{ carnet_data.registro.player.first_name }} {{ carnet_data.registro.player.last_name }}
-                                </h1>
-                                <p class="text-lg text-blue-700 font-semibold uppercase text-with-outline">
-                                    Club Deportivo {{ carnet_data.registro.club.display_name }}
-                                </p>
-                                <p class="mt-2 text-xl text-gray-800 text-with-outline">
-                                    <span class="font-semibold">C.I: {{ carnet_data.registro.player.national_id }}</span>
-                                </p>
-                                <p class="text-lg text-gray-700 text-with-outline">
-                                    <span class="font-semibold">{{ carnet_data.edad }} Años</span>
-                                </p>
-                                <p class="text-lg text-gray-700 text-with-outline">
-                                    <span class="font-semibold">Categoría - {{ carnet_data.categoria|title }}</span>
-                                </p>
-                            </div>
+        {% if forloop.counter0|divisibleby:2 %}
+        <div class="flex justify-end gap-2">
+        {% endif %}
+        
+        <!-- Columna individual -->
+        <div class="carnet-wrapper-{% if forloop.counter0|divisibleby:2 %}even{% else %}odd{% endif %}">
+            <div class="flex gap-0">
+                <!-- Carnet Frontal -->
+                <div class="carnet-container relative rounded overflow-hidden shadow-lg border border-gray-200"
+                {% if carnet_data.categoria == "FEMENINO" %}
+                style="background-image: url('{% static 'img/background_femenino.jpg' %}');"
+                {% elif carnet_data.categoria == "MASTER" %}
+                style="background-image: url('{% static 'img/background_master.jpg' %}');"
+                {% else %}
+                style="background-image: url('{% static 'img/background_hombres.jpg' %}');"
+                {% endif %}>
+                    <div class="h-24 bg-sky-600/80 p-3 flex justify-center items-center backdrop-blur-xs">
+                        <div class="text-blue-900 text-center">
+                            <span class="block text-xl font-bold text-white">LIGA INDEPENDIENTE</span>
+                            <span class="block text-xl font-bold text-white">SANTA CLARA DE SAN MILLAN</span>
                         </div>
                     </div>
-
-                    <!-- Carnet Posterior -->
-                    <div class="carnet-container relative rounded overflow-hidden shadow-lg border border-gray-200"
-                    {% if carnet_data.categoria == "FEMENINO" %}
-                    style="background-image: url('{% static 'img/background_femenino.jpg' %}');"
-                    {% elif carnet_data.categoria == "MASTER" %}
-                    style="background-image: url('{% static 'img/background_master.jpg' %}');"
-                    {% else %}
-                    style="background-image: url('{% static 'img/background_hombres.jpg' %}');"
-                    {% endif %}>
-                        <div class="h-24 bg-sky-600/80 p-3 flex justify-center items-center">
-                            <div class="text-blue-800 text-center w-full">
-                                <span class="block text-xl font-bold text-white">CAMPEONATO</span>
-                                <span class="block text-2xl font-bold text-white">2025-2026</span>
-                            </div>
+                    <div class="relative p-4 bg-white/50 rounded-b-lg">
+                        <div class="absolute -top-1 left-1/2 transform -translate-x-1/2">
+                            <img src="{{ carnet_data.foto_url }}" alt="Foto Jugador"
+                                class="w-48 h-48 rounded-md border-1 border-gray-400 bg-gray-200 object-cover shadow-md">
                         </div>
-                        <div class="relative p-4 bg-white/50 rounded-b-lg">
-                            <div class="absolute -top-5 left-1/2 transform -translate-x-1/2">
-                                <img src="{% static 'img/logo-liga.jpeg' %}" alt="Logo Liga"
-                                    class="w-40 h-40 rounded border-1 border-gray-400 bg-gray-200 shadow-md">
-                            </div>
-                            <div class="mt-32 text-center space-y-2">
-                                <h1 class="text-2xl font-bold uppercase text-gray-800 text-with-outline pt-10 pb-10">
-                                    Categoría - {{ carnet_data.categoria|title }}
-                                </h1>
-                                <h1 class="pb-8"></h1>
-                                <h1 class="text-2xl font-bold uppercase text-gray-800 text-with-outline pt-10">
-                                    COMISIÓN DE CALIFICACIONES
-                                    <p class="text-xs text-gray-600 text-with-outline lowercase">colmenaec.com</p>
-                                </h1>
-                            </div>
+                        <div class="mt-40 text-center space-y-1">
+                            <h1 class="text-[60px] font-bold text-gray-800 text-with-outline">{{ carnet_data.registro.number }}</h1>
+                            <h1 class="text-2xl font-bold uppercase text-gray-800 text-with-outline">
+                                {{ carnet_data.registro.player.first_name }} {{ carnet_data.registro.player.last_name }}
+                            </h1>
+                            <p class="text-lg text-blue-700 font-semibold uppercase text-with-outline">
+                                Club Deportivo {{ carnet_data.registro.club.display_name }}
+                            </p>
+                            <p class="mt-2 text-xl text-gray-800 text-with-outline">
+                                <span class="font-semibold">C.I: {{ carnet_data.registro.player.national_id }}</span>
+                            </p>
+                            <p class="text-lg text-gray-700 text-with-outline">
+                                <span class="font-semibold">{{ carnet_data.edad }} Años</span>
+                            </p>
+                            <p class="text-lg text-gray-700 text-with-outline">
+                                <span class="font-semibold">Categoría - {{ carnet_data.categoria|title }}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carnet Posterior -->
+                <div class="carnet-container relative rounded overflow-hidden shadow-lg border border-gray-200"
+                {% if carnet_data.categoria == "FEMENINO" %}
+                style="background-image: url('{% static 'img/background_femenino.jpg' %}');"
+                {% elif carnet_data.categoria == "MASTER" %}
+                style="background-image: url('{% static 'img/background_master.jpg' %}');"
+                {% else %}
+                style="background-image: url('{% static 'img/background_hombres.jpg' %}');"
+                {% endif %}>
+                    <div class="h-24 bg-sky-600/80 p-3 flex justify-center items-center">
+                        <div class="text-blue-800 text-center w-full">
+                            <span class="block text-xl font-bold text-white">CAMPEONATO</span>
+                            <span class="block text-2xl font-bold text-white">2025-2026</span>
+                        </div>
+                    </div>
+                    <div class="relative p-4 bg-white/50 rounded-b-lg">
+                        <div class="absolute -top-5 left-1/2 transform -translate-x-1/2">
+                            <img src="{% static 'img/logo-liga.jpeg' %}" alt="Logo Liga"
+                                class="w-40 h-40 rounded border-1 border-gray-400 bg-gray-200 shadow-md">
+                        </div>
+                        <div class="mt-32 text-center space-y-2">
+                            <h1 class="text-2xl font-bold uppercase text-gray-800 text-with-outline pt-10 pb-10">
+                                Categoría - {{ carnet_data.categoria|title }}
+                            </h1>
+                            <h1 class="pb-8"></h1>
+                            <h1 class="text-2xl font-bold uppercase text-gray-800 text-with-outline pt-10">
+                                COMISIÓN DE CALIFICACIONES
+                                <p class="text-xs text-gray-600 text-with-outline lowercase">colmenaec.com</p>
+                            </h1>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Espacio de 100px después de cada dos carnets -->
-        {% if forloop.counter|divisibleby:2 %}
-        <div style="height:90px;"></div>
-        {% endif %}
-        
-        <!-- Salto de página cada 3 carnets para impresión (ajustado por el nuevo tamaño) -->
-        {% if forloop.counter|divisibleby:2 and not forloop.last %}
-        <div class="page-break"></div>
+        {% if forloop.counter|divisibleby:2 or forloop.last %}
+        </div>
         {% endif %}
         {% endfor %}
     </div>
