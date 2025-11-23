@@ -1,10 +1,11 @@
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from clubs.models.Register import Register
 from datetime import date
 
 
-class CarnetReport(TemplateView):
+class CarnetReport(LoginRequiredMixin, TemplateView):
     template_name = "reports/carnet.html"
 
     def get_context_data(self, **kwargs):
