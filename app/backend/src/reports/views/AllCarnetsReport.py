@@ -19,7 +19,7 @@ class AllCarnetsReport(TemplateView):
         registros = Register.objects.filter(
             season__categorie=categoria,
             status='APROBADO'
-        ).select_related('player', 'club', 'season').order_by('club__name', 'number')
+        ).select_related('player', 'club', 'season')
         
         # Preparar los datos de cada registro
         carnets_data = []
@@ -48,3 +48,4 @@ class AllCarnetsReport(TemplateView):
         context['total_carnets'] = len(carnets_data)
         
         return context
+    
