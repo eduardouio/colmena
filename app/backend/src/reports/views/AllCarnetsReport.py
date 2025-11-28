@@ -8,20 +8,17 @@ from datetime import date
 
 class AllCarnetsReport(TemplateView):
     template_name = "reports/carnet_masivo.html"
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
-        categoria_id = self.kwargs.get('categoria_id')
+
+        categoria_id = self.kwargs.get("categoria_id")
         categoria = get_object_or_404(Categorie, pk=categoria_id)
-        
-        # Obtener todos los registros aprobados de la categoría
+
         registros = Register.objects.filter(
-            season__categorie=categoria,
-            status='APROBADO'
-        ).select_related('player', 'club', 'season')
-        
-        # Preparar los datos de cada registro
+            season__categorie=categoria, status="APROBADO"
+        ).select_related("player", "club", "season").order_by("-created_at")
+
         carnets_data = []
         for registro in registros:
             edad = None
@@ -33,19 +30,20 @@ class AllCarnetsReport(TemplateView):
                     and today.day < registro.player.birth_date.day
                 ):
                     edad -= 1
-            
+
             foto_url = registro.photo.url if registro.photo else ""
-            
-            carnets_data.append({
-                'registro': registro,
-                'edad': edad,
-                'foto_url': foto_url,
-                'categoria': categoria.name
-            })
-        
-        context['carnets'] = carnets_data
-        context['categoria'] = categoria.name
-        context['total_carnets'] = len(carnets_data)
-        
+
+            carnets_data.append(
+                {
+                    "registro": registro,
+                    "edad": edad,
+                    "foto_url": foto_url,
+                    "categoria": categoria.name,
+                }
+            )
+
+        context["carnets"] = carnets_data
+        context["categoria"] = categoria.name
+        context["total_carnets"] = len(carnets_data)
+
         return context
-    
